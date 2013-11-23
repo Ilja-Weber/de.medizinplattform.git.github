@@ -6,14 +6,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<ui:composition template="">
+<ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 	   <h:form>
             <h:panelGrid columns="2">
                 <h:outputText value="Name"></h:outputText>
-                <h:inputText value="blah"></h:inputText>
+                <h:inputText value="#{loginBean.name}"></h:inputText>
                 <h:outputText value="Password"></h:outputText>
-                <h:inputSecret value="blah"></h:inputSecret>
+                <h:inputSecret value="#{loginBean.password}"></h:inputSecret>
             </h:panelGrid>
             <h:commandButton value="Login" action="login"></h:commandButton>
         </h:form>
