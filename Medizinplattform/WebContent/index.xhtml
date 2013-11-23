@@ -8,7 +8,15 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-	    Here some intro stuff dunno and command link to log-in and register
+	    <table id="newsflash_table">
+      		<tr>
+       			<h:form>
+        			<td>
+        				<h:commandLink style="background-color:white;" value="Log-IN" action="login" />
+        			</td>
+        		</h:form>
+      		</tr>
+    </table>
 	</ui:define>
 </ui:composition>
 </html>

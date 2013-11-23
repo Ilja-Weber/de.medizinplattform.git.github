@@ -1,7 +1,11 @@
-package de.medizinplattform.beans;
+package de.medizinplattform.managedbeans;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
+@ManagedBean
 public class LoginBean {
+
 	private String name = "Enter your name here";
 	private String password;
 	
@@ -9,7 +13,8 @@ public class LoginBean {
 		return name;
 	}
 	public void setName(final String name) {
-		this.name = name;
+		this.name=name;
+		//session.setName(name);
 	}
 	public String getPassword() {
 		return password;
