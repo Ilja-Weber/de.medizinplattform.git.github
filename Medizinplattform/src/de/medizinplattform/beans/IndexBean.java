@@ -1,5 +1,5 @@
 package de.medizinplattform.beans;
 
-public class LoginBean {
+public class IndexBean {
 
 }
