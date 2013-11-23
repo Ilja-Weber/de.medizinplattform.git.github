@@ -19,8 +19,6 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Projekt/Instrumenten/eclipselink/jlib/eclipselink.jar"/>
-	<classpathentry kind="lib" path="C:/Projekt/Instrumenten/eclipselink/jlib/jpa/javax.persistence_2.1.0.v201304241213.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.5.0 - Kepler">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

@@ -1,4 +1,4 @@
-package de.medizinplattform;
+package de.medizinplattform.beans;
 
 public class LoginBean
 {
