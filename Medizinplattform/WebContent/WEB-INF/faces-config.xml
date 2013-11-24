@@ -6,12 +6,17 @@
     version="2.2">
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
-		<managed-bean-class>de.medizinplattform.beans.LoginBean</managed-bean-class>
+		<managed-bean-class>de.medizinplattform.managedbeans.LoginBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>indexBean</managed-bean-name>
-		<managed-bean-class>de.medizinplattform.beans.IndexBean</managed-bean-class>
+		<managed-bean-class>de.medizinplattform.managedbeans.IndexBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>tagCloudBean</managed-bean-name>
+		<managed-bean-class>de.medizinplattform.managedbeans.TagCloudBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
