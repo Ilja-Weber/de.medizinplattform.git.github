@@ -45,12 +45,19 @@ public class RegisterBean {
 		this.password = password;
 	}
 	
-	public void registerUser(){
+	public String registerUser(){
 		if(users != null){
-		
-			System.out.println("registering user");
-			users.createUser(name, password);
-			System.out.println("Done!");
-		}       
+			
+			System.out.println("Try to create new user");
+			if(users.hasUser(name)==false){
+				users.createUser(name, password);
+				return "succesful_registration.xhtml";
+			}
+			else{
+				System.out.println("User " + name + " already exists");
+			}
+			
+		}
+		return null;
 	}
 }

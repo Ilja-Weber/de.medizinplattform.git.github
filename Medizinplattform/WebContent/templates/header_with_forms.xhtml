@@ -6,7 +6,11 @@
 	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <body>
-	<div style="width:100%;font-size:36px;line-height:48px;background-color:#B0B0B0 ;color:black">
+	<div style="width:100%;font-size:12px;line-height:30px;background-color:#E8E8E8  ;color:black">
+		<span style="float:left;font-size:26px">
+			<h:link value="MediPlatt" outcome="index.xhtml"></h:link>
+		</span>
+		<span style="text-align:right">
 		<h:form>
             <h:outputText value="Login"></h:outputText>
 			<h:inputText value="#{headerBean.name}"></h:inputText>
@@ -14,7 +18,10 @@
 			<h:inputSecret value="#{headerBean.password}"></h:inputSecret>
 			<h:commandButton value="Login" action="#{headerBean.login()}"></h:commandButton>
 			<h:commandLink value="register" action="register"></h:commandLink>
-        </h:form>
+		</h:form>
+        
+        </span>
+		
 	</div>
 </body>
 </html>

@@ -9,6 +9,7 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 	   
+	   <div>
 	   <h:form>
             <h:panelGrid columns="2">
                 <h:outputText value="Choose a name"></h:outputText>
@@ -18,6 +19,8 @@
             </h:panelGrid>
             <h:commandButton value="Register" action="#{registerBean.registerUser()}"></h:commandButton>
         </h:form>
+	   </div>
+	   
 	</ui:define>
 </ui:composition>
 </html>

@@ -56,7 +56,7 @@ public class HeaderBean {
 		this.header = header;
 	}
 	
-	public void login(){
+	public String login(){
 		//debug
 		if(users != null){
 	    
@@ -68,6 +68,7 @@ public class HeaderBean {
 				if(password.equals(users.getPassword(name))){
 					System.out.println("succesfull login");
 					header="header_with_name.xhtml";
+					return "index.xhtml";
 				}
 				else{
 					System.out.println("wrong password");
@@ -77,12 +78,13 @@ public class HeaderBean {
 	    
 		
 		}       
-	          
+		return null;    
 	}
-	public void logout(){
+	public String logout(){
 		//debug
 		System.out.println("header_with_forms mode set");
 		header="header_with_forms.xhtml";
+		return "index.xhtml";
 	}
 	
 }
