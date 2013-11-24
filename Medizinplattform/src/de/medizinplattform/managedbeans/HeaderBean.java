@@ -21,6 +21,7 @@ public class HeaderBean {
 		return name;
 	}
 	public void setName(String name) {
+		//debug
 		System.out.println("Name was set to "+name);
 		this.name = name;
 	}
@@ -28,6 +29,7 @@ public class HeaderBean {
 		return password;
 	}
 	public void setPassword(String password) {
+		//debug
 		System.out.println("Password was set to "+password);
 		this.password = password;
 	}
@@ -40,10 +42,15 @@ public class HeaderBean {
 		this.header = header;
 	}
 	
-	public void check(){
-		System.out.println("check called");
+	public void login(){
+		//debug
+		System.out.println("header_with_name mode set");
 		header="header_with_name.xhtml";
-		System.out.println("New header mode set");
+	}
+	public void logout(){
+		//debug
+		System.out.println("header_with_forms mode set");
+		header="header_with_forms.xhtml";
 	}
 
 }

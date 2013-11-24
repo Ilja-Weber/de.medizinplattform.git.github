@@ -7,7 +7,10 @@
       xmlns:p="http://primefaces.org/ui">
 <body>
 	<div>
+		<h:form>
 		<h:outputText value="Hey #{headerBean.name}"></h:outputText>
+		<h:commandLink value="log out" action="#{headerBean.logout()}"></h:commandLink>
+		</h:form>
 	</div>
 </body>
 </html>
