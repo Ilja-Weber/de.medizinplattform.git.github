@@ -15,9 +15,18 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>tagCloudBean</managed-bean-name>
-		<managed-bean-class>de.medizinplattform.managedbeans.TagCloudBean</managed-bean-class>
+		<managed-bean-name>sessionBean</managed-bean-name>
+		<managed-bean-class>de.medizinplattform.managedbeans.SessionBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-
+	<navigation-rule>
+		<display-name>index.xhtml</display-name>
+		<from-view-id>/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
 </faces-config>
