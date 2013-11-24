@@ -84,5 +84,5 @@ public class HeaderBean {
 		System.out.println("header_with_forms mode set");
 		header="header_with_forms.xhtml";
 	}
-
+	
 }

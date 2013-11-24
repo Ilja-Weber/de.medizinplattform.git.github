@@ -31,5 +31,11 @@ public class Users {
 		return users.get(name);
 	}
 	
+	public void createUser(String name, String password){
+		this.users.put(name, password);
+		System.out.println("User "+ name + " created");
+	}
+	
+	
 	
 }
