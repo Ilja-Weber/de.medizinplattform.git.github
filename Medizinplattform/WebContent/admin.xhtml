@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+	    <ul>
+      		<ui:repeat var="userVar" value="#{users.getUsers()}">
+        		<li>
+        			<h:form>
+            			<h:outputText value="#{userVar.name} "></h:outputText>
+            			<h:outputText value="#{userVar.password} "></h:outputText>
+            			<h:outputText value="#{userVar.role} "></h:outputText>
+            			<br></br>
+          			</h:form>
+          		</li>
+      		</ui:repeat>
+    	</ul>
+	</ui:define>
+</ui:composition>
+</html>
