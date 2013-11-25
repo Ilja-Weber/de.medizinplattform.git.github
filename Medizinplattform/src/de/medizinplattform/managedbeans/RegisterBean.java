@@ -3,13 +3,13 @@ package de.medizinplattform.managedbeans;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import de.medizinplattform.entities.Users;
 
 
 @ManagedBean(name = "registerBean")
-@SessionScoped
+@RequestScoped
 public class RegisterBean {
 
 	@ManagedProperty(value="#{users}")
@@ -49,7 +49,7 @@ public class RegisterBean {
 	public String registerUser(){
 		if(users != null){
 			
-			System.out.println("Try to create new user");
+			System.out.println("Trying to create new user");
 			if(users.hasUser(name)==false){
 				users.createUser(name, password);
 				return "succesful_registration.xhtml";
