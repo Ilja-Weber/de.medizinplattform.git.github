@@ -16,73 +16,96 @@ import javax.faces.bean.ManagedBean;
 @ApplicationScoped
 public class Users {
 	
-	HashMap<String, User> users = new HashMap<String, User>();
+	List<TableUser> users = new ArrayList<TableUser>();
 	
+	User temp_user = new User();	
 	
 	public Users(){
 		//User Ilja@1312
-		users.put("Ilja", new User());
-		users.get("Ilja").setName("Ilja");
-		users.get("Ilja").setPassword("1312");
-		users.get("Ilja").setRole("user");
-		
-		//User Ilja@1312
-		users.put("Admin", new User());
-		users.get("Admin").setName("Admin");
-		users.get("Admin").setPassword("admin");
-		users.get("Admin").setRole("admin");
-		
-			
+		users.add(new TableUser(new User("Ilja", "1312", "user")));
+		users.add(new TableUser(new User("Admin", "admin", "admin")));
+					
 		System.out.println("UsersBean started and initialized");
 	}
 	
+	public TableUser findUserByName(String name){
+		for(TableUser user : users){
+			if(user.user.getName().equals(name)){
+				return user;
+			}
+		}
+		return null;
+	}
+	
+	public User getTemp_user(){
+		return temp_user;
+	}
+	
+	public void setTemp_user(User temp_user){
+		this.temp_user=temp_user;
+	}
 	
 	public boolean hasUser(String name){
-		return users.containsKey(name);
+		return (findUserByName(name)!=null)?true:false;
 	}
 	
 	public String getPassword(String name){
-		return users.get(name).getPassword();
+		return findUserByName(name).user.getPassword();
 	}
 	
 	public String getRole(String name){
-		return users.get(name).getRole();
+		return findUserByName(name).user.getRole();
 	}
 	
 	public void createUser(String name, String password){
-		users.put(name, new User());
-		users.get(name).setName(name);
-		users.get(name).setPassword(password);
-		users.get(name).setRole("user");
+		users.add(new TableUser(new User(name, password, "user")));
 		
 		System.out.println("User "+ name + "@" + password+" created");
 	}
 	
-	public List<User> getUsers(){
-		System.out.println("Trying to build Users List");
-		List<User> user_list = new ArrayList<User>();
-		Set<String> keys = new HashSet<String>();
-		System.out.println("Get all keys from hash");
-		keys = users.keySet();
+	public String createUser(){
 		
-		System.out.println("Iterate");
-		String temp;
-		Iterator<String> it = keys.iterator();
-		while(it.hasNext()){
-			System.out.println("Get next key");
-			temp = it.next();
-			
-			
-			System.out.println("We got "+temp);
-			
-			System.out.println("Now add "+temp+" to the users_list");
-			user_list.add(users.get(temp));
-		}
-		System.out.println("Return the list");
-		return user_list;
+		users.add(new TableUser(new User(temp_user.getName(), temp_user.getPassword(),  temp_user.getRole())));
+		
+		System.out.println("User "+ temp_user.getName() + "@" + temp_user.getPassword()+" created");
+		
+		temp_user.name="";
+		temp_user.password="";
+		temp_user.role="";
+		
+		return null;
+	}
+	
+	public List<TableUser> getUsers(){
+		return users;
 
 	}
 	
+	public String editUser(TableUser tu){
+		System.out.println("Edit table user");
+		tu.setCanEdit(true);
+		return null;
+	}
+	
+	public String removeUser(TableUser tu){
+		System.out.println("Remove table user");
+		users.remove(tu);
+		return null;
+	}
+	
+	public String saveUsers(){
+		
+		for(TableUser tu : getUsers()){
+			tu.setCanEdit(false);
+		}
+		return null;
+	}
+	
+	public String saveUser(TableUser tu){
+		System.out.println("Save table user");
+		tu.setCanEdit(false);
+		return null;
+	}
 	
 	@PreDestroy
 	public void cry(){

@@ -10,6 +10,15 @@ public class User{
 		System.out.println("New User created");
 	}
 	
+	public User(String name, String password, String role){
+		this.name=name;
+		this.password=password;
+		this.role=role;
+		System.out.println("New User created");
+	}
+	
+	
+	
 	public String getName() {
 		return name;
 	}

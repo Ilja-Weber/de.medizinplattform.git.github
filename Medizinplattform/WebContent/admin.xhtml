@@ -9,20 +9,65 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 		
-		<h:dataTable value="#{users.users}" var="userVar">
-			<h:column>
-				<f:facet name="header">Name</f:facet>    				
-     	 		#{userVar.name}
-   			</h:column>
-			<h:column>
-				<f:facet name="header">Password</f:facet>
-      			#{userVar.password}
-   			</h:column>
-			<h:column>
-				<f:facet name="header">Role</f:facet>
-      			#{userVar.role}
-   			</h:column>
-		</h:dataTable>
+		<h:form>
+      		<h:dataTable value="#{users.users}" var="tableUserVar">
+         <h:column>    				
+            <f:facet name="header">Name</f:facet>    				
+            <h:inputText value="#{tableUserVar.user.name}"
+               size="10" rendered="#{tableUserVar.canEdit}" />
+            <h:outputText value="#{tableUserVar.user.name}"
+               rendered="#{not tableUserVar.canEdit}" />
+         </h:column>
+         <h:column>
+            <f:facet name="header">Password</f:facet>
+            <h:inputText value="#{tableUserVar.user.password}" 
+               size="20" rendered="#{tableUserVar.canEdit}" />
+            <h:outputText value="#{tableUserVar.user.password}" 
+               rendered="#{not tableUserVar.canEdit}" />
+         </h:column>
+         <h:column>
+            <f:facet name="header">Role</f:facet>
+            <h:inputText value="#{tableUserVar.user.role}" size="5"
+               rendered="#{tableUserVar.canEdit}" />
+            <h:outputText value="#{tableUserVar.user.role}" 
+               rendered="#{not tableUserVar.canEdit}" />
+         </h:column>
+         <h:column>
+            <f:facet name="header">Edit</f:facet>
+               <h:commandButton value="Edit" action="#{users.editUser(tableUserVar)}" rendered="#{not tableUserVar.canEdit}">
+               </h:commandButton>
+               <h:commandButton value="Save" action="#{users.saveUser(tableUserVar)}" rendered="#{tableUserVar.canEdit}">
+               </h:commandButton>
+         </h:column>
+         <h:column>
+            <f:facet name="header">Remove</f:facet>
+               <h:commandButton value="Remove" action="#{users.removeUser(tableUserVar)}" rendered="#{not tableUserVar.canRemove}">
+               </h:commandButton>
+         </h:column>
+      	</h:dataTable>  
+	  <br/>
+	  
+	  <table>
+      <tr>
+            <td>Name :</td>
+            <td><h:inputText size="10" value="#{users.temp_user.name}" /></td>
+      </tr>
+      <tr>
+            <td>Password :</td>
+            <td><h:inputText size="20" value="#{users.temp_user.password}" /></td>
+      </tr>
+      <tr>
+            <td>Role :</td>
+            <td><h:inputText size="5" value="#{users.temp_user.role}" /></td>
+      </tr>
+      <tr>
+            <td> </td>
+            <td><h:commandButton value="Add user" 
+               action="#{users.createUser()}" /></td>
+      </tr>
+      </table>	  
+		  
+   </h:form>
 		
 	</ui:define>
 </ui:composition>
