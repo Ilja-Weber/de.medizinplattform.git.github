@@ -8,18 +8,22 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-	    <ul>
-      		<ui:repeat var="userVar" value="#{users.getUsers()}">
-        		<li>
-        			<h:form>
-            			<h:outputText value="#{userVar.name} "></h:outputText>
-            			<h:outputText value="#{userVar.password} "></h:outputText>
-            			<h:outputText value="#{userVar.role} "></h:outputText>
-            			<br></br>
-          			</h:form>
-          		</li>
-      		</ui:repeat>
-    	</ul>
+		
+		<h:dataTable value="#{users.getUsers()}" var="userVar">
+			<h:column>
+				<f:facet name="header">Name</f:facet>    				
+     	 		#{userVar.name}
+   			</h:column>
+			<h:column>
+				<f:facet name="header">Password</f:facet>
+      			#{userVar.password}
+   			</h:column>
+			<h:column>
+				<f:facet name="header">Role</f:facet>
+      			#{userVar.role}
+   			</h:column>
+		</h:dataTable>
+		
 	</ui:define>
 </ui:composition>
 </html>
