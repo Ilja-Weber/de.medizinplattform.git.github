@@ -73,7 +73,8 @@ public class LoginBean {
 			else{
 				if(password.equals(users.getPassword(name))){
 					System.out.println("succesfull login");
-					user.setRole("user");
+					user.setRole(users.getRole(name));
+					System.out.println("Session role set to " + users.getRole(name));
 					user.setName(name);
 					return "index.xhtml?faces-redirect=true";
 				}
@@ -91,6 +92,7 @@ public class LoginBean {
 		//debug
 		System.out.println("header_with_forms mode set");
 		user.setRole("guest");
+		System.out.println("Session role set to guest");
 		user.setName(null);
 		return "index.xhtml?faces-redirect=true";
 	}

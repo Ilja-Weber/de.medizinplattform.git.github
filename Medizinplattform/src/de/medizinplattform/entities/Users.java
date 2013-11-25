@@ -38,6 +38,10 @@ public class Users {
 		return users.get(name).get("password");
 	}
 	
+	public String getRole(String name){
+		return users.get(name).get("role");
+	}
+	
 	public void createUser(String name, String password){
 		users.put(name, new HashMap<String, String>());
 		users.get(name).put("password", password);
