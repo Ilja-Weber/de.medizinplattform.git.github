@@ -2,7 +2,7 @@ package de.medizinplattform.entities;
 
 import java.util.HashMap;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -19,7 +19,7 @@ public class Users {
 		users.put("Gregory", "house");
 		users.put("example@gg.com", "example");
 		users.put("s", "s");
-		System.out.println("Users Entity created and filld");
+		System.out.println("UsersBean started and initialized");
 	}
 	
 	
@@ -37,5 +37,8 @@ public class Users {
 	}
 	
 	
-	
+	@PreDestroy
+	public void cry(){
+		//System.out.println("UsersBean is about to be destroyed");
+	}
 }

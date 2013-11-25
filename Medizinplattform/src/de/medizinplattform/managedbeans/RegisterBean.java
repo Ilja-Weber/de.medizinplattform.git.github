@@ -1,5 +1,6 @@
 package de.medizinplattform.managedbeans;
 
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -59,5 +60,10 @@ public class RegisterBean {
 			
 		}
 		return null;
+	}
+	
+	@PreDestroy
+	public void cry(){
+		//System.out.println("RegisterBean is about to be destroyed");
 	}
 }

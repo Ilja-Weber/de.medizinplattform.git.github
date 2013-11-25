@@ -1,19 +1,20 @@
 package de.medizinplattform.managedbeans;
 
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import de.medizinplattform.entities.Users;
 
-@ManagedBean(name="headerBean")
-@SessionScoped
-public class HeaderBean {
+@ManagedBean(name="loginBean")
+@RequestScoped
+public class LoginBean {
 	
 	public String name;
 	public String password;
-	public String header="header_with_forms.xhtml";
-
+	
+	
 	@ManagedProperty(value="#{users}")
 	private Users users;
 	
@@ -25,49 +26,55 @@ public class HeaderBean {
 		this.users = users;
 	}
 
-	public HeaderBean(){
+	
+	@ManagedProperty(value="#{userBean}")
+	private UserBean user;
+	
+	public UserBean getUser() {
+		return user;
+	}
+
+	public void setUser(UserBean user) {
+		this.user = user;
+	}
+	
+	
+	public LoginBean(){
 		
 		//debug
-		System.out.println("Header Bean started");
+		System.out.println("Login Bean started");
 	}
+	
 	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
-		//debug
-		System.out.println("Name was set to "+name);
 		this.name = name;
 	}
+	
+	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
-		//debug
-		System.out.println("Password was set to "+password);
 		this.password = password;
 	}
 	
-	public String getHeader() {
-		return header;
-	}
-
-	public void setHeader(String header) {
-		this.header = header;
-	}
 	
 	public String login(){
 		//debug
 		if(users != null){
 	    
-			System.out.println("checking if user is registered");
+			System.out.println("checking if user " + name+ " is registered");
 			if(users.hasUser(name)==false){
 				System.out.println("no such user exists");
 			}
 			else{
 				if(password.equals(users.getPassword(name))){
 					System.out.println("succesfull login");
-					header="header_with_name.xhtml";
+					user.setHeader("header_with_name.xhtml");
+					user.setName(name);
 					return "index.xhtml";
 				}
 				else{
@@ -83,8 +90,14 @@ public class HeaderBean {
 	public String logout(){
 		//debug
 		System.out.println("header_with_forms mode set");
-		header="header_with_forms.xhtml";
+		user.setHeader("header_with_forms.xhtml");
+		user.setName(null);
 		return "index.xhtml";
+	}
+	
+	@PreDestroy
+	public void cry(){
+		//System.out.println("LoginBean is about to be destroyed");
 	}
 	
 }

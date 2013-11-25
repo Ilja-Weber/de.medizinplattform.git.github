@@ -13,10 +13,10 @@
 		<span style="text-align:right">
 		<h:form>
             <h:outputText value="Login"></h:outputText>
-			<h:inputText value="#{headerBean.name}"></h:inputText>
+			<h:inputText value="#{loginBean.name}"></h:inputText>
 			<h:outputText value="Password"></h:outputText>
-			<h:inputSecret value="#{headerBean.password}"></h:inputSecret>
-			<h:commandButton value="Login" action="#{headerBean.login()}"></h:commandButton>
+			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
+			<h:commandButton value="Login" action="#{loginBean.login()}"></h:commandButton>
 			<h:commandLink value="register" action="register"></h:commandLink>
 		</h:form>
         
