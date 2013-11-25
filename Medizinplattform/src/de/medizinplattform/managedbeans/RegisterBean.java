@@ -52,7 +52,7 @@ public class RegisterBean {
 			System.out.println("Trying to create new user");
 			if(users.hasUser(name)==false){
 				users.createUser(name, password);
-				return "succesful_registration.xhtml";
+				return "succesful_registration.xhtml?faces-redirect=true";
 			}
 			else{
 				System.out.println("User " + name + " already exists");

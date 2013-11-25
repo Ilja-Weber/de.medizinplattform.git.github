@@ -10,7 +10,7 @@ public class UserBean {
 	
 	public String name;
 	public String password;
-	public String header="header_with_forms.xhtml";
+	public String header="header_guest.xhtml";
 	
 	public UserBean(){
 		System.out.println("UserBean started");
@@ -33,6 +33,18 @@ public class UserBean {
 	}
 	public void setHeader(String header) {
 		this.header = header;
+	}
+	
+	public void setRole(String role){
+		if(role.equals("user")){
+			header="header_user.xhtml";
+		}
+		else if(role.equals("admin")){
+			header="header_admin.xhtml";
+		}
+		else{
+			header="header_guest.xhtml";
+		}
 	}
 	
 	@PreDestroy

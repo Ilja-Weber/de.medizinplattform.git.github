@@ -73,9 +73,9 @@ public class LoginBean {
 			else{
 				if(password.equals(users.getPassword(name))){
 					System.out.println("succesfull login");
-					user.setHeader("header_with_name.xhtml");
+					user.setRole("user");
 					user.setName(name);
-					return "index.xhtml";
+					return "index.xhtml?faces-redirect=true";
 				}
 				else{
 					System.out.println("wrong password");
@@ -90,9 +90,9 @@ public class LoginBean {
 	public String logout(){
 		//debug
 		System.out.println("header_with_forms mode set");
-		user.setHeader("header_with_forms.xhtml");
+		user.setRole("guest");
 		user.setName(null);
-		return "index.xhtml";
+		return "index.xhtml?faces-redirect=true";
 	}
 	
 	@PreDestroy
