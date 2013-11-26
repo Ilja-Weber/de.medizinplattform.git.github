@@ -27,47 +27,61 @@
          </h:column>
          <h:column>
             <f:facet name="header">Role</f:facet>
-            <h:inputText value="#{tableUserVar.user.role}" size="5"
-               rendered="#{tableUserVar.canEdit}" />
+            <h:selectOneMenu value="#{tableUserVar.user.role}"  rendered="#{tableUserVar.canEdit}">
+   				<f:selectItem itemValue="user" itemLabel="user" />
+   				<f:selectItem itemValue="admin" itemLabel="admin" />						
+			</h:selectOneMenu>
             <h:outputText value="#{tableUserVar.user.role}" 
                rendered="#{not tableUserVar.canEdit}" />
          </h:column>
          <h:column>
             <f:facet name="header">Edit</f:facet>
-               <h:commandButton value="Edit" action="#{users.editUser(tableUserVar)}" rendered="#{not tableUserVar.canEdit}">
+               <h:commandButton value="Edit" action="#{adminBean.editUser(tableUserVar)}" rendered="#{not tableUserVar.canEdit}">
                </h:commandButton>
-               <h:commandButton value="Save" action="#{users.saveUser(tableUserVar)}" rendered="#{tableUserVar.canEdit}">
+               <h:commandButton value="Save" action="#{adminBean.saveUser(tableUserVar)}" rendered="#{tableUserVar.canEdit}">
                </h:commandButton>
          </h:column>
          <h:column>
             <f:facet name="header">Remove</f:facet>
-               <h:commandButton value="Remove" action="#{users.removeUser(tableUserVar)}" rendered="#{not tableUserVar.canRemove}">
+               <h:commandButton value="Remove" action="#{adminBean.removeUser(tableUserVar)}" rendered="#{not tableUserVar.canRemove}">
                </h:commandButton>
          </h:column>
-      	</h:dataTable>  
-	  <br/>
+         
+         
+      	</h:dataTable>
+      	</h:form>  
+      	<br/>
+      	
+      	  <h:form>
+      	  <h:commandButton value="New User" action="#{adminBean.makeFormVisible()}" rendered="#{not adminBean.formForAddUserVisible}"></h:commandButton>
+	  			<h:panelGrid columns="5" rendered="#{adminBean.formForAddUserVisible}">
+ 				
+ 				<h:outputText value="Name"></h:outputText>
+ 				<h:outputText value="Password"></h:outputText>
+ 				<h:outputText value="Role"></h:outputText>
+ 				<h:outputText value=""></h:outputText>
+ 				<h:outputText value=""></h:outputText>
+				<h:inputText id="add_user_name" value="#{adminBean.newUserName}" size="10" label="Name"></h:inputText>
+				<h:inputText id="add_user_password" value="#{adminBean.newUserPassword}" size="20" label="Password"></h:inputText>
+				<h:selectOneMenu value="#{adminBean.newUserRole}">
+   					<f:selectItem itemValue="user" itemLabel="user" />
+   					<f:selectItem itemValue="admin" itemLabel="admin" />						
+			    </h:selectOneMenu>
+				<h:commandButton value="Add user" action="#{adminBean.addNewUser()}" />
+				<h:commandButton value="Cancel" action="#{adminBean.cancel()}" /> 
+	  </h:panelGrid>
+      	  </h:form>
+              
+        
 	  
-	  <table>
-      <tr>
-            <td>Name :</td>
-            <td><h:inputText size="10" value="#{users.temp_user.name}" /></td>
-      </tr>
-      <tr>
-            <td>Password :</td>
-            <td><h:inputText size="20" value="#{users.temp_user.password}" /></td>
-      </tr>
-      <tr>
-            <td>Role :</td>
-            <td><h:inputText size="5" value="#{users.temp_user.role}" /></td>
-      </tr>
-      <tr>
-            <td> </td>
-            <td><h:commandButton value="Add user" 
-               action="#{users.createUser()}" /></td>
-      </tr>
-      </table>	  
+	  
+	  
+ 
+		
+ 
+	
 		  
-   </h:form>
+   
 		
 	</ui:define>
 </ui:composition>

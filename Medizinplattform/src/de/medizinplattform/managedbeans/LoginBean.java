@@ -71,10 +71,10 @@ public class LoginBean {
 				System.out.println("no such user exists");
 			}
 			else{
-				if(password.equals(users.getPassword(name))){
+				if(password.equals(users.getUsersPassword(name))){
 					System.out.println("succesfull login");
-					user.setRole(users.getRole(name));
-					System.out.println("Session role set to " + users.getRole(name));
+					user.setRole(users.getUsersRole(name));
+					System.out.println("Session role set to " + users.getUsersRole(name));
 					user.setName(name);
 					return "index.xhtml?faces-redirect=true";
 				}

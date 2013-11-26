@@ -12,6 +12,7 @@ import de.medizinplattform.entities.Users;
 @RequestScoped
 public class RegisterBean {
 
+	
 	@ManagedProperty(value="#{users}")
 	private Users users;
 	
@@ -22,6 +23,7 @@ public class RegisterBean {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
+	
 	
 	public String name;
 	public String password;
@@ -51,7 +53,7 @@ public class RegisterBean {
 			
 			System.out.println("Trying to create new user");
 			if(users.hasUser(name)==false){
-				users.createUser(name, password);
+				users.createUser(name, password, "user");
 				return "succesful_registration.xhtml?faces-redirect=true";
 			}
 			else{
