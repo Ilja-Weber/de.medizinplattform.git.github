@@ -79,7 +79,7 @@ public class LoginBean {
 					return "index.xhtml?faces-redirect=true";
 				}
 				else{
-					System.out.println("wrong password");
+					return "falsche password.xhtml";
 				}
 			}
 				
