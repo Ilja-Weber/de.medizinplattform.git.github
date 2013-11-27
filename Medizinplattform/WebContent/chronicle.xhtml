@@ -25,7 +25,7 @@
 							<tr>
 								<td>
 									<h:inputText value="#{entry.text}" size="20" rendered="#{entry.editable}" />
-           							<h:outputText value="#{entry.text}" rendered="#{not entry.editable}" />
+           							<h:outputText value="#{entry.text}" rendered="#{not entry.editable}" />           							
 								</td>
 								<td>
 									<h:commandButton value="Edit" action="#{chronicleBean.editEntry(entry)}" rendered="#{not entry.editable}"></h:commandButton>
