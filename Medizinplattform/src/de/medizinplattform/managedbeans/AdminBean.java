@@ -23,6 +23,17 @@ public class AdminBean {
 		this.users = users;
 	}
 	
+	@ManagedProperty(value="#{sessionBean}")
+	private SessionBean session;
+	
+	public SessionBean getSession() {
+		return session;
+	}
+
+	public void setSession(SessionBean session) {
+		this.session = session;
+	}
+	
 	
 	boolean formForAddUserVisible = false;
 	
@@ -92,22 +103,28 @@ public class AdminBean {
 		return null;
 	}
 	
-	public String editUser(UserEditable tableUser){
-		System.out.println("Edit table user");
-		tableUser.setEditable(true);
+	public String editUser(UserEditable userEditable){
+		userEditable.setEditable(true);
 		return null;
 	}
 	
-	public String saveUser(UserEditable tableUser){
-		System.out.println("Save table user");
-		tableUser.setEditable(false);
+	public String saveUser(UserEditable userEditable){
+		userEditable.setEditable(false);
 		return null;
 	}
 	
-	public String removeUser(UserEditable tableUser){
-		System.out.println("Remove table user");
+	public String removeUser(UserEditable userEditable){
 		if(users != null){
-			users.removeUser(tableUser);
+			users.removeUser(userEditable);
+		}
+		return null;
+	}
+	
+	
+	public String viewUsersChronicle(UserEditable userEditable){
+		if(session != null){
+			session.setCanSeeChronicleOf(userEditable.getName());
+			return "chronicle.xhtml?faces-redirect=true";
 		}
 		return null;
 	}

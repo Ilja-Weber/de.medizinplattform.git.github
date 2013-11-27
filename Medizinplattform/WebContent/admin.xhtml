@@ -35,15 +35,17 @@
                rendered="#{not editableUser.editable}" />
          </h:column>
          <h:column>
-            <f:facet name="header">Edit</f:facet>
-               <h:commandButton value="Edit" action="#{adminBean.editUser(editableUser)}" rendered="#{not editableUser.editable}">
+            <f:facet name="header">Chronicle</f:facet>
+               <h:commandLink value="view" action="#{adminBean.viewUsersChronicle(editableUser)}"></h:commandLink>
+         </h:column>
+         <h:column>
+               <h:commandButton value="edit" action="#{adminBean.editUser(editableUser)}" rendered="#{not editableUser.editable}">
                </h:commandButton>
-               <h:commandButton value="Save" action="#{adminBean.saveUser(editableUser)}" rendered="#{editableUser.editable}">
+               <h:commandButton value="save" action="#{adminBean.saveUser(editableUser)}" rendered="#{editableUser.editable}">
                </h:commandButton>
          </h:column>
          <h:column>
-            <f:facet name="header">Remove</f:facet>
-               <h:commandButton value="Remove" action="#{adminBean.removeUser(editableUser)}">
+               <h:commandButton value="remove" action="#{adminBean.removeUser(editableUser)}">
                </h:commandButton>
          </h:column>
          

@@ -27,8 +27,11 @@
 						
 			<h:form rendered="#{sessionBean.user}">
 				<h:commandLink style="font-size:12px" value=" manage users " action="admin.xhtml?faces-redirect=true"  rendered="#{sessionBean.admin}"></h:commandLink>
-				<h:commandLink style="font-size:12px" value="#{sessionBean.canSeeChronicleOf}'s chronicle" action="chronicle.xhtml?faces-redirect=true"></h:commandLink>
-				<h:outputText value=" | #{sessionBean.usersName} | "></h:outputText>				
+				<h:outputText value=" | "  rendered="#{sessionBean.admin}"></h:outputText>
+				<h:commandLink style="font-size:12px" value="#{sessionBean.canSeeChronicleOf}'s chronicle" action="chronicle.xhtml?faces-redirect=true"   rendered="#{not sessionBean.admin}">
+				</h:commandLink>
+				<h:outputText value=" | "  rendered="#{not sessionBean.admin}"></h:outputText>
+				<h:outputText value="#{sessionBean.usersName} | "></h:outputText>				
 				<h:commandLink style="font-size:12px" value=" log out " action="#{loginBean.logout()}"></h:commandLink>
 			</h:form>
 			
