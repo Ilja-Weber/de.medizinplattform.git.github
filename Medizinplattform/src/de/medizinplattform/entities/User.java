@@ -6,15 +6,10 @@ public class User{
 	public String password;
 	public String role;
 	
-	public User(){
-		System.out.println("New User created");
-	}
-	
 	public User(String name, String password, String role){
 		this.name=name;
 		this.password=password;
 		this.role=role;
-		System.out.println("New User created");
 	}
 	
 	

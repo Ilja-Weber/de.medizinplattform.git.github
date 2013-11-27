@@ -4,7 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import de.medizinplattform.entities.TableUser;
+import de.medizinplattform.containerbeans.UserEditable;
 import de.medizinplattform.entities.Users;
 
 
@@ -92,19 +92,19 @@ public class AdminBean {
 		return null;
 	}
 	
-	public String editUser(TableUser tableUser){
+	public String editUser(UserEditable tableUser){
 		System.out.println("Edit table user");
-		tableUser.setCanEdit(true);
+		tableUser.setEditable(true);
 		return null;
 	}
 	
-	public String saveUser(TableUser tableUser){
+	public String saveUser(UserEditable tableUser){
 		System.out.println("Save table user");
-		tableUser.setCanEdit(false);
+		tableUser.setEditable(false);
 		return null;
 	}
 	
-	public String removeUser(TableUser tableUser){
+	public String removeUser(UserEditable tableUser){
 		System.out.println("Remove table user");
 		if(users != null){
 			users.removeUser(tableUser);

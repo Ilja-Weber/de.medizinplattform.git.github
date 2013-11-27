@@ -10,40 +10,40 @@
 	<ui:define name="content">
 		
 		<h:form>
-      		<h:dataTable value="#{users.users}" var="tableUserVar">
+      		<h:dataTable value="#{users.usersList}" var="editableUser">
          <h:column>    				
             <f:facet name="header">Name</f:facet>    				
-            <h:inputText value="#{tableUserVar.user.name}"
-               size="10" rendered="#{tableUserVar.canEdit}" />
-            <h:outputText value="#{tableUserVar.user.name}"
-               rendered="#{not tableUserVar.canEdit}" />
+            <h:inputText value="#{editableUser.name}"
+               size="10" rendered="#{editableUser.editable}" />
+            <h:outputText value="#{editableUser.name}"
+               rendered="#{not editableUser.editable}" />
          </h:column>
          <h:column>
             <f:facet name="header">Password</f:facet>
-            <h:inputText value="#{tableUserVar.user.password}" 
-               size="20" rendered="#{tableUserVar.canEdit}" />
-            <h:outputText value="#{tableUserVar.user.password}" 
-               rendered="#{not tableUserVar.canEdit}" />
+            <h:inputText value="#{editableUser.password}" 
+               size="20" rendered="#{editableUser.editable}" />
+            <h:outputText value="#{editableUser.password}" 
+               rendered="#{not editableUser.editable}" />
          </h:column>
          <h:column>
             <f:facet name="header">Role</f:facet>
-            <h:selectOneMenu value="#{tableUserVar.user.role}"  rendered="#{tableUserVar.canEdit}">
+            <h:selectOneMenu value="#{editableUser.role}"  rendered="#{editableUser.editable}">
    				<f:selectItem itemValue="user" itemLabel="user" />
    				<f:selectItem itemValue="admin" itemLabel="admin" />						
 			</h:selectOneMenu>
-            <h:outputText value="#{tableUserVar.user.role}" 
-               rendered="#{not tableUserVar.canEdit}" />
+            <h:outputText value="#{editableUser.role}" 
+               rendered="#{not editableUser.editable}" />
          </h:column>
          <h:column>
             <f:facet name="header">Edit</f:facet>
-               <h:commandButton value="Edit" action="#{adminBean.editUser(tableUserVar)}" rendered="#{not tableUserVar.canEdit}">
+               <h:commandButton value="Edit" action="#{adminBean.editUser(editableUser)}" rendered="#{not editableUser.editable}">
                </h:commandButton>
-               <h:commandButton value="Save" action="#{adminBean.saveUser(tableUserVar)}" rendered="#{tableUserVar.canEdit}">
+               <h:commandButton value="Save" action="#{adminBean.saveUser(editableUser)}" rendered="#{editableUser.editable}">
                </h:commandButton>
          </h:column>
          <h:column>
             <f:facet name="header">Remove</f:facet>
-               <h:commandButton value="Remove" action="#{adminBean.removeUser(tableUserVar)}" rendered="#{not tableUserVar.canRemove}">
+               <h:commandButton value="Remove" action="#{adminBean.removeUser(editableUser)}">
                </h:commandButton>
          </h:column>
          

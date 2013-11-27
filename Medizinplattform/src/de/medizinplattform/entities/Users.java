@@ -7,27 +7,29 @@ import javax.annotation.PreDestroy;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import de.medizinplattform.containerbeans.UserEditable;
+
 //das ist keine entity
 @ManagedBean(name="users")
 @ApplicationScoped
 public class Users {
 	
-	List<TableUser> users = new ArrayList<TableUser>();
+	List<UserEditable> users = new ArrayList<UserEditable>();
 	
 	
 	public Users(){
 		//User Ilja@1312
-		users.add(new TableUser(new User("Ilja", "1312", "user")));
-		users.add(new TableUser(new User("Admin", "admin", "admin")));
-		users.add(new TableUser(new User("Pedro", "3234", "user")));
+		users.add(new UserEditable(new User("Ilja", "1312", "user")));
+		users.add(new UserEditable(new User("Admin", "admin", "admin")));
+		users.add(new UserEditable(new User("Pedro", "3234", "user")));
 					
 		System.out.println("UsersBean started and initialized");
 	}
 	
 	//Find a User in a Database
-	public TableUser findUserByName(String name){
-		for(TableUser user : users){
-			if(user.user.getName().equals(name)){
+	public UserEditable findUserByName(String name){
+		for(UserEditable user : users){
+			if(user.getUser().getName().equals(name)){
 				return user;
 			}
 		}
@@ -41,31 +43,31 @@ public class Users {
 	
 	//Get Users password
 	public String getUsersPassword(String name){
-		return findUserByName(name).user.getPassword();
+		return findUserByName(name).getUser().getPassword();
 	}
 	
 	//Get Users role
 	public String getUsersRole(String name){
-		return findUserByName(name).user.getRole();
+		return findUserByName(name).getUser().getRole();
 	}
 	
 	
 	
 	
 	//Get all Users from Database
-	public List<TableUser> getUsers(){
+	public List<UserEditable> getUsersList(){
 		return users;
 
 	}
 	
 	//Create a User in Database
 	public void createUser(String name, String password, String role){
-		users.add(new TableUser(new User(name, password, role)));
+		users.add(new UserEditable(new User(name, password, role)));
 		System.out.println("User "+ name + "@" + password+" created");
 	}
 	
 	//Remove User from Database
-	public void removeUser(TableUser tableUser){
+	public void removeUser(UserEditable tableUser){
 		System.out.println("Remove table user");
 		users.remove(tableUser);
 	
