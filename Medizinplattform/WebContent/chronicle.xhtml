@@ -9,7 +9,7 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 	   <h:form>
-      		
+      		<h:commandLink  rendered="#{sessionBean.admin}" value="back" action="admin.xhtml?faces-redirect=true"></h:commandLink>
       		<table style="margin:8px">
       		<ui:repeat var="chronicle" value="#{chronicleBean.createChroniclesList()}">
         		<tr>
