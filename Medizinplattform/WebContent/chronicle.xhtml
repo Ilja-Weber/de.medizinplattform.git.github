@@ -13,8 +13,8 @@
       		<table style="margin:8px">
       		<ui:repeat var="chronicle" value="#{chronicleBean.createChroniclesList()}">
         		<tr>
-					<b><td><h:outputText value="#{chronicle.headersText}" /></td></b>
-					<b><td><h:outputText value="#{chronicle.date}   " /></td></b>
+					<td><b><h:outputText value="#{chronicle.headersText}" /></b></td>
+					<td><b><h:outputText value="#{chronicle.date}   " /></b></td>
 					<td><h:commandButton value="Remove" action="#{chronicleBean.removeChronicle(chronicle)}"></h:commandButton></td>
 				</tr>
         		
