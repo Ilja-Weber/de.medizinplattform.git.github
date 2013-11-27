@@ -3,17 +3,18 @@ package de.medizinplattform.managedbeans;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import de.medizinplattform.entities.Users;
 
 @ManagedBean(name="loginBean")
-@RequestScoped
+@ViewScoped
 public class LoginBean {
 	
 	public String name;
 	public String password;
 	
+	private boolean loginFormVisible = false;
 	
 	@ManagedProperty(value="#{users}")
 	private Users users;
@@ -40,9 +41,7 @@ public class LoginBean {
 	
 	
 	public LoginBean(){
-		
-		//debug
-		System.out.println("Login Bean started");
+		loginFormVisible=false;
 	}
 	
 	
@@ -53,12 +52,24 @@ public class LoginBean {
 		this.name = name;
 	}
 	
+	public boolean isLoginFormVisible() {
+		return loginFormVisible;
+	}
+
+	public void setLoginFormVisible(boolean loginFormVisible) {
+		this.loginFormVisible = loginFormVisible;
+	}
 	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String makeLoginFormVisible(){
+		loginFormVisible=true;
+		return null;
 	}
 	
 	
@@ -100,6 +111,7 @@ public class LoginBean {
 		session.setAdmin(false);
 		session.setUser(false);
 		session.setUsersName(null);
+				
 		return "index.xhtml?faces-redirect=true";
 	}
 	

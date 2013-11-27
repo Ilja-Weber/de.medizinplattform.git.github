@@ -15,14 +15,23 @@
 		<span style="text-align:right;font-size:20px;color:black">
 			
 			<h:form  rendered="#{sessionBean.guest}">
-            	<h:outputText value=" Login"></h:outputText>
-				<h:inputText value="#{loginBean.name}"></h:inputText>
-				<h:outputText value=" Password"></h:outputText>
-				<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
-				<h:commandButton value="Login" action="#{loginBean.login()}"></h:commandButton>
-				<h:commandLink value="  register  " action="register.xhtml?faces-redirect=true"></h:commandLink>
+            	
+            	<h:commandLink value="login" action="#{loginBean.makeLoginFormVisible()}"  rendered="#{not loginBean.loginFormVisible}"></h:commandLink>
+            	
+            	<h:outputText  rendered="#{loginBean.loginFormVisible}" value=" Login"></h:outputText>
+				<h:inputText  rendered="#{loginBean.loginFormVisible}" value="#{loginBean.name}"></h:inputText>
+				<h:outputText  rendered="#{loginBean.loginFormVisible}" value=" Password"></h:outputText>
+				<h:inputSecret  rendered="#{loginBean.loginFormVisible}" value="#{loginBean.password}"></h:inputSecret>
+				<h:commandButton  rendered="#{loginBean.loginFormVisible}" value="Login" action="#{loginBean.login()}"></h:commandButton>
+				
 				<h:outputText value=" | "></h:outputText>
-				<h:commandLink value="  forgot password  " action="login_fail.xhtml?faces-redirect=true"></h:commandLink>
+				
+				<h:commandLink  rendered="#{loginBean.loginFormVisible}" value="  forgot password  " action="login_fail.xhtml?faces-redirect=true"></h:commandLink>
+				<h:outputText  rendered="#{loginBean.loginFormVisible}" value=" | "></h:outputText>
+				
+				<h:commandLink value="  register  " action="register.xhtml?faces-redirect=true"></h:commandLink>
+				
+				
 			</h:form>
 						
 			<h:form rendered="#{sessionBean.user}">
