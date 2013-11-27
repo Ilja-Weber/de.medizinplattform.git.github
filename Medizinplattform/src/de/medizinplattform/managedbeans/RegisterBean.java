@@ -53,7 +53,7 @@ public class RegisterBean {
 			
 			System.out.println("Trying to create new user");
 			if(users.hasUser(name)==false){
-				users.createUser(name, password, "user");
+				users.createUser(name, password, false);
 				return "succesful_registration.xhtml?faces-redirect=true";
 			}
 			else{

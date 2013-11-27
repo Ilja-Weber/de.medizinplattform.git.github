@@ -80,7 +80,8 @@ public class AdminBean {
 	public String addNewUser(){
 		if(users != null){
 			if(!newUserName.equals("") && !newUserPassword.equals("") &&!newUserRole.equals("")){
-				users.createUser(newUserName, newUserPassword, newUserRole);
+				boolean isAdmin = (newUserRole.equals("admin")) ? true : false;
+				users.createUser(newUserName, newUserPassword, isAdmin);
 			}
 			else{
 				System.out.println("Form input missinng: Cannot add new User");

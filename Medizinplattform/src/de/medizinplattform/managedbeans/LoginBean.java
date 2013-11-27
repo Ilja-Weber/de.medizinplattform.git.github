@@ -75,18 +75,11 @@ public class LoginBean {
 					session.setUsersName(name);
 					session.setCanSeeChronicleOf(name); //<-Von interesse fuer Admins, die chronicle von anderen anschauen wollen.
 					
-					if(users.getUsersRole(name).equals("user")){
-						session.setAdmin(false);
-						session.setUser(true);
+					session.setUser(true);
+					if(users.isUserAdmin(name)){
+						session.setAdmin(true);
 					}
 					
-					else if(users.getUsersRole(name).equals("admin")){
-						session.setAdmin(true);
-						session.setUser(true);
-					}
-					else{
-						System.out.println("Error: No such role exists");
-					}
 					session.setGuest(false);
 					
 					return "index.xhtml?faces-redirect=true";

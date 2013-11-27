@@ -36,7 +36,7 @@
          </h:column>
          <h:column>
             <f:facet name="header">Chronicle</f:facet>
-               <h:commandLink value="view" action="#{adminBean.viewUsersChronicle(editableUser)}"></h:commandLink>
+               <h:commandLink value="view" action="#{adminBean.viewUsersChronicle(editableUser)}"  rendered="#{not editableUser.admin}"></h:commandLink>
          </h:column>
          <h:column>
                <h:commandButton value="edit" action="#{adminBean.editUser(editableUser)}" rendered="#{not editableUser.editable}">

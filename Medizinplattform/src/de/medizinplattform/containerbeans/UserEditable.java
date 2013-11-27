@@ -38,11 +38,19 @@ public class UserEditable{
 	}
 	
 	public String getRole(){
-		return user.getRole();
+		return (user.isAdmin())?"admin":"user";
 	}
 	
 	public void setRole(String role){
-		user.setRole(role);
+		user.setAdmin(((role.equals("admin"))?true:false));
+	}	
+	
+	public boolean isAdmin(){
+		return user.isAdmin();
+	}
+	
+	public void setAdmin(boolean isAdmin){
+		user.setAdmin(isAdmin);
 	}	
 
 	public boolean isEditable() {

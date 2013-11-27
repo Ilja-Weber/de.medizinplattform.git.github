@@ -19,9 +19,9 @@ public class Users {
 	
 	public Users(){
 		//User Ilja@1312
-		users.add(new UserEditable(new User("Ilja", "1312", "user")));
-		users.add(new UserEditable(new User("Admin", "admin", "admin")));
-		users.add(new UserEditable(new User("Pedro", "3234", "user")));
+		users.add(new UserEditable(new User("Ilja", "1312", false)));
+		users.add(new UserEditable(new User("Admin", "admin", true)));
+		users.add(new UserEditable(new User("Pedro", "3234", false)));
 					
 		System.out.println("UsersBean started and initialized");
 	}
@@ -47,8 +47,8 @@ public class Users {
 	}
 	
 	//Get Users role
-	public String getUsersRole(String name){
-		return findUserByName(name).getUser().getRole();
+	public boolean isUserAdmin(String name){
+		return findUserByName(name).getUser().isAdmin();
 	}
 	
 	
@@ -61,15 +61,13 @@ public class Users {
 	}
 	
 	//Create a User in Database
-	public void createUser(String name, String password, String role){
-		users.add(new UserEditable(new User(name, password, role)));
-		System.out.println("User "+ name + "@" + password+" created");
+	public void createUser(String name, String password, boolean isAdmin){
+		users.add(new UserEditable(new User(name, password, isAdmin)));
 	}
 	
 	//Remove User from Database
-	public void removeUser(UserEditable tableUser){
-		System.out.println("Remove table user");
-		users.remove(tableUser);
+	public void removeUser(UserEditable userEditable){
+		users.remove(userEditable);
 	
 	}
 	

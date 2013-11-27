@@ -4,12 +4,12 @@ public class User{
 	
 	public String name;
 	public String password;
-	public String role;
+	public boolean admin;
 	
-	public User(String name, String password, String role){
+	public User(String name, String password, boolean admin){
 		this.name=name;
 		this.password=password;
-		this.role=role;
+		this.admin=admin;
 	}
 	
 	
@@ -26,11 +26,11 @@ public class User{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
-		return role;
+	public boolean isAdmin() {
+		return admin;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setAdmin(boolean isAdmin) {
+		this.admin = isAdmin;
 	}
 	
 	
