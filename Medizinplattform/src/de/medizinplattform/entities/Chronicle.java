@@ -3,13 +3,25 @@ package de.medizinplattform.entities;
 public class Chronicle {
 	
 	
+	public String id;
 	public String usersName;
 	public String headersText;
-	public boolean editable=false;
+	public String date;
 	
-	public Chronicle(String usersName, String headersText){
+	public Chronicle(String id, String usersName, String headersText, String date){
+		this.id=id;
 		this.usersName=usersName;
 		this.headersText=headersText;
+		this.date=date;
+	}
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getUsersName() {
@@ -28,14 +40,18 @@ public class Chronicle {
 		this.headersText = headersText;
 	}
 
-	public boolean isEditable() {
-		return editable;
+	public String getDate() {
+		return date;
 	}
 
-	public void setEditable(boolean editable) {
-		this.editable = editable;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	
+
+	@Override
+	public String toString(){
+		return id+"@"+usersName;
+	}
 	
 
 }

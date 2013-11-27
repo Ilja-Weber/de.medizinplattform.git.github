@@ -19,6 +19,7 @@ public class Users {
 		//User Ilja@1312
 		users.add(new TableUser(new User("Ilja", "1312", "user")));
 		users.add(new TableUser(new User("Admin", "admin", "admin")));
+		users.add(new TableUser(new User("Pedro", "3234", "user")));
 					
 		System.out.println("UsersBean started and initialized");
 	}
