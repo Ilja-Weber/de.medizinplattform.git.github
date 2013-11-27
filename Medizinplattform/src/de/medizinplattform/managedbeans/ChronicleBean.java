@@ -41,14 +41,14 @@ public class ChronicleBean {
 		
 	
 	//Injecting UserBean
-	@ManagedProperty(value="#{userBean}")
-	private UserBean loggedUser;
+	@ManagedProperty(value="#{sessionBean}")
+	private SessionBean loggedUser;
 	
-	public UserBean getLoggedUser() {
+	public SessionBean getLoggedUser() {
 		return loggedUser;
 	}
 
-	public void setLoggedUser(UserBean loggedUser) {
+	public void setLoggedUser(SessionBean loggedUser) {
 		this.loggedUser = loggedUser;
 	}
 	
@@ -63,7 +63,7 @@ public class ChronicleBean {
 	
 	public List<Chronicle> createChroniclesList(){
 		if(loggedUser!=null){
-			return chronicles.getUsersChronicles(loggedUser.getName());
+			return chronicles.getUsersChronicles(loggedUser.getCanSeeChronicleOf());
 		}
 		return null;
 		

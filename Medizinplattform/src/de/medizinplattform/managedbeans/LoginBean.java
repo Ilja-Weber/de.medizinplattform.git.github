@@ -27,15 +27,15 @@ public class LoginBean {
 	}
 
 	
-	@ManagedProperty(value="#{userBean}")
-	private UserBean user;
+	@ManagedProperty(value="#{sessionBean}")
+	private SessionBean session;
 	
-	public UserBean getUser() {
-		return user;
+	public SessionBean getSession() {
+		return session;
 	}
 
-	public void setUser(UserBean user) {
-		this.user = user;
+	public void setSession(SessionBean session) {
+		this.session = session;
 	}
 	
 	
@@ -65,17 +65,30 @@ public class LoginBean {
 	public String login(){
 		//debug
 		if(users != null){
-	    
-			System.out.println("checking if user " + name+ " is registered");
+			
 			if(users.hasUser(name)==false){
 				System.out.println("no such user exists");
 			}
 			else{
 				if(password.equals(users.getUsersPassword(name))){
-					System.out.println("succesfull login");
-					user.setRole(users.getUsersRole(name));
-					System.out.println("Session role set to " + users.getUsersRole(name));
-					user.setName(name);
+					
+					session.setUsersName(name);
+					session.setCanSeeChronicleOf(name); //<-Von interesse fuer Admins, die chronicle von anderen anschauen wollen.
+					
+					if(users.getUsersRole(name).equals("user")){
+						session.setAdmin(false);
+						session.setUser(true);
+					}
+					
+					else if(users.getUsersRole(name).equals("admin")){
+						session.setAdmin(true);
+						session.setUser(true);
+					}
+					else{
+						System.out.println("Error: No such role exists");
+					}
+					session.setGuest(false);
+					
 					return "index.xhtml?faces-redirect=true";
 				}
 				else{
@@ -90,10 +103,10 @@ public class LoginBean {
 	}
 	public String logout(){
 		//debug
-		System.out.println("header_with_forms mode set");
-		user.setRole("guest");
-		System.out.println("Session role set to guest");
-		user.setName(null);
+		session.setGuest(true);
+		session.setAdmin(false);
+		session.setUser(false);
+		session.setUsersName(null);
 		return "index.xhtml?faces-redirect=true";
 	}
 	
