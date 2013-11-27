@@ -5,10 +5,9 @@ import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 import de.medizinplattform.entities.Chronicle;
-import de.medizinplattform.entities.Chronicles;
+import de.medizinplattform.entities.Entry;
 
 @ManagedBean(name="searchBean")
 @ApplicationScoped
@@ -26,7 +25,23 @@ public class SearchBean {
 					result.add(0, chronicleInList);
 				}
 			}
+		System.out.println("UserChronicles "+result);
 		return result;
 		
 	}
+	
+	public List<Entry> findEntryByChronicleId(List<Entry> entries, String chronicle_id){
+		List<Entry> result = new ArrayList<Entry>();
+			for(Entry entryInList : entries){
+				if(chronicle_id.equals(entryInList.getChronicleId())){
+					result.add(0, entryInList);
+					
+				}
+			}
+		System.out.println("Search: I return "+result);
+		return result;
+		
+	}
+	
+	
 }

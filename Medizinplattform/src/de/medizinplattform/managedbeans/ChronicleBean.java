@@ -9,6 +9,8 @@ import javax.faces.bean.SessionScoped;
 
 import de.medizinplattform.entities.Chronicle;
 import de.medizinplattform.entities.Chronicles;
+import de.medizinplattform.entities.Entries;
+import de.medizinplattform.entities.Entry;
 
 @ManagedBean(name="chronicleBean")
 @SessionScoped
@@ -24,6 +26,19 @@ public class ChronicleBean {
 	public void setChronicles(Chronicles chronicles) {
 		this.chronicles = chronicles;
 	}
+	
+	//Injecting Entries
+		@ManagedProperty(value="#{entries}")
+		private Entries entries;
+		
+		public Entries getEntries() {
+			return entries;
+		}
+		
+		public void setEntries(Entries entries) {
+			this.entries = entries;
+		}
+		
 	
 	//Injecting UserBean
 	@ManagedProperty(value="#{userBean}")
@@ -46,7 +61,7 @@ public class ChronicleBean {
 	}
 	
 	
-	public List<Chronicle> getChroniclesList(){
+	public List<Chronicle> createChroniclesList(){
 		if(loggedUser!=null){
 			return chronicles.getUsersChronicles(loggedUser.getName());
 		}
@@ -54,20 +69,46 @@ public class ChronicleBean {
 		
 	}
 	
-	
-	public String editChronicle(Chronicle chronicle){
-		chronicle.setEditable(true);
-		return null;
-	}
-	
-	
-	public String saveChronicle(Chronicle chronicle){
-		chronicle.setEditable(false);
-		return null;
-	}
-	
-	
 	public String removeChronicle(Chronicle chronicle){
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Entry> createEntriesList(Chronicle input){
+		if(input==null){
+			System.out.println("WTFWTFWTFWTFWTFWTF");
+		}
+			
+		if(entries != null && input!=null){
+			System.out.println("chronicleBean gets "+input+" and calls passes "+input.getId()+" to entries");
+			return entries.getUserEntriesByChronicleId(input.getId());
+		}
+		return null;
+	}
+	
+	
+	public String editEntry(Entry entry){
+		entry.setEditable(true);
+		return null;
+	}
+	
+	
+	public String saveEntry(Entry entry){
+		entry.setEditable(false);
+		return null;
+	}
+	
+	
+	public String removeEntry(Entry entry){
+		if(entries != null){
+			entries.removeEntry(entry);
+		}
 		return null;
 	}
 	

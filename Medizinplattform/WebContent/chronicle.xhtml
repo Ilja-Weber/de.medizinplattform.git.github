@@ -8,40 +8,45 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-	    Here you could see and browse all the nice diagramms and stuff.<br></br>
-	    <h:graphicImage library="images" name="chronicle.png" />
-	    <h:form>
-      		<h:dataTable value="#{chronicleBean.chroniclesList}" var="chronicle">
-         <h:column>    				
-            <f:facet name="header">UsersName</f:facet>    				
-            <h:inputText value="#{chronicle.usersName}"
-               size="10" rendered="#{chronicle.editable}" />
-            <h:outputText value="#{chronicle.usersName}"
-               rendered="#{not chronicle.editable}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">HeaderText</f:facet>
-            <h:inputText value="#{chronicle.headersText}" 
-               size="20" rendered="#{chronicle.editable}" />
-            <h:outputText value="#{chronicle.headersText}" 
-               rendered="#{not chronicle.editable}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">Edit</f:facet>
-               <h:commandButton value="Edit" action="#{chronicleBean.editChronicle(chronicle)}" rendered="#{not chronicle.editable}">
-               </h:commandButton>
-               <h:commandButton value="Save" action="#{chronicleBean.saveChronicle(chronicle)}" rendered="#{chronicle.editable}">
-               </h:commandButton>
-         </h:column>
-         <h:column>
-            <f:facet name="header">Remove</f:facet>
-               <h:commandButton value="Remove" action="#{chronicleBean.removeChronicle(chronicle)}">
-               </h:commandButton>
-         </h:column>
-         
-         
-      	</h:dataTable>
-      	</h:form>  
+	   <h:form>
+      		
+      		<table style="margin:8px">
+      		<ui:repeat var="chronicle" value="#{chronicleBean.createChroniclesList()}">
+        		<tr>
+					<b><td><h:outputText value="#{chronicle.headersText}" /></td></b>
+					<b><td><h:outputText value="#{chronicle.date}   " /></td></b>
+					<td><h:commandButton value="Remove" action="#{chronicleBean.removeChronicle(chronicle)}"></h:commandButton></td>
+				</tr>
+        		
+        		<tr>
+        			<td>
+        				<table style="margin:8px">
+        				<ui:repeat var="entry" value="#{chronicleBean.createEntriesList(chronicle)}">
+							<tr>
+								<td>
+									<h:inputText value="#{entry.text}" size="20" rendered="#{entry.editable}" />
+           							<h:outputText value="#{entry.text}" rendered="#{not entry.editable}" />
+								</td>
+								<td>
+									<h:commandButton value="Edit" action="#{chronicleBean.editEntry(entry)}" rendered="#{not entry.editable}"></h:commandButton>
+               						<h:commandButton value="Save" action="#{chronicleBean.saveEntry(entry)}" rendered="#{entry.editable}"></h:commandButton>
+								</td>
+								<td>
+									<h:commandButton value="Remove" action="#{chronicleBean.removeEntry(entry)}"></h:commandButton>
+								</td>
+							</tr>
+						</ui:repeat>
+						</table>
+        			</td>
+        		</tr>
+        		
+        		
+        		
+      		
+      		</ui:repeat>
+      		</table>
+      		
+      </h:form>  
 	    
 	</ui:define>
 </ui:composition>

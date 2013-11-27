@@ -29,20 +29,27 @@ public class Chronicles {
 	List<Chronicle> chroniclesList = new ArrayList<Chronicle>();
 	
 	public Chronicles(){
-		chroniclesList.add(new Chronicle("Ilja", "Very-very bad headache"));
-		chroniclesList.add(new Chronicle("Ilja", "Unhappyness"));
-		chroniclesList.add(new Chronicle("Pedro", "Pedros decease"));
-		chroniclesList.add(new Chronicle("Pedro", "Death"));
+		chroniclesList.add(new Chronicle("123", "Ilja", "Very-very bad headache", "21.11.2013"));
+		chroniclesList.add(new Chronicle("152", "Ilja", "Unhappyness", "22.11.2013"));
+		chroniclesList.add(new Chronicle("112", "Pedro", "Pedros decease", "11.11.2012"));
+		chroniclesList.add(new Chronicle("333", "Pedro", "Its getting worse ad worse", "10.01.1945"));
+		chroniclesList.add(new Chronicle("132", "Pedro", "Death", "06.02.2079"));
 	}
 	
 	public List<Chronicle> getUsersChronicles(String usersName){
 		if(search != null){
+			System.out.println("Chronicles: Hey take these chronicles from "+usersName);
 			return search.findUsersChronicles(chroniclesList, usersName);
 		}
+		System.out.println("Chronicles: About to be null");
 		return null;
 	}
-
+	
 	public List<Chronicle> getChroniclesList() {
 		return chroniclesList;
 	}
+	
+	
+	
+	
 }
