@@ -21,6 +21,7 @@
 				<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
 				<h:commandButton value="Login" action="#{loginBean.login()}"></h:commandButton>
 				<h:commandLink value="  register  " action="register.xhtml?faces-redirect=true"></h:commandLink>
+				<h:outputText value=" | "></h:outputText>
 				<h:commandLink value="  forgot password  " action="login_fail.xhtml?faces-redirect=true"></h:commandLink>
 			</h:form>
 						
