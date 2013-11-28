@@ -57,6 +57,10 @@ public class SessionBean {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+	
+	public boolean isLoggedIn(){
+		return admin||user;
+	}
 
 	@PreDestroy
 	public void cry(){
