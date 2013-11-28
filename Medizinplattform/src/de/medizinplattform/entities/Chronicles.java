@@ -7,15 +7,15 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import de.medizinplattform.managedbeans.SearchBean;
+import de.medizinplattform.utilitybeans.SearchBean;
 
 @ManagedBean(name="chronicles")
 @ApplicationScoped
 public class Chronicles {
 	
 	//Injecting SearchBean
-		@ManagedProperty(value="#{searchBean}")
-		private SearchBean search;
+	@ManagedProperty(value="#{searchBean}")
+	private SearchBean search;
 		
 		public SearchBean getSearch() {
 			return search;

@@ -7,7 +7,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import de.medizinplattform.managedbeans.SearchBean;
+import de.medizinplattform.utilitybeans.SearchBean;
 
 
 @ManagedBean(name="entries")

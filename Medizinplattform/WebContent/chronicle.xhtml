@@ -10,43 +10,99 @@
 	<ui:define name="content">
 	   <h:form>
       		<h:commandLink  rendered="#{sessionBean.admin}" value="back" action="admin.xhtml?faces-redirect=true"></h:commandLink>
-      		<table style="margin:8px">
-      		<ui:repeat var="chronicle" value="#{chronicleBean.createChroniclesList()}">
-        		<tr>
-					<td><b><h:outputText value="#{chronicle.headersText}" /></b></td>
-					<td><b><h:outputText value="#{chronicle.date}   " /></b></td>
-					<td><h:commandButton value="Remove" action="#{chronicleBean.removeChronicle(chronicle)}"></h:commandButton></td>
-				</tr>
-        		
-        		<tr>
-        			<td>
-        				<table style="margin:8px">
-        				<ui:repeat var="entry" value="#{chronicleBean.createEntriesList(chronicle)}">
-							<tr>
-								<td>
-									<h:inputText value="#{entry.text}" size="20" rendered="#{entry.editable}" />
-           							<h:outputText value="#{entry.text}" rendered="#{not entry.editable}" />           							
-								</td>
-								<td>
-									<h:commandButton value="Edit" action="#{chronicleBean.editEntry(entry)}" rendered="#{not entry.editable}"></h:commandButton>
-               						<h:commandButton value="Save" action="#{chronicleBean.saveEntry(entry)}" rendered="#{entry.editable}"></h:commandButton>
-								</td>
-								<td>
-									<h:commandButton value="Remove" action="#{chronicleBean.removeEntry(entry)}"></h:commandButton>
-								</td>
-							</tr>
-						</ui:repeat>
-						</table>
-        			</td>
-        		</tr>
-        		
-        		
-        		
-      		
-      		</ui:repeat>
-      		</table>
-      		
-      </h:form>  
+       </h:form>
+       
+       <h:panelGroup>
+       		<h:form  rendered="#{not chronicleBean.newEntriesContainerFormVisible}">
+      			<h:commandButton value="new chronicle entry" action="#{chronicleBean.newButton()}"></h:commandButton>
+       		</h:form>
+       		
+       		<h:form  rendered="#{chronicleBean.newEntriesContainerFormVisible}">
+       			<table>
+       				<tr>
+       					<td>
+       						<h:outputText value=" What happened? "></h:outputText><br/>
+       					</td>
+       					<td>
+       						<h:outputText value=" When? "></h:outputText>
+       					</td>
+       					<td>
+       					</td>
+       				</tr>
+       				<tr>
+       					<td>
+       						<h:inputText size="120" value="#{chronicleBean.newEntryText}"></h:inputText><br/>
+       					</td>
+       					<td>
+       						<h:inputText size="2"  value="#{chronicleBean.newEntryDay}"></h:inputText>
+       						<h:outputText value="."></h:outputText>
+       						<h:inputText size="2"  value="#{chronicleBean.newEntryMonth}"></h:inputText>
+       						<h:outputText value="."></h:outputText>
+       						<h:inputText size="4"  value="#{chronicleBean.newEntryYear}"></h:inputText>
+       					</td>
+       					<td>
+       						<h:commandButton value="save" action="#{chronicleBean.saveButton()}"></h:commandButton>
+       						<h:outputText value=" | "></h:outputText>
+      						<h:commandButton value="cancel" action="#{chronicleBean.cancelButton()}"></h:commandButton>
+       					</td>
+       				</tr>
+       			</table>   	
+      		</h:form>
+       </h:panelGroup>
+       <h:panelGroup>
+       	<ui:repeat  value="#{chronicleBean.entriesContainers}" var="entryContainer" >
+       		<table>
+       			<tr>
+       				<td>
+       					<h:outputText value="#{entryContainer.currentTitle}"></h:outputText>
+       					<h:outputText value=" | "></h:outputText>
+       					<h:outputText value="#{entryContainer.fromDate}"></h:outputText>
+       					<h:outputText value=" - "></h:outputText>
+       					<h:outputText value="#{entryContainer.toDate}"></h:outputText>
+       				</td>
+       				<td>
+       					<h:commandButton value="delete"></h:commandButton>
+       				</td>
+       			</tr>
+       			<tr>
+       				<td>
+       					<ui:repeat  value="#{chronicleBean.getEntries(entryContainer)}" var="entry" >
+       						<table>
+       							<tr>
+       								<td>
+       									<h:outputText value="#{entry.entryText}" rendered="#{not entry.editable}"></h:outputText>
+       									<h:inputText value="#{entry.entryText}" rendered="#{entry.editable}"></h:inputText>
+       								</td>
+       								<td>
+       								</td>
+       							</tr>
+       							<tr>
+       								<td>
+       									<h:outputText value="#{entry.entryDate}" rendered="#{not entry.editable}"></h:outputText>
+       									<h:panelGroup  rendered="#{entry.editable}">
+       										<h:inputText value="#{entry.entryDay}"></h:inputText>
+       										<h:outputText value="."></h:outputText>
+       										<h:inputText value="#{entry.entryMonth}"></h:inputText>
+       										<h:outputText value="."></h:outputText>
+       										<h:inputText value="#{entry.entryYear}"></h:inputText>
+       									</h:panelGroup>       									
+       								</td>
+       								<td>
+       									<h:commandButton value="save"></h:commandButton>
+       									<h:commandButton value="remove"></h:commandButton>
+       								</td>
+       							</tr>
+       							 
+       							
+       						</table>
+       					</ui:repeat>      					
+       				</td>
+       				<td>
+       				</td>
+       			</tr>
+       		</table>
+       	</ui:repeat>
+       </h:panelGroup>  
 	    
 	</ui:define>
 </ui:composition>

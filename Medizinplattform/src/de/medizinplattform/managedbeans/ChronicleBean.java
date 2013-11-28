@@ -1,46 +1,21 @@
 package de.medizinplattform.managedbeans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import de.medizinplattform.entities.Chronicle;
-import de.medizinplattform.entities.Chronicles;
-import de.medizinplattform.entities.Entries;
-import de.medizinplattform.entities.Entry;
+import de.medizinplattform.containerbeans.EntriesContainerEditable;
+import de.medizinplattform.containerbeans.EntryEditable;
+import de.medizinplattform.managers.EntriesContainersManager;
+import de.medizinplattform.managers.EntriesManager;
 
 @ManagedBean(name="chronicleBean")
 @SessionScoped
 public class ChronicleBean {
-	//Injecting Chronicles
-	@ManagedProperty(value="#{chronicles}")
-	private Chronicles chronicles;
 	
-	public Chronicles getChronicles() {
-		return chronicles;
-	}
-	
-	public void setChronicles(Chronicles chronicles) {
-		this.chronicles = chronicles;
-	}
-	
-	//Injecting Entries
-		@ManagedProperty(value="#{entries}")
-		private Entries entries;
-		
-		public Entries getEntries() {
-			return entries;
-		}
-		
-		public void setEntries(Entries entries) {
-			this.entries = entries;
-		}
-		
-	
-	//Injecting UserBean
+	//Injecting sessionBean for retrieving logged user information
 	@ManagedProperty(value="#{sessionBean}")
 	private SessionBean loggedUser;
 	
@@ -52,64 +27,107 @@ public class ChronicleBean {
 		this.loggedUser = loggedUser;
 	}
 	
+	//Injecting entriesContainersManager
+	@ManagedProperty(value="#{entriesContainersManager}")
+	private EntriesContainersManager entriesContainersManager;		
+	public EntriesContainersManager getEntriesContainersManager() {
+		return entriesContainersManager;
+	}
+	public void setEntriesContainersManager(EntriesContainersManager entriesContainersManager) {
+		this.entriesContainersManager = entriesContainersManager;
+	}
 	
-	List<Chronicle> chroniclesList = new ArrayList<Chronicle>();
+	//Injecting entriesManager 
+	@ManagedProperty(value="#{entriesManager}")
+	private EntriesManager entriesManager;		
+	public EntriesManager getEntriesManager() {
+		return entriesManager;
+	}
+	public void setEntriesManager(EntriesManager entriesManager) {
+		this.entriesManager = entriesManager;
+	}
 	
-	
+	//Constructor with debug info
 	public ChronicleBean(){
 		System.out.println("ChronicleBean started");
 	}
 	
+	private boolean newEntriesContainerFormVisible = false;
+	private String newEntryText;
+	private String newEntryDate;
+	private String newEntryDay;
+	private String newEntryMonth;
+	private String newEntryYear;
 	
-	public List<Chronicle> createChroniclesList(){
-		if(loggedUser!=null){
-			return chronicles.getUsersChronicles(loggedUser.getCanSeeChronicleOf());
+	
+
+	public boolean getNewEntriesContainerFormVisible(){
+		return newEntriesContainerFormVisible;
+	}
+	public String newButton(){
+		newEntriesContainerFormVisible=true;
+		return null;
+	}
+	public String saveButton(){
+		newEntriesContainerFormVisible=false;
+		return null;
+	}
+	public String cancelButton(){
+		newEntriesContainerFormVisible=false;
+		newEntryText=null;
+		newEntryDate=null;
+		newEntryDay=null;
+		newEntryMonth=null;
+		newEntryYear=null;
+		return null;
+	}
+	public String getNewEntryText() {
+		return newEntryText;
+	}
+
+	public void setNewEntryText(String newEntryText) {
+		this.newEntryText = newEntryText;
+	}
+
+	public String getNewEntryDate() {
+		return newEntryDate;
+	}
+
+	public void setNewEntryDate(String newEntryDate) {
+		this.newEntryDate = newEntryDate;
+	}
+	public String getNewEntryDay() {
+		return newEntryDay;
+	}
+
+	public void setNewEntryDay(String newEntryDay) {
+		this.newEntryDay = newEntryDay;
+	}
+
+	public String getNewEntryMonth() {
+		return newEntryMonth;
+	}
+
+	public void setNewEntryMonth(String newEntryMonth) {
+		this.newEntryMonth = newEntryMonth;
+	}
+
+	public String getNewEntryYear() {
+		return newEntryYear;
+	}
+
+	public void setNewEntryYear(String newEntryYear) {
+		this.newEntryYear = newEntryYear;
+	}
+	
+	public List<EntriesContainerEditable> getEntriesContainers(){
+		return entriesContainersManager.getEntriesContainersList(loggedUser.getCanSeeChronicleOf());
+	}
+	public List<EntryEditable> getEntries(EntriesContainerEditable entriesContainerEditable){
+		if(entriesContainerEditable!=null){
+			return entriesManager.getEntriesList(entriesContainerEditable);
 		}
 		return null;
 		
 	}
-	
-	public String removeChronicle(Chronicle chronicle){
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	public List<Entry> createEntriesList(Chronicle input){
-		if(input==null){
-			System.out.println("WTFWTFWTFWTFWTFWTF");
-		}
-			
-		if(entries != null && input!=null){
-			System.out.println("chronicleBean gets "+input+" and calls passes "+input.getId()+" to entries");
-			return entries.getUserEntriesByChronicleId(input.getId());
-		}
-		return null;
-	}
-	
-	
-	public String editEntry(Entry entry){
-		entry.setEditable(true);
-		return null;
-	}
-	
-	
-	public String saveEntry(Entry entry){
-		entry.setEditable(false);
-		return null;
-	}
-	
-	
-	public String removeEntry(Entry entry){
-		if(entries != null){
-			entries.removeEntry(entry);
-		}
-		return null;
-	}
-	
 }
