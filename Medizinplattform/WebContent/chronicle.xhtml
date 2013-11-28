@@ -66,8 +66,16 @@
        			</tr>
        			<tr>
        				<td>
+       					<table>
+       						<tr>
+       							<td>
+       								<h:commandButton value="+"></h:commandButton>
+       							</td>
+       							<td>
+       							</td>
+       						</tr>
        					<ui:repeat  value="#{chronicleBean.getEntries(entryContainer)}" var="entry" >
-       						<table>
+       						
        							<tr>
        								<td>
        									<h:outputText value="#{entry.entryText}" rendered="#{not entry.editable}"></h:outputText>
@@ -94,8 +102,9 @@
        							</tr>
        							 
        							
-       						</table>
-       					</ui:repeat>      					
+       						
+       					</ui:repeat>   
+       					</table>   					
        				</td>
        				<td>
        				</td>

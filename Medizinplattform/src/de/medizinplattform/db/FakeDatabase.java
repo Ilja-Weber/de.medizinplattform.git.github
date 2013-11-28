@@ -29,7 +29,7 @@ public class FakeDatabase {
 		entriesTable.add(new EntryEditable("2", "Oh mah gad i dead", "22", "11", "2013", false));
 		entriesTable.add(new EntryEditable("3", "Oh mah gad i dead", "22", "11", "2013", false));
 		entriesTable.add(new EntryEditable("4", "Oh mah gad i dead", "22", "11", "2013", false));
-		entriesTable.add(new EntryEditable("5", "Oh mah gad i dead", "22", "11", "2013", false));
+		entriesTable.add(new EntryEditable("5", "Ilja was and were everywhere", "22", "11", "2013", false));
 	}
 
 	public List<EntriesContainerEditable> getEntriesContainerTable() {
