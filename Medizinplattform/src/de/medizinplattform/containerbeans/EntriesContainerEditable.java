@@ -14,6 +14,13 @@ public class EntriesContainerEditable {
 	private String ownerName;
 	private String id;
 	
+	//new entry form
+	private boolean newEntryFormVisible = false;
+	private String newEntryText;
+	private String newEntryDay;
+	private String newEntryMonth;
+	private String newEntryYear;
+	
 	private List<EntryEditable> containerEntries = new ArrayList<EntryEditable>();
 	
 	public EntriesContainerEditable(String ownerName, String id, String currentTitle, String fromDate, String toDate){
@@ -69,6 +76,76 @@ public class EntriesContainerEditable {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	
+	public boolean isNewEntryFormVisible() {
+		return newEntryFormVisible;
+	}
+
+	
+	public void setNewEntryFormVisible(boolean newEntryFormVisible) {
+		this.newEntryFormVisible = newEntryFormVisible;
+	}
+
+	
+	public String getNewEntryText() {
+		return newEntryText;
+	}
+
+	
+	public void setNewEntryText(String newEntryText) {
+		this.newEntryText = newEntryText;
+	}
+
+	
+	public String getNewEntryDay() {
+		return newEntryDay;
+	}
+
+	
+	public void setNewEntryDay(String newEntryDay) {
+		this.newEntryDay = newEntryDay;
+	}
+
+	
+	public String getNewEntryMonth() {
+		return newEntryMonth;
+	}
+
+	
+	public void setNewEntryMonth(String newEntryMonth) {
+		this.newEntryMonth = newEntryMonth;
+	}
+
+	
+	public String getNewEntryYear() {
+		return newEntryYear;
+	}
+
+	
+	public void setNewEntryYear(String newEntryYear) {
+		this.newEntryYear = newEntryYear;
+	}
 	
 	
+	public String addNewEntry(){
+		newEntryFormVisible=true;
+		return null;
+	}
+	public String saveNewEntry(){
+		newEntryText=null;
+		newEntryDay=null;
+		newEntryMonth=null;
+		newEntryYear=null;
+		newEntryFormVisible=false;
+		return null;
+	}
+	public String cancelNewEntry(){
+		newEntryText=null;
+		newEntryDay=null;
+		newEntryMonth=null;
+		newEntryYear=null;
+		newEntryFormVisible=false;
+		return null;
+	}
 }

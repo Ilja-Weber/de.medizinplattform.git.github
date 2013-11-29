@@ -74,7 +74,18 @@ public class EntryEditable {
 		this.editable = editable;
 	}
 
-	
+	public String editEntryButton(){
+		editable=true;
+		return null;
+	}
+	public String saveEntryButton(){
+		editable=false;
+		return null;
+	}
+	public String removeEntryButton(){
+		editable=false;
+		return null;
+	}
 	
 	
 }
