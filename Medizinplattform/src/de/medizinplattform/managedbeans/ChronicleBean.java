@@ -10,10 +10,21 @@ import de.medizinplattform.containerbeans.EntriesContainerEditable;
 import de.medizinplattform.containerbeans.EntryEditable;
 import de.medizinplattform.managers.EntriesContainersManager;
 import de.medizinplattform.managers.EntriesManager;
+import de.medizinplattform.utilitybeans.IdGeneratorBean;
 
 @ManagedBean(name="chronicleBean")
 @SessionScoped
 public class ChronicleBean {
+	
+	//Injecting IdGenerator
+	@ManagedProperty(value="#{idGenerator}")
+	private IdGeneratorBean idGenerator;			
+	public IdGeneratorBean getIdGenerator() {
+		return idGenerator;
+	}			
+	public void setIdGenerator(IdGeneratorBean idGenerator) {
+		this.idGenerator = idGenerator;
+	}
 	
 	//Injecting sessionBean for retrieving logged user information
 	@ManagedProperty(value="#{sessionBean}")
@@ -70,8 +81,12 @@ public class ChronicleBean {
 	}
 	public String saveButton(){
 		newEntriesContainerFormVisible=false;
+		
+		
 		if((newEntryText!=null) && (newEntryDay!=null) && (newEntryMonth!=null) && (newEntryYear!=null)){
-			String newEntryContainerId="3";
+			
+			String newEntryContainerId=idGenerator.getUniqueEntrieContainerId();
+			
 			entriesContainersManager.addNewEntriesContainer(
 					new EntriesContainerEditable(
 							loggedUser.getCanSeeChronicleOf(),
@@ -88,6 +103,7 @@ public class ChronicleBean {
 							newEntryMonth, 
 							newEntryYear,
                             false));
+			
 			newEntriesContainerFormVisible=false;
 			newEntryText=null;
 			newEntryDate=null;
