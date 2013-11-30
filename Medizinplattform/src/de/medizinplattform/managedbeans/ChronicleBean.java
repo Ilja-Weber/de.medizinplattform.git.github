@@ -70,6 +70,31 @@ public class ChronicleBean {
 	}
 	public String saveButton(){
 		newEntriesContainerFormVisible=false;
+		if((newEntryText!=null) && (newEntryDay!=null) && (newEntryMonth!=null) && (newEntryYear!=null)){
+			String newEntryContainerId="3";
+			entriesContainersManager.addNewEntriesContainer(
+					new EntriesContainerEditable(
+							loggedUser.getCanSeeChronicleOf(),
+							newEntryContainerId,
+							newEntryText,
+							(newEntryDay+"."+newEntryMonth+"."+newEntryYear),
+							(newEntryDay+"."+newEntryMonth+"."+newEntryYear)));
+			
+			entriesManager.addNewEntry(
+					new EntryEditable(
+							newEntryContainerId, 
+							newEntryText, 
+							newEntryDay,
+							newEntryMonth, 
+							newEntryYear,
+                            false));
+			newEntriesContainerFormVisible=false;
+			newEntryText=null;
+			newEntryDate=null;
+			newEntryDay=null;
+			newEntryMonth=null;
+			newEntryYear=null;
+		}
 		return null;
 	}
 	public String cancelButton(){

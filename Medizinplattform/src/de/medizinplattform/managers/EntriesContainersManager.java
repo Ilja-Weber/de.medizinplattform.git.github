@@ -44,4 +44,8 @@ public class EntriesContainersManager {
 	public List<EntriesContainerEditable> getEntriesContainersList(String ownerName){
 		return search.getEntriesContainerByOwnerName(dataBase.getEntriesContainerTable(), ownerName);
 	}
+	
+	public void addNewEntriesContainer(EntriesContainerEditable entriesContainerEditable){
+		dataBase.getEntriesContainerTable().add(entriesContainerEditable);
+	}
 }

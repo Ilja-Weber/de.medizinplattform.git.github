@@ -48,5 +48,9 @@ public class EntriesManager {
 	public List<EntryEditable> getEntriesList(EntriesContainerEditable entriesContainerEditable){
 		return search.getEntryEditableByEntriesContainersId(dataBase.getEntriesTable(), entriesContainerEditable.getId());
 	}
+	
+	public void addNewEntry(EntryEditable entryEditable){
+		dataBase.getEntriesTable().add(entryEditable);
+	}
 				
 }
