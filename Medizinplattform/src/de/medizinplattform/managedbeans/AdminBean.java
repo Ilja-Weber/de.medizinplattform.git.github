@@ -5,22 +5,22 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import de.medizinplattform.containerbeans.UserEditable;
-import de.medizinplattform.entities.Users;
+import de.medizinplattform.managers.UsersManager;
 
 
 @ManagedBean(name="adminBean")
 @SessionScoped
 public class AdminBean {
 	
-	@ManagedProperty(value="#{users}")
-	private Users users;
+	@ManagedProperty(value="#{usersManager}")
+	private UsersManager usersManager;
 	
-	public Users getUsers() {
-		return users;
+	public UsersManager getUsersManager() {
+		return usersManager;
 	}
 
-	public void setUsers(Users users) {
-		this.users = users;
+	public void setUsersManager(UsersManager usersManager) {
+		this.usersManager = usersManager;
 	}
 	
 	@ManagedProperty(value="#{sessionBean}")
@@ -77,17 +77,17 @@ public class AdminBean {
 		this.formForAddUserVisible = formForAddUserVisible;
 	}
 	
-	public String addNewUser(){
-		if(users != null){
+	public String addNewUserButton(){
+		if(usersManager != null){
 			if(!newUserName.equals("") && !newUserPassword.equals("") &&!newUserRole.equals("")){
 				boolean isAdmin = (newUserRole.equals("admin")) ? true : false;
-				users.createUser(newUserName, newUserPassword, isAdmin);
+				usersManager.createUser(newUserName, newUserPassword, isAdmin);
 			}
 			else{
 				System.out.println("Form input missinng: Cannot add new User");
 			}
 		}
-		cancel();
+		cancelButton();
 		return null;
 	}
 	
@@ -96,7 +96,7 @@ public class AdminBean {
 		return null;
 	}
 	
-	public String cancel(){
+	public String cancelButton(){
 		newUserName="";
 		newUserPassword="";
 		newUserRole="";
@@ -104,25 +104,25 @@ public class AdminBean {
 		return null;
 	}
 	
-	public String editUser(UserEditable userEditable){
+	public String editUserButton(UserEditable userEditable){
 		userEditable.setEditable(true);
 		return null;
 	}
 	
-	public String saveUser(UserEditable userEditable){
+	public String saveUserButton(UserEditable userEditable){
 		userEditable.setEditable(false);
 		return null;
 	}
 	
-	public String removeUser(UserEditable userEditable){
-		if(users != null){
-			users.removeUser(userEditable);
+	public String removeUserButton(UserEditable userEditable){
+		if(usersManager != null){
+			usersManager.removeUser(userEditable);
 		}
 		return null;
 	}
 	
 	
-	public String viewUsersChronicle(UserEditable userEditable){
+	public String viewUsersChronicleLink(UserEditable userEditable){
 		if(session != null){
 			session.setCanSeeChronicleOf(userEditable.getName());
 			return "chronicle.xhtml?faces-redirect=true";

@@ -1,5 +1,6 @@
 package de.medizinplattform.managers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
@@ -7,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import de.medizinplattform.containerbeans.EntriesContainerEditable;
+import de.medizinplattform.containerbeans.EntryEditable;
 import de.medizinplattform.db.FakeDatabase;
 import de.medizinplattform.utilitybeans.SearchBean;
 
@@ -47,5 +49,20 @@ public class EntriesContainersManager {
 	
 	public void addNewEntriesContainer(EntriesContainerEditable entriesContainerEditable){
 		dataBase.getEntriesContainerTable().add(entriesContainerEditable);
+	}
+	
+	public void deleteEntriesContainer(EntriesContainerEditable entriesContainerEditable){
+		dataBase.getEntriesContainerTable().remove(entriesContainerEditable);
+	}
+	
+	public void updateEntriesContainersState(EntriesContainerEditable entriesContainerEditable){
+		List<EntryEditable> containerEntries = search.getEntryEditableByEntriesContainersId(dataBase.getEntriesTable(), entriesContainerEditable.getId());
+		entriesContainerEditable.setCurrentTitle(containerEntries.get(0).getEntryText());
+		entriesContainerEditable.setFromDate(containerEntries.get(containerEntries.size()-1).getEntryDate());
+		entriesContainerEditable.setToDate(containerEntries.get(0).getEntryDate());
+	}
+	
+	public EntriesContainerEditable findEntriesContainerEditableById(String id){
+		return search.getEntriesContainerById(dataBase.getEntriesContainerTable(), id);
 	}
 }

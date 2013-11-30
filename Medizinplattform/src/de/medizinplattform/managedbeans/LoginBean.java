@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import de.medizinplattform.entities.Users;
+import de.medizinplattform.managers.UsersManager;
 
 @ManagedBean(name="loginBean")
 @ViewScoped
@@ -16,15 +16,15 @@ public class LoginBean {
 	
 	private boolean loginFormVisible = false;
 	
-	@ManagedProperty(value="#{users}")
-	private Users users;
+	@ManagedProperty(value="#{usersManager}")
+	private UsersManager usersManager;
 	
-	public Users getUsers() {
-		return users;
+	public UsersManager getUsersManager() {
+		return usersManager;
 	}
 
-	public void setUsers(Users users) {
-		this.users = users;
+	public void setUsersManager(UsersManager usersManager) {
+		this.usersManager = usersManager;
 	}
 
 	
@@ -75,19 +75,19 @@ public class LoginBean {
 	
 	public String login(){
 		//debug
-		if(users != null){
+		if(usersManager != null){
 			
-			if(users.hasUser(name)==false){
+			if(usersManager.hasUser(name)==false){
 				System.out.println("no such user exists");
 			}
 			else{
-				if(password.equals(users.getUsersPassword(name))){
+				if(password.equals(usersManager.getUsersPassword(name))){
 					
 					session.setUsersName(name);
 					session.setCanSeeChronicleOf(name); //<-Von interesse fuer Admins, die chronicle von anderen anschauen wollen.
 					
 					session.setUser(true);
-					if(users.isUserAdmin(name)){
+					if(usersManager.isUserAdmin(name)){
 						session.setAdmin(true);
 					}
 					

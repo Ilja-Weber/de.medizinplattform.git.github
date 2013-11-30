@@ -29,11 +29,9 @@ public class ChronicleBean {
 	//Injecting sessionBean for retrieving logged user information
 	@ManagedProperty(value="#{sessionBean}")
 	private SessionBean loggedUser;
-	
 	public SessionBean getLoggedUser() {
 		return loggedUser;
 	}
-
 	public void setLoggedUser(SessionBean loggedUser) {
 		this.loggedUser = loggedUser;
 	}
@@ -75,11 +73,14 @@ public class ChronicleBean {
 	public boolean getNewEntriesContainerFormVisible(){
 		return newEntriesContainerFormVisible;
 	}
-	public String newButton(){
+	
+	//Actions
+	//create new entrycontainer
+	public String addNewEntriesContainerButton(){
 		newEntriesContainerFormVisible=true;
 		return null;
 	}
-	public String saveButton(){
+	public String saveNewEntriesContainerButton(){
 		newEntriesContainerFormVisible=false;
 		
 		
@@ -113,7 +114,7 @@ public class ChronicleBean {
 		}
 		return null;
 	}
-	public String cancelButton(){
+	public String cancelNewEntriesContainerButton(){
 		newEntriesContainerFormVisible=false;
 		newEntryText=null;
 		newEntryDate=null;
@@ -122,6 +123,68 @@ public class ChronicleBean {
 		newEntryYear=null;
 		return null;
 	}
+	public String deleteEntriesContainerButton(EntriesContainerEditable entriesContainerEditable){
+		entriesContainersManager.deleteEntriesContainer(entriesContainerEditable);
+		return null;
+	}
+	
+	//create new entry
+	public String addNewEntryButton(EntriesContainerEditable entriesContainerEditable){
+		entriesContainerEditable.setNewEntryFormVisible(true);
+		return null;
+	}
+	public String saveNewEntryButton(EntriesContainerEditable entriesContainerEditable){
+		
+		if((entriesContainerEditable.getNewEntryText()!=null) &&
+				(entriesContainerEditable.getNewEntryDay()!=null) &&
+				(entriesContainerEditable.getNewEntryMonth()!=null) &&
+				(entriesContainerEditable.getNewEntryYear()!=null)){
+			entriesManager.addNewEntry(
+					new EntryEditable(
+							entriesContainerEditable.getId(), 
+							entriesContainerEditable.getNewEntryText(), 
+							entriesContainerEditable.getNewEntryDay(), 
+							entriesContainerEditable.getNewEntryMonth(), 
+							entriesContainerEditable.getNewEntryYear(),
+							false));
+			entriesContainerEditable.setNewEntryText(null);
+			entriesContainerEditable.setNewEntryDay(null);
+			entriesContainerEditable.setNewEntryMonth(null);
+			entriesContainerEditable.setNewEntryYear(null);
+			entriesContainerEditable.setNewEntryFormVisible(false);
+		}
+		entriesContainersManager.updateEntriesContainersState(entriesContainerEditable);
+		return null;
+	}
+	public String cancelNewEntryButton(EntriesContainerEditable entriesContainerEditable){
+		entriesContainerEditable.setNewEntryText(null);
+		entriesContainerEditable.setNewEntryDay(null);
+		entriesContainerEditable.setNewEntryMonth(null);
+		entriesContainerEditable.setNewEntryYear(null);
+		entriesContainerEditable.setNewEntryFormVisible(false);
+		return null;
+	}
+	
+	//edit existing entry
+	public String editEntryButton(EntryEditable entryEditable){
+		entryEditable.setEditable(true);
+		return null;
+	}
+	public String saveEntryButton(EntryEditable entryEditable){
+		entryEditable.setEditable(false);
+		entriesContainersManager.updateEntriesContainersState(
+				entriesContainersManager.findEntriesContainerEditableById(entryEditable.getEntriesContainerEditableId())
+				);
+		return null;
+	}
+	public String removeEntryButton(EntryEditable entryEditable){
+		EntriesContainerEditable ece = entriesContainersManager.findEntriesContainerEditableById(entryEditable.getEntriesContainerEditableId());
+		entriesManager.removeEntry(entryEditable);
+		entriesContainersManager.updateEntriesContainersState(ece);
+		return null;
+	}
+	
+	//Getters and Setters
 	public String getNewEntryText() {
 		return newEntryText;
 	}

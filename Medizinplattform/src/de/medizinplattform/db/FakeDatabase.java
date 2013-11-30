@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 
 import de.medizinplattform.containerbeans.EntriesContainerEditable;
 import de.medizinplattform.containerbeans.EntryEditable;
+import de.medizinplattform.containerbeans.UserEditable;
+import de.medizinplattform.entities.User;
 
 @ManagedBean(name="dataBase")
 @ApplicationScoped
@@ -16,6 +18,7 @@ public class FakeDatabase {
 	//Fake tables
 	public List<EntriesContainerEditable> entriesContainerTable = new ArrayList<EntriesContainerEditable>();
 	public List<EntryEditable> entriesTable = new ArrayList<EntryEditable>();
+	public List<UserEditable> usersTable = new ArrayList<UserEditable>();
 	
 	public FakeDatabase(){
 		entriesContainerTable.add(new EntriesContainerEditable("Pedro", "1", "Kopfschmerzen", "22.12.2012", "25.12.2012"));
@@ -30,6 +33,10 @@ public class FakeDatabase {
 		entriesTable.add(new EntryEditable("3", "asdfafa", "22", "11", "2013", false));
 		entriesTable.add(new EntryEditable("4", "Oh mah gad i dead", "22", "11", "2013", false));
 		entriesTable.add(new EntryEditable("5", "Ilja was and were everywhere", "22", "11", "2013", false));
+		
+		usersTable.add(new UserEditable(new User("Ilja", "1312", false)));
+		usersTable.add(new UserEditable(new User("Admin", "admin", true)));
+		usersTable.add(new UserEditable(new User("Pedro", "3234", false)));
 	}
 
 	public List<EntriesContainerEditable> getEntriesContainerTable() {
@@ -39,6 +46,11 @@ public class FakeDatabase {
 	public List<EntryEditable> getEntriesTable() {
 		return entriesTable;
 	}
+	
+	public List<UserEditable> getUsersTable(){
+		return usersTable;
+	}
+	
 	
 	
 }

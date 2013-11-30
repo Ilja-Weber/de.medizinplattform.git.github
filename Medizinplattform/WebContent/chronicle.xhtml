@@ -18,7 +18,7 @@
 <!--Here we render button "new chronicle entry" or the form for creation of the new chronicle entry-->
 <h:panelGroup>
   <h:form	rendered="#{not chronicleBean.newEntriesContainerFormVisible}">
-    <h:commandButton value="new chronicle entry" action="#{chronicleBean.newButton()}"></h:commandButton>
+    <h:commandButton value="new chronicle entry" action="#{chronicleBean.addNewEntriesContainerButton()}"></h:commandButton>
   </h:form>
 
   <h:form rendered="#{chronicleBean.newEntriesContainerFormVisible}">
@@ -44,9 +44,9 @@
           <h:inputText size="4" value="#{chronicleBean.newEntryYear}"></h:inputText>
         </td>
         <td>
-          <h:commandButton value="save" action="#{chronicleBean.saveButton()}"></h:commandButton> 
+          <h:commandButton value="save" action="#{chronicleBean.saveNewEntriesContainerButton()}"></h:commandButton> 
           <h:outputText value=" | "></h:outputText> 
-          <h:commandButton value="cancel"	action="#{chronicleBean.cancelButton()}"></h:commandButton>
+          <h:commandButton value="cancel"	action="#{chronicleBean.cancelNewEntriesContainerButton()}"></h:commandButton>
         </td>
       </tr>
     </table>
@@ -75,7 +75,7 @@
       </td>
       <td>
         <!--<h:form>-->
-          <h:commandButton value="delete"></h:commandButton>
+          <h:commandButton value="delete" action="#{chronicleBean.deleteEntriesContainerButton(entryContainer)}"></h:commandButton>
         <!--</h:form>   -->     
       </td>
     </tr>
@@ -88,7 +88,7 @@
             <td>
               <h:panelGroup>
                 <h:panelGroup rendered="#{not entryContainer.newEntryFormVisible}">
-                  <h:commandButton value="+"  action="#{entryContainer.addNewEntry()}"></h:commandButton>
+                  <h:commandButton value="+"  action="#{chronicleBean.addNewEntryButton(entryContainer)}"></h:commandButton>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{entryContainer.newEntryFormVisible}">
                   <table>
@@ -107,25 +107,26 @@
                         <h:inputText size="30" value="#{entryContainer.newEntryText}"></h:inputText><br />
                       </td>
                       <td>
-                        <h:inputText size="2" value="#{chronicleBean.newEntryDay}"></h:inputText> 
+                        <h:inputText size="2" value="#{entryContainer.newEntryDay}"></h:inputText> 
                         <h:outputText value="."></h:outputText> 
-                        <h:inputText size="2" value="#{chronicleBean.newEntryMonth}"></h:inputText> 
+                        <h:inputText size="2" value="#{entryContainer.newEntryMonth}"></h:inputText> 
                         <h:outputText value="."></h:outputText> 
-                        <h:inputText size="4" value="#{chronicleBean.newEntryYear}"></h:inputText>
+                        <h:inputText size="4" value="#{entryContainer.newEntryYear}"></h:inputText>
                       </td>
                       <td>
-                        <h:commandButton value="save" action="#{entryContainer.saveNewEntry()}"></h:commandButton> 
+                        <h:commandButton value="save" action="#{chronicleBean.saveNewEntryButton(entryContainer)}"></h:commandButton> 
                         <h:outputText value=" | "></h:outputText> 
-                        <h:commandButton value="cancel"  action="#{entryContainer.cancelNewEntry()}"></h:commandButton>
+                        <h:commandButton value="cancel"  action="#{chronicleBean.cancelNewEntryButton(entryContainer)}"></h:commandButton>
                       </td>
                     </tr>
                   </table>
                 </h:panelGroup>
               </h:panelGroup>
             </td>
-            <td>
-            </td>
+            
           </tr>
+          
+         
         </table>
           
 <!--In a cycle we get entries from database and render them-->
@@ -136,8 +137,6 @@
               <td>
                 <h:outputText value="#{entry.entryText}" rendered="#{not entry.editable}"></h:outputText> 
                 <h:inputText value="#{entry.entryText}" rendered="#{entry.editable}"></h:inputText>
-              </td>
-              <td>
               </td>
             </tr>
             <tr  style="background-color:#F8F8F8">
@@ -152,16 +151,15 @@
                 </h:panelGroup>
               </td>
               <td>
-                <h:commandButton value="edit" action="#{entry.editEntryButton()}" rendered="#{not entry.editable}"></h:commandButton>
-                <h:commandButton value="save" action="#{entry.saveEntryButton()}" rendered="#{entry.editable}"></h:commandButton>  
-                <h:commandButton value="remove" action="#{entry.removeEntryButton()}"></h:commandButton>
+                <h:commandButton value="edit" action="#{chronicleBean.editEntryButton(entry)}" rendered="#{not entry.editable}"></h:commandButton>
+                <h:commandButton value="save" action="#{chronicleBean.saveEntryButton(entry)}" rendered="#{entry.editable}"></h:commandButton>  
+                <h:commandButton value="remove" action="#{chronicleBean.removeEntryButton(entry)}"></h:commandButton>
               </td>
             </tr>
           </table>
         </ui:repeat>       
       </td>
-      <td>
-      </td>
+      
     </tr>
   </table>
   </ui:repeat>

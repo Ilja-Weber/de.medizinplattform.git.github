@@ -52,5 +52,9 @@ public class EntriesManager {
 	public void addNewEntry(EntryEditable entryEditable){
 		dataBase.getEntriesTable().add(entryEditable);
 	}
+	public void removeEntry(EntryEditable entryEditable){
+		dataBase.getEntriesTable().remove(entryEditable);
+	}
+	
 				
 }

@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import de.medizinplattform.entities.Users;
+import de.medizinplattform.managers.UsersManager;
 
 
 @ManagedBean(name = "registerBean")
@@ -13,15 +13,15 @@ import de.medizinplattform.entities.Users;
 public class RegisterBean {
 
 	
-	@ManagedProperty(value="#{users}")
-	private Users users;
+	@ManagedProperty(value="#{usersManager}")
+	private UsersManager usersManager;
 	
-	public Users getUsers() {
-		return users;
+	public UsersManager getUsersManager() {
+		return usersManager;
 	}
 
-	public void setUsers(Users users) {
-		this.users = users;
+	public void setUsersManager(UsersManager usersManager) {
+		this.usersManager = usersManager;
 	}
 	
 	
@@ -49,11 +49,11 @@ public class RegisterBean {
 	}
 	
 	public String registerUser(){
-		if(users != null){
+		if(usersManager != null){
 			
 			System.out.println("Trying to create new user");
-			if(users.hasUser(name)==false){
-				users.createUser(name, password, false);
+			if(usersManager.hasUser(name)==false){
+				usersManager.createUser(name, password, false);
 				return "succesful_registration.xhtml?faces-redirect=true";
 			}
 			else{

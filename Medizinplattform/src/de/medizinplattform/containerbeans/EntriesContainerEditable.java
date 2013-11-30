@@ -20,9 +20,7 @@ public class EntriesContainerEditable {
 	private String newEntryDay;
 	private String newEntryMonth;
 	private String newEntryYear;
-	
-	private List<EntryEditable> containerEntries = new ArrayList<EntryEditable>();
-	
+		
 	public EntriesContainerEditable(String ownerName, String id, String currentTitle, String fromDate, String toDate){
 		this.ownerName=ownerName;
 		this.id=id;
@@ -31,11 +29,7 @@ public class EntriesContainerEditable {
 		this.toDate=toDate;
 	}
 		
-	public void updateState(){
-		currentTitle=containerEntries.get(0).getEntryText();
-		fromDate=containerEntries.get(containerEntries.size()-1).getEntryDate();
-		toDate=containerEntries.get(0).getEntryDate();
-	}
+	
 
 	public String getCurrentTitle() {
 		return currentTitle;
@@ -126,26 +120,5 @@ public class EntriesContainerEditable {
 	public void setNewEntryYear(String newEntryYear) {
 		this.newEntryYear = newEntryYear;
 	}
-	
-	
-	public String addNewEntry(){
-		newEntryFormVisible=true;
-		return null;
-	}
-	public String saveNewEntry(){
-		newEntryText=null;
-		newEntryDay=null;
-		newEntryMonth=null;
-		newEntryYear=null;
-		newEntryFormVisible=false;
-		return null;
-	}
-	public String cancelNewEntry(){
-		newEntryText=null;
-		newEntryDay=null;
-		newEntryMonth=null;
-		newEntryYear=null;
-		newEntryFormVisible=false;
-		return null;
-	}
+		
 }
