@@ -97,9 +97,9 @@ public class AdminBean {
 	}
 	
 	public String cancelButton(){
-		newUserName="";
-		newUserPassword="";
-		newUserRole="";
+		newUserName=null;
+		newUserPassword=null;
+		newUserRole=null;
 		formForAddUserVisible=false;
 		return null;
 	}
