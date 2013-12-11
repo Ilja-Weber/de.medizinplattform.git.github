@@ -1,19 +1,20 @@
 package de.medizinplattform.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="REGISTERED_USER")
 public class User{
 	
-	public String name;
-	public String password;
-	public boolean admin;
+	@Id
+	private String name;
 	
-	public User(String name, String password, boolean admin){
-		this.name=name;
-		this.password=password;
-		this.admin=admin;
-	}
+	private String password;
+	private String role;
 	
-	
-	
+		
 	public String getName() {
 		return name;
 	}
@@ -26,11 +27,19 @@ public class User{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	public boolean isAdmin() {
-		return admin;
+		return role.equals("admin");
 	}
 	public void setAdmin(boolean isAdmin) {
-		this.admin = isAdmin;
+		this.role = (isAdmin)?"admin":"user";
 	}
 	
 	

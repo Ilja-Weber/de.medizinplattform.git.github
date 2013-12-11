@@ -34,9 +34,9 @@ public class FakeDatabase {
 		entriesTable.add(new EntryEditable("4", "Oh mah gad i dead", "22", "11", "2013", false));
 		entriesTable.add(new EntryEditable("5", "Ilja was and were everywhere", "22", "11", "2013", false));
 		
-		usersTable.add(new UserEditable(new User("Ilja", "1312", false)));
-		usersTable.add(new UserEditable(new User("Admin", "admin", true)));
-		usersTable.add(new UserEditable(new User("Pedro", "3234", false)));
+		//usersTable.add(new UserEditable(new User("Ilja", "1312", false)));
+		//usersTable.add(new UserEditable(new User("Admin", "admin", true)));
+		//usersTable.add(new UserEditable(new User("Pedro", "3234", false)));
 	}
 
 	public List<EntriesContainerEditable> getEntriesContainerTable() {

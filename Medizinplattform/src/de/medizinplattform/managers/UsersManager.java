@@ -58,7 +58,11 @@ public class UsersManager {
 	
 	//Create a User in Database
 	public void createUser(String name, String password, boolean isAdmin){
-		dataBase.getUsersTable().add(new UserEditable(new User(name, password, isAdmin)));
+		User user = new User();
+		user.setName(name);
+		user.setPassword(password);
+		user.setAdmin(isAdmin);
+		dataBase.getUsersTable().add(new UserEditable(user));
 	}
 	
 	//Remove User from Database

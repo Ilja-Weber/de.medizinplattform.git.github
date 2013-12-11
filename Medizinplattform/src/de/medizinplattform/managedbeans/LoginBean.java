@@ -1,71 +1,75 @@
 package de.medizinplattform.managedbeans;
 
+import java.util.List;
+
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
+import de.medizinplattform.entities.User;
 import de.medizinplattform.managers.UsersManager;
 
 @ManagedBean(name="loginBean")
 @ViewScoped
 public class LoginBean {
-	
-	public String name;
-	public String password;
-	
-	private boolean loginFormVisible = false;
-	
+	//Injecting usersManager
 	@ManagedProperty(value="#{usersManager}")
-	private UsersManager usersManager;
-	
+	private UsersManager usersManager;	
 	public UsersManager getUsersManager() {
 		return usersManager;
 	}
-
 	public void setUsersManager(UsersManager usersManager) {
 		this.usersManager = usersManager;
 	}
 
-	
+	//Injecting sessionBean
 	@ManagedProperty(value="#{sessionBean}")
-	private SessionBean session;
-	
+	private SessionBean session;	
 	public SessionBean getSession() {
 		return session;
 	}
-
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
+	
+	private String name;
+	private String password;	
+	private boolean loginFormVisible = false;
+	
+	private final String PERSISTENCE_UNIT_NAME = "common-entities";
+	private EntityManagerFactory factory;
 	
 	
 	public LoginBean(){
 		loginFormVisible=false;
 	}
 	
-	
+	//Getters-Setters
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public boolean isLoginFormVisible() {
-		return loginFormVisible;
-	}
-
-	public void setLoginFormVisible(boolean loginFormVisible) {
-		this.loginFormVisible = loginFormVisible;
-	}
-	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}	
+	public boolean isLoginFormVisible() {
+		return loginFormVisible;
 	}
+	public void setLoginFormVisible(boolean loginFormVisible) {
+		this.loginFormVisible = loginFormVisible;
+	}
+	
+	
 	
 	public String makeLoginFormVisible(){
 		loginFormVisible=true;
@@ -74,35 +78,33 @@ public class LoginBean {
 	
 	
 	public String login(){
-		//debug
-		if(usersManager != null){
-			
-			if(usersManager.hasUser(name)==false){
-				System.out.println("no such user exists");
-			}
-			else{
-				if(password.equals(usersManager.getUsersPassword(name))){
-					
-					session.setUsersName(name);
-					session.setCanSeeChronicleOf(name); //<-Von interesse fuer Admins, die chronicle von anderen anschauen wollen.
-					
-					session.setUser(true);
-					if(usersManager.isUserAdmin(name)){
-						session.setAdmin(true);
-					}
-					
-					session.setGuest(false);
-					
-					return "index.xhtml?faces-redirect=true";
-				}
-				else{
-					return "login_fail.xhtml?faces-redirect=true";
-				}
-			}
-				
-	    
+		if(name.length()>0 && password.length()>0){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("common-entities");
+		EntityManager em = emf.createEntityManager();
 		
-		}       
+		Query q = em.createQuery("SELECT x FROM User x WHERE x.name ='"+name+"'");
+		List<User> usersList = (List<User>) q.getResultList();
+		
+		if(usersList.size()>1){
+			//Error: Schould trow an Exeption, because there cannot be many users with same name
+			System.out.println("Oooops! Too many Users with same name found!");
+		}
+		else if(usersList.size()==0){
+			//None User with that name found, maybe there was a mistake in the spelling, or the user is not registered
+			System.out.println("Oooops! No such User found!");
+		}
+		else{
+			//One User found, now check if password is correct and if, then set session data
+			if(usersList.get(0).getPassword().equals(password)){
+				session.setUsersName(usersList.get(0).getName());
+				session.setCanSeeChronicleOf(usersList.get(0).getName());
+				session.setGuest(false);
+				session.setUser(true);
+				session.setAdmin(usersList.get(0).isAdmin());
+			}
+		}
+		
+		}
 		return null;    
 	}
 	public String logout(){
