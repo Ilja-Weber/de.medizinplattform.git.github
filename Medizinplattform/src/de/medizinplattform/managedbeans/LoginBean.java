@@ -42,7 +42,6 @@ public class LoginBean {
 	private boolean loginFormVisible = false;
 	
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";
-	private EntityManagerFactory factory;
 	
 	
 	public LoginBean(){
@@ -79,14 +78,15 @@ public class LoginBean {
 	
 	public String login(){
 		if(name.length()>0 && password.length()>0){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("common-entities");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		
 		Query q = em.createQuery("SELECT x FROM User x WHERE x.name ='"+name+"'");
+		
 		List<User> usersList = (List<User>) q.getResultList();
 		
 		if(usersList.size()>1){
-			//Error: Schould trow an Exeption, because there cannot be many users with same name
+			//Error: Should throw an Exception, because there cannot be many users with same name
 			System.out.println("Oooops! Too many Users with same name found!");
 		}
 		else if(usersList.size()==0){
@@ -116,10 +116,4 @@ public class LoginBean {
 				
 		return "index.xhtml?faces-redirect=true";
 	}
-	
-	@PreDestroy
-	public void cry(){
-		//System.out.println("LoginBean is about to be destroyed");
-	}
-	
 }

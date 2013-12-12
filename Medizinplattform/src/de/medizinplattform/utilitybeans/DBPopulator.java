@@ -18,6 +18,7 @@ public class DBPopulator {
 		    
 		    // create new todo
 		    em.getTransaction().begin();
+		    
 		    User user = new User();
 		    user.setName("Ilja");
 		    user.setPassword("1312");

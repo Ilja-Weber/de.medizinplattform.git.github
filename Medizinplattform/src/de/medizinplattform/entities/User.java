@@ -1,6 +1,7 @@
 package de.medizinplattform.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -8,13 +9,20 @@ import javax.persistence.Table;
 @Table(name="REGISTERED_USER")
 public class User{
 	
-	@Id
-	private String name;
+	@Id @GeneratedValue
+	private long id;
 	
+	private String name;	
 	private String password;
 	private String role;
 	
 		
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

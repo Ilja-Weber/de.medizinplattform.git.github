@@ -1,10 +1,19 @@
 package de.medizinplattform.managedbeans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import de.medizinplattform.containerbeans.UserEditable;
+import de.medizinplattform.entities.User;
+import de.medizinplattform.managedbeans.components.NewUserBeanComponent;
+import de.medizinplattform.managedbeans.components.UserBeanComponent;
 import de.medizinplattform.managers.UsersManager;
 
 
@@ -12,123 +21,67 @@ import de.medizinplattform.managers.UsersManager;
 @SessionScoped
 public class AdminBean {
 	
-	@ManagedProperty(value="#{usersManager}")
-	private UsersManager usersManager;
+	//...?
+	private final String PERSISTENCE_UNIT_NAME = "common-entities";	
 	
-	public UsersManager getUsersManager() {
-		return usersManager;
-	}
-
-	public void setUsersManager(UsersManager usersManager) {
-		this.usersManager = usersManager;
-	}
-	
+	//Injecting sessionBean
 	@ManagedProperty(value="#{sessionBean}")
-	private SessionBean session;
-	
+	private SessionBean session;	
 	public SessionBean getSession() {
 		return session;
 	}
-
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
 	
+	//Components
+	private NewUserBeanComponent newUserC=null;
+	private List<UserBeanComponent> usersC=null;
 	
-	boolean formForAddUserVisible = false;
 	
-	public String newUserName;
-	public String newUserPassword;
-	public String newUserRole;
-	
-	public String getNewUserName() {
-		return newUserName;
-	}
-
-	public void setNewUserName(String newUserName) {
-		this.newUserName = newUserName;
-	}
-
-	public String getNewUserPassword() {
-		return newUserPassword;
-	}
-
-	public void setNewUserPassword(String newUserPassword) {
-		this.newUserPassword = newUserPassword;
-	}
-
-	public String getNewUserRole() {
-		return newUserRole;
-	}
-
-	public void setNewUserRole(String newUserRole) {
-		this.newUserRole = newUserRole;
-	}
-
+	//Constructor
 	public AdminBean(){
-		System.out.println("AdminBean started");
-	}
-
-	public boolean isFormForAddUserVisible() {
-		return formForAddUserVisible;
-	}
-
-	public void setFormForAddUserVisible(boolean formForAddUserVisible) {
-		this.formForAddUserVisible = formForAddUserVisible;
+		
 	}
 	
-	public String addNewUserButton(){
-		if(usersManager != null){
-			if(!newUserName.equals("") && !newUserPassword.equals("") &&!newUserRole.equals("")){
-				boolean isAdmin = (newUserRole.equals("admin")) ? true : false;
-				usersManager.createUser(newUserName, newUserPassword, isAdmin);
+	//Getters-Setters
+	public NewUserBeanComponent getNewUserC(){
+		if(newUserC==null){
+			newUserC = new NewUserBeanComponent(this);
+		}
+		return newUserC;
+	}
+	
+	public List<UserBeanComponent> getUsersC(){
+		if(usersC==null){
+			usersC = new ArrayList<UserBeanComponent>();
+			List<User> usersList = new ArrayList<User>();
+			
+			//Get list of all users
+			//get entitymanager
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			EntityManager em = emf.createEntityManager();
+			//Create a query
+			Query q = em.createQuery("SELECT x FROM User x");
+			usersList = (List<User>) q.getResultList();
+			
+			//In for-loop create for each User a userComponent
+			for(User user : usersList){
+				usersC.add(new UserBeanComponent(this, user));
 			}
-			else{
-				System.out.println("Form input missinng: Cannot add new User");
-			}
+			
 		}
-		cancelButton();
-		return null;
+		return usersC;
 	}
 	
-	public String makeFormVisible(){
-		formForAddUserVisible=true;
-		return null;
-	}
 	
-	public String cancelButton(){
-		newUserName=null;
-		newUserPassword=null;
-		newUserRole=null;
-		formForAddUserVisible=false;
-		return null;
-	}
-	
-	public String editUserButton(UserEditable userEditable){
-		userEditable.setEditable(true);
-		return null;
-	}
-	
-	public String saveUserButton(UserEditable userEditable){
-		userEditable.setEditable(false);
-		return null;
-	}
-	
-	public String removeUserButton(UserEditable userEditable){
-		if(usersManager != null){
-			usersManager.removeUser(userEditable);
+	public void removeUserComponent(UserBeanComponent userBeanComponent) {
+		if(usersC!=null){
+			usersC.remove(userBeanComponent);
 		}
-		return null;
+		
 	}
 	
-	
-	public String viewUsersChronicleLink(UserEditable userEditable){
-		if(session != null){
-			session.setCanSeeChronicleOf(userEditable.getName());
-			return "chronicle.xhtml?faces-redirect=true";
-		}
-		return null;
-	}
 	
 	
 }

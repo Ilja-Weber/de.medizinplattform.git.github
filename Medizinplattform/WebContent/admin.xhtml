@@ -8,72 +8,98 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		
 		<h:form>
-      		<h:dataTable value="#{usersManager.usersList}" var="editableUser">
-         <h:column>    				
-            <f:facet name="header">Name</f:facet>    				
-            <h:inputText value="#{editableUser.name}"
-               size="10" rendered="#{editableUser.editable}" />
-            <h:outputText value="#{editableUser.name}"
-               rendered="#{not editableUser.editable}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">Password</f:facet>
-            <h:inputText value="#{editableUser.password}" 
-               size="20" rendered="#{editableUser.editable}" />
-            <h:outputText value="#{editableUser.password}" 
-               rendered="#{not editableUser.editable}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">Role</f:facet>
-            <h:selectOneMenu value="#{editableUser.role}"  rendered="#{editableUser.editable}">
-   				<f:selectItem itemValue="user" itemLabel="user" />
-   				<f:selectItem itemValue="admin" itemLabel="admin" />						
-			</h:selectOneMenu>
-            <h:outputText value="#{editableUser.role}" 
-               rendered="#{not editableUser.editable}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">Chronicle</f:facet>
-               <h:commandLink value="view" action="#{adminBean.viewUsersChronicleLink(editableUser)}"  rendered="#{not editableUser.admin}"></h:commandLink>
-         </h:column>
-         <h:column>
-               <h:commandButton value="edit" action="#{adminBean.editUserButton(editableUser)}" rendered="#{not editableUser.editable}">
-               </h:commandButton>
-               <h:commandButton value="save" action="#{adminBean.saveUserButton(editableUser)}" rendered="#{editableUser.editable}">
-               </h:commandButton>
-         </h:column>
-         <h:column>
-               <h:commandButton value="remove" action="#{adminBean.removeUserButton(editableUser)}">
-               </h:commandButton>
-         </h:column>
-         
-         
-      	</h:dataTable>
-      	</h:form>  
-      	<br/>
-      	
-      	  <h:form>
-      	  <h:commandButton value="New User" action="#{adminBean.makeFormVisible()}" rendered="#{not adminBean.formForAddUserVisible}"></h:commandButton>
-	  			<h:panelGrid columns="5" rendered="#{adminBean.formForAddUserVisible}">
- 				
- 				<h:outputText value="Name"></h:outputText>
- 				<h:outputText value="Password"></h:outputText>
- 				<h:outputText value="Role"></h:outputText>
- 				<h:outputText value=""></h:outputText>
- 				<h:outputText value=""></h:outputText>
-				<h:inputText id="add_user_name" value="#{adminBean.newUserName}" size="10" label="Name"></h:inputText>
-				<h:inputText id="add_user_password" value="#{adminBean.newUserPassword}" size="20" label="Password"></h:inputText>
-				<h:selectOneMenu value="#{adminBean.newUserRole}">
-   					<f:selectItem itemValue="user" itemLabel="user" />
-   					<f:selectItem itemValue="admin" itemLabel="admin" />						
-			    </h:selectOneMenu>
-				<h:commandButton value="Add user" action="#{adminBean.addNewUserButton()}" />
-				<h:commandButton value="Cancel" action="#{adminBean.cancelButton()}" /> 
-	  </h:panelGrid>
-      	  </h:form>
-		
+			<h:commandButton  	rendered="#{not adminBean.getNewUserC().newUserFormVisible}"
+								value="create new user" 
+								action="#{adminBean.getNewUserC().showNewUserForm()}"></h:commandButton>
+			<h:panelGroup rendered="#{adminBean.getNewUserC().newUserFormVisible}">
+			<table>
+				<tr>
+					<td>
+						<h:outputText value="Name"></h:outputText>
+					</td>
+					<td>
+						<h:outputText value="Password"></h:outputText>
+					</td>
+					<td>
+						<h:outputText value="Role"></h:outputText>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:inputText value="#{adminBean.getNewUserC().name}"></h:inputText>
+					</td>
+					<td>
+						<h:inputText value="#{adminBean.getNewUserC().password}"></h:inputText>
+					</td>
+					<td>
+						<h:selectOneMenu value="#{adminBean.getNewUserC().role}">
+   								<f:selectItem itemValue="admin"/>
+   								<f:selectItem itemValue="user" />   								
+   						</h:selectOneMenu>
+					</td>
+					<td>
+						<h:commandButton value="create" action="#{adminBean.getNewUserC().createButton()}"></h:commandButton>
+						<h:commandButton value="cancel" action="#{adminBean.getNewUserC().cancelButton()}"></h:commandButton>
+					</td>
+				</tr>
+			</table>
+			</h:panelGroup>			
+		</h:form>
+		<hr></hr>
+		<h:form>
+			<table>
+				<tr>
+					<td>
+						<h:outputText value="Name"></h:outputText>
+					</td>
+					<td>
+						<h:outputText value="Password"></h:outputText>
+					</td>
+					<td>
+						<h:outputText value="Role"></h:outputText>
+					</td>
+				</tr>
+				<ui:repeat var="userBeanComponent" value="#{adminBean.usersC}">
+				<tr>
+					<td>
+						<h:outputText value="#{userBeanComponent.name}"  rendered="#{not userBeanComponent.beingEdited}"></h:outputText>
+						<h:inputText value="#{userBeanComponent.name}" rendered="#{userBeanComponent.beingEdited}"></h:inputText>
+					</td>
+					<td>
+						<h:outputText value="#{userBeanComponent.password}"  rendered="#{not userBeanComponent.beingEdited}"></h:outputText>
+						<h:inputText value="#{userBeanComponent.password}" rendered="#{userBeanComponent.beingEdited}"></h:inputText>
+					</td>
+					<td>
+						<h:outputText value="#{userBeanComponent.role}"  rendered="#{not userBeanComponent.beingEdited}"></h:outputText>
+						<h:panelGroup>
+							<h:selectOneMenu value="#{userBeanComponent.role}" rendered="#{userBeanComponent.beingEdited}">
+   								<f:selectItem itemValue="admin"/>
+   								<f:selectItem itemValue="user" />   								
+   							</h:selectOneMenu>
+						</h:panelGroup>
+					</td>
+					<td>
+						<h:commandButton 	value="edit" 
+											action="#{userBeanComponent.editButton()}"
+											rendered="#{not userBeanComponent.beingEdited}"></h:commandButton>
+					
+					
+						<h:commandButton 	value="save" 
+											action="#{userBeanComponent.saveButton()}"
+											rendered="#{userBeanComponent.beingEdited}"></h:commandButton>
+						<h:commandButton 	value="cancel" 
+											action="#{userBeanComponent.cancelButton()}"
+											rendered="#{userBeanComponent.beingEdited}"></h:commandButton>
+					</td>
+					<td>
+						<h:commandButton value="delete" action="#{userBeanComponent.deleteButton()}"></h:commandButton>
+					</td>
+				</tr>
+				</ui:repeat>
+			</table>
+		</h:form>
+		<hr></hr>	
 	</ui:define>
 </ui:composition>
 </html>
