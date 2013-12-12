@@ -17,16 +17,7 @@ import de.medizinplattform.managers.UsersManager;
 @ManagedBean(name="loginBean")
 @ViewScoped
 public class LoginBean {
-	//Injecting usersManager
-	@ManagedProperty(value="#{usersManager}")
-	private UsersManager usersManager;	
-	public UsersManager getUsersManager() {
-		return usersManager;
-	}
-	public void setUsersManager(UsersManager usersManager) {
-		this.usersManager = usersManager;
-	}
-
+	
 	//Injecting sessionBean
 	@ManagedProperty(value="#{sessionBean}")
 	private SessionBean session;	
@@ -36,12 +27,15 @@ public class LoginBean {
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
+	//Constants
+	private final String PERSISTENCE_UNIT_NAME = "common-entities";
 	
+	//Variables
 	private String name;
 	private String password;	
 	private boolean loginFormVisible = false;
 	
-	private final String PERSISTENCE_UNIT_NAME = "common-entities";
+	
 	
 	
 	public LoginBean(){

@@ -1,27 +1,17 @@
 package de.medizinplattform.managedbeans.components;
 
-import javax.faces.bean.ManagedProperty;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import de.medizinplattform.entities.User;
 import de.medizinplattform.managedbeans.AdminBean;
-import de.medizinplattform.managers.UsersManager;
 
 public class UserBeanComponent {
-	//...?
+	//Constants
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";	
-	//Injecting usersManager
-	@ManagedProperty(value="#{usersManager}")
-	private UsersManager usersManager;	
-	public UsersManager getUsersManager() {
-		return usersManager;
-	}
-	public void setUsersManager(UsersManager usersManager) {
-		this.usersManager = usersManager;
-	}
-		
+	
+	//Variables
 	private String name;
 	private String password;
 	private String role; 

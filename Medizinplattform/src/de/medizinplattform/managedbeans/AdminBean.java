@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import de.medizinplattform.entities.User;
 import de.medizinplattform.managedbeans.components.NewUserBeanComponent;
 import de.medizinplattform.managedbeans.components.UserBeanComponent;
-import de.medizinplattform.managers.UsersManager;
 
 
 @ManagedBean(name="adminBean")
