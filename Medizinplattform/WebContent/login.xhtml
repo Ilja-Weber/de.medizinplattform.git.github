@@ -26,7 +26,7 @@
 						<h:outputText value="Password"></h:outputText>
 					</td>
 					<td>
-						<h:inputText></h:inputText>
+						<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
 					</td>
 					<td>
 						<span></span>
@@ -37,7 +37,7 @@
 						
 					</td>
 					<td>
-						<h:commandButton value="Log-In"></h:commandButton>
+						<h:commandButton value="Log-In" action="#{loginBean.login()}"></h:commandButton>
 						<h:commandLink value="  forgot password?"></h:commandLink>
 					</td>
 					<td>
