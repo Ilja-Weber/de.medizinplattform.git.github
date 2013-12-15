@@ -11,7 +11,16 @@
 <div class="common-content">
 
 	<div id="new-story-area">
-	Button "Start Story" and a Form for new story here
+	<h:form>
+	<h:selectOneMenu value="#{chronicleBean.getNewStoryComponent().type}">
+   			<f:selectItems value="#{chronicleBean.getNewStoryComponent().types}" />
+   	</h:selectOneMenu>
+	<h:inputText value="#{chronicleBean.getNewStoryComponent().date}"></h:inputText>
+	<h:inputText value="#{chronicleBean.getNewStoryComponent().time}"></h:inputText>
+	<h:inputText value="#{chronicleBean.getNewStoryComponent().content}"></h:inputText>
+	<h:commandButton  value="start" action="#{chronicleBean.getNewStoryComponent().startButton()}"></h:commandButton>
+	<h:commandButton  value="cancel" action="#{chronicleBean.getNewStoryComponent().cancelButton()}"></h:commandButton>
+	</h:form>
 	</div>
 	
 	<div id="stories-area">

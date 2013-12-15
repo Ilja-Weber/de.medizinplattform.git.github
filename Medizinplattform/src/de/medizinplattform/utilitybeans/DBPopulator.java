@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
 
 public class DBPopulator {
@@ -23,8 +24,15 @@ public class DBPopulator {
 		    story.setStoryTeller("Sarah");
 		    em.persist(story);
 		    
-		    System.out.println("Id: "+story.getId());
+		    Entry entry = new Entry();
+		    entry.setBelongsToStory(story.getId());
+		    entry.setDate("21.11.2014");
+		    entry.setTime("11:24");
+		    entry.setContent("Hallo haloo");
+		    em.persist(entry);
+		    
 		    em.getTransaction().commit();
+		    
 		    System.out.println("Id: "+story.getId());
 		    em.close();
 		  }

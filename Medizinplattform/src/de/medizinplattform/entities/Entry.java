@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ENTITY")
+@Table(name="STORY_ENTRY")
 public class Entry {
 	
 	
@@ -22,13 +22,14 @@ public class Entry {
 	
 	
 	//VARIABLE - OUTER
-	private String belongsToStory;
-	public String getBelongsToStory(){
+	private long belongsToStory;
+	public long getBelongsToStory(){
 		return belongsToStory;
 	}
-	public void setBelongsToStory(String newStoryId){
+	public void setBelongsToStory(long newStoryId){
 		this.belongsToStory=newStoryId;
 	}
+	
 	
 	//VARIABLE - OUTER
 	private String type;
@@ -38,6 +39,7 @@ public class Entry {
 	public void setType(String newType){
 		this.type=newType;
 	}
+	
 	
 	//VARIABLE - OUTER
 	private String date; //Format dd.mm.yyyy

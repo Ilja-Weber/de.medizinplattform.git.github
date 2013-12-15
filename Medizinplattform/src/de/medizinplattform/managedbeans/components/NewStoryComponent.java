@@ -3,10 +3,19 @@ package de.medizinplattform.managedbeans.components;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.faces.bean.ManagedProperty;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import de.medizinplattform.entities.Entry;
+import de.medizinplattform.entities.Story;
 import de.medizinplattform.managedbeans.ChronicleBean;
+import de.medizinplattform.managedbeans.SessionBean;
 
 public class NewStoryComponent {
-	
+	//Constants
+	private final String PERSISTENCE_UNIT_NAME = "common-entities";	
 	
 	
 	//Constructor
@@ -20,32 +29,58 @@ public class NewStoryComponent {
 	
 	
 	//Variable - OUTER
-	private String text = "Hello";
-	public String getText(){
-		return text;
+	private String type;
+	public String getType(){
+		return type;
 	}
-	public void setText(String newText){
-		this.text=newText;
+	public void setType(String newType){
+		this.type=newType;
+	}
+	
+	//Variable - OUTER
+	private Map<String,Object> types;
+	public Map<String, Object> getTypes(){
+		
+		if(types==null){
+			
+			types=new LinkedHashMap<String, Object>();
+			types.put("symptome", "symptome");
+			types.put("diagnosis", "diagnosis");
+			types.put("medicine", "medicine");
+			types.put("action", "action");
+			types.put("recomendation", "recomendation");
+		}
+		return types;
+	
 	}
 	
 	
 	//Variable - OUTER
-	private String fromDate = "12.11.2013";
-	public String getFromDate(){
-		return fromDate;
+	private String date;
+	public String getDate(){
+		return date;
 	}
-	public void setFromDate(String newFromDate){
-		this.fromDate=newFromDate;
+	public void setDate(String newDate){
+		this.date=newDate;
 	}
 	
 	
 	//Variable - OUTER
-	private String toDate = "16.11.2013";
-	public String getToDate(){
-		return toDate;
+	private String time;
+	public String getTime(){
+		return time;
 	}
-	public void setToDate(String newToDate){
-			this.toDate=newToDate;
+	public void setTime(String newTime){
+		this.time=newTime;
+	}
+	
+	//Variable - OUTER
+	private String content;
+	public String getContent(){
+		return content;
+	}
+	public void setContent(String newContent){
+		this.content=newContent;
 	}
 	
 	
@@ -59,111 +94,6 @@ public class NewStoryComponent {
 	}
 	
 	
-	//Variable - OUTER
-	private String day;
-	public String getDay(){
-		return day;
-	}
-	public void setDay(String newDay){
-		this.day=newDay;
-		System.out.println("Day set to "+newDay);
-	}
-	
-	
-	//Variable - OUTER
-	private Map<String,Object> possibleDays;
-	public Map<String, Object> getPossibleDays(){
-		
-		if(possibleDays==null){
-			
-			possibleDays=new LinkedHashMap<String, Object>();
-			
-			String temp=null;
-			for(int i=1 ; i<32 ; i++){
-				
-				if(i<10){
-					temp="0";
-				}
-				else{
-					temp="";
-				}
-				temp=temp+String.valueOf(i);
-				
-				possibleDays.put(temp, temp);
-			}
-		}
-		return possibleDays;
-	
-	}
-	
-	
-	//Variable - OUTER
-	private String month;
-	public String getMonth(){
-		return month;
-	}
-	public void setMonth(String newMonth){
-		this.month=newMonth;
-	}
-	
-	
-	//Variable - OUTER
-	private Map<String,Object> possibleMonths;
-	public Map<String, Object> getPossibleMonths(){
-			
-		if(possibleMonths==null){
-			
-			possibleMonths=new LinkedHashMap<String, Object>();
-				
-			possibleMonths.put("January", "January");
-			possibleMonths.put("February", "February");
-			possibleMonths.put("March", "March");
-			possibleMonths.put("April", "April");
-			possibleMonths.put("May", "May");
-			possibleMonths.put("June", "June");
-			possibleMonths.put("July", "July");
-			possibleMonths.put("August", "August");
-			possibleMonths.put("September", "September");
-			possibleMonths.put("October", "October");
-			possibleMonths.put("November", "Novermber");
-			possibleMonths.put("December", "December");
-			
-		}
-		return possibleMonths;
-	
-	}
-	
-	
-	//Variable - OUTER
-	private String year;
-	public String getYear(){
-		return year;
-	}
-	public void setYear(String newYear){
-		this.year=newYear;
-	}
-	
-	
-	//Variable - OUTER
-	private Map<String,Object> possibleYears;
-	public Map<String, Object> getPossibleYears(){
-			
-		if(possibleYears==null){
-				
-			possibleYears=new LinkedHashMap<String, Object>();
-					
-			possibleYears.put("2014", "2014");
-			possibleYears.put("2013", "2013");
-			possibleYears.put("2012", "2012");
-			possibleYears.put("2011", "2011");
-			possibleYears.put("<2011", "<2011");
-				
-		}
-		return possibleYears;
-		
-	}
-	
-	
 	//Buttons logic
 	public String showFormButton(){
 		this.formVisible=true;
@@ -172,18 +102,45 @@ public class NewStoryComponent {
 	
 	//Buttons logic
 	public String startButton(){
-
-		formVisible=false;
+		if(!type.equals("") && !date.equals("") && !time.equals("")&& !content.equals("")){
+			//Obtain em
+			
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			EntityManager em = emf.createEntityManager();
+			
+			em.getTransaction().begin();
+		    
+		    Story story = new Story();
+		    story.setStoryTeller(parent.getSession().getCanSeeChronicleOf());
+		    em.persist(story);
+		    
+		    Entry entry = new Entry();
+		    entry.setBelongsToStory(story.getId());
+		    entry.setType(type);
+		    entry.setDate(date);
+		    entry.setTime(time);
+		    entry.setContent(content);
+		    em.persist(entry);
+		    
+		    em.getTransaction().commit();
+		    em.close();
+				
+				
+				
+			cancelButton();
+			
+			
+		}
 		return null;
 	}
 	
 	
 	//Buttons logic
 	public String cancelButton(){
-		text="";
-		day="";
-		month="";
-		year="";
+		type="";
+		date="";
+		time="";
+		content="";
 		formVisible=false;
 		System.out.println("cancel all changes");
 		return null;

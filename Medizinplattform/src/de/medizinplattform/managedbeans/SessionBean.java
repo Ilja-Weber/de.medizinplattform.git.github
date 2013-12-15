@@ -64,6 +64,6 @@ public class SessionBean {
 
 	@PreDestroy
 	public void cry(){
-		//System.out.println("UserBean is about to be destroyed");
+		System.out.println("SessionBean is about to be destroyed");
 	}
 }
