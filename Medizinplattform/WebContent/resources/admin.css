@@ -1,0 +1,99 @@
+#new_user {
+	margin-left:auto;
+	margin-right:auto;
+	padding:0px;
+	width:100%;
+}
+
+#new_user_button {
+	margin-left:auto;
+	margin-right:auto;
+	width:120px;
+}
+
+#new_user_form {
+	margin-left:auto;
+	margin-right:auto;
+	padding:18px;
+	width:540px;
+	border-style:solid;
+	border-width:1px;
+	border-color:grey;
+}
+
+#new_user_form .text {
+	font-weight:bold;
+}
+
+#new_user_form .name-input {
+	width:200px;
+}
+
+#new_user_form .password-input {
+	width:110px;
+}
+
+#new_user_form .role-input {
+	width:65px;
+}
+
+#user_table {
+	margin-top:12px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:0px;
+	width:576px;
+	border-style:solid;
+	border-width:1px;
+	border-color:grey;
+	
+	background-color:red;
+}
+
+#user_table .row-even-true, .row-even-false {
+	width:100%;
+}
+
+#user_table .row-even-true {
+	background-color:white;
+}
+
+#user_table .row-even-false {
+	background-color:bisque;
+}
+
+#user_table .user-name {
+	text-align:left;
+	width:200px;
+}
+
+#user_table .user-password {
+	text-align:left;
+	width:110px;
+}
+
+#user_table .user-role {
+	width:65px;
+}
+
+#user_table .user-edit {
+	text-align:center;
+	width:100px;
+}
+
+#user_table .user-remove {
+	text-align:center;
+	width:75px;
+}
+
+#user_table .password-input {
+	text-align:left;
+	width:103px;
+}
+
+#user_table .name-input {
+	margin:0px;
+	text-align:left;
+	width:193px;
+}
+

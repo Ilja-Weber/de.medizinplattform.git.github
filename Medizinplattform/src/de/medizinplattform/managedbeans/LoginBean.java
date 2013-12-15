@@ -103,6 +103,7 @@ public class LoginBean {
 					session.setAdmin(false);
 					session.setUser(true);
 				}
+				return "index.xhtml?faces-redirect=true";
 			}
 		}
 		
