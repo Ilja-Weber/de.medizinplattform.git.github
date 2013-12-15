@@ -8,28 +8,17 @@
 
 <ui:composition template="/templates/template.xhtml">
 <ui:define name="content">
-  <ui:composition template="/templates/story.xhtml">
-    
-    <ui:define name="sticker">
-      <h:outputText value="STICKER"></h:outputText>
-    </ui:define>
-    
-    <ui:define name="newEnry">
-      <h:outputText value="(!) CREATE NEW ENTRY"></h:outputText>
-    </ui:define>
-    
-    <ui:define name="entriesList">
-      <ul>
-        <li>Date  :  Text</li>
-        <li>Date  :  Text</li>
-        <li>Date  :  Text</li>
-        <li>Date  :  Text</li>
-        <li>Date  :  Text</li>
-        <li>Date  :  Text</li>
-      </ul> 
-    </ui:define>
-     
-  </ui:composition>
+<div class="common-content">
+
+	<div id="new-story-area">
+	Button "Start Story" and a Form for new story here
+	</div>
+	
+	<div id="stories-area">
+	First of all a list of storyareas
+	</div>
+
+</div>
 </ui:define>
 </ui:composition>
 </html>

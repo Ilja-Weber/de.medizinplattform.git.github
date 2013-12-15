@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import de.medizinplattform.entities.User;
+import de.medizinplattform.entities.Story;
 
 public class DBPopulator {
 	
@@ -19,14 +19,13 @@ public class DBPopulator {
 		    // create new todo
 		    em.getTransaction().begin();
 		    
-		    User user = new User();
-		    user.setName("Ilja");
-		    user.setPassword("1312");
-		    user.setRole("admin");
-		    em.persist(user);
+		    Story story = new Story();
+		    story.setStoryTeller("Sarah");
+		    em.persist(story);
 		    
+		    System.out.println("Id: "+story.getId());
 		    em.getTransaction().commit();
-
+		    System.out.println("Id: "+story.getId());
 		    em.close();
 		  }
 }
