@@ -8,44 +8,29 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h:form>
-			<table>
-				<tr>
-					<td>
-						<h:outputText value="Name"></h:outputText>
-					</td>
-					<td>
-						<h:inputText></h:inputText>
-					</td>
-					<td>
-						<span></span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h:outputText value="Password"></h:outputText>
-					</td>
-					<td>
-						<h:inputText></h:inputText>
-					</td>
-					<td>
-						<span></span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						
-					</td>
-					<td>
-						<h:commandButton value="Log-In"></h:commandButton>
-						<h:commandLink value="  forgot password?"></h:commandLink>
-					</td>
-					<td>
-						<span></span>
-					</td>
-				</tr>
-			</table>
-		</h:form>
-	</ui:define>
+
+<div id="login">
+	<h:form>
+	<ul>
+		<li>
+			<div>
+				<span class="text">Name</span>
+				<h:inputText styleClass="text-input" value="#{loginBean.name}"></h:inputText>
+			</div>			
+		</li>
+		<li>
+			<div class="container">
+				<span class="text">Password (<h:link value="forgot it?" outcome="password-restoration.xhtml"></h:link>)</span>
+				<h:inputSecret styleClass="text-input" value="#{loginBean.password}"></h:inputSecret>
+			</div>			
+		</li>
+		<li>
+			<h:commandButton class="login_button" value="Log-In" action="#{loginBean.login()}"></h:commandButton>
+		</li>
+	</ul>
+	</h:form>
+</div>
+
+</ui:define>
 </ui:composition>
 </html>

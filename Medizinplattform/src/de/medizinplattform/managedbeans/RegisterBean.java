@@ -1,10 +1,17 @@
 package de.medizinplattform.managedbeans;
 
+import java.util.List;
+
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
+import de.medizinplattform.entities.User;
 import de.medizinplattform.managers.UsersManager;
 
 
@@ -12,55 +19,72 @@ import de.medizinplattform.managers.UsersManager;
 @RequestScoped
 public class RegisterBean {
 
-	
-	@ManagedProperty(value="#{usersManager}")
-	private UsersManager usersManager;
-	
-	public UsersManager getUsersManager() {
-		return usersManager;
-	}
-
-	public void setUsersManager(UsersManager usersManager) {
-		this.usersManager = usersManager;
-	}
+	//Constants
+	private final String PERSISTENCE_UNIT_NAME = "common-entities";
 	
 	
-	public String name;
-	public String password;
-	
+	//Constructor
 	public RegisterBean(){
 		System.out.println("RegisterBean started");
 	}
 
+	
+	//Variable - OUTER
+	private String name=null;
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	//Variable - OUTER
+	private String password=null;
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	
+	//Buttons logic
 	public String registerUser(){
-		if(usersManager != null){
+		if(name.length()>0 && password.length()>0){
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			EntityManager em = emf.createEntityManager();
 			
-			System.out.println("Trying to create new user");
-			if(usersManager.hasUser(name)==false){
-				usersManager.createUser(name, password, false);
-				return "succesful_registration.xhtml?faces-redirect=true";
+			Query q = em.createQuery("SELECT x FROM User x WHERE x.name ='"+name+"'");
+			
+			List<User> usersList = (List<User>) q.getResultList();
+			
+			if(usersList.size()>1){
+				//Error: Should throw an Exception, because there cannot be many users with same name
+				System.out.println("Oooops! Too many Users with same name found!");
+			}
+			else if(usersList.size()==1){
+				//One User found, cannot register another with same name
+				System.out.println("Oooops! Such user already exists");
 			}
 			else{
-				System.out.println("User " + name + " already exists");
+				//No User found, now check if password is correct and if, then set session data
+				
+				User user = new User();
+				user.setName(name);
+				user.setPassword(password);
+				user.setRole("user");
+					
+				em.getTransaction().begin();
+				em.persist(user);
+				em.getTransaction().commit();
+				
+				return "registration-success.xhtml?faces-redirect=true";
+				}
+			
+			
+				
 			}
 			
-		}
 		return null;
 	}
 	

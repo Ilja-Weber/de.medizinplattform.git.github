@@ -5,47 +5,38 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<body>
-	<div style="width:100%;font-size:12px;line-height:30px;background-color:#E8E8E8  ;color:black">
+
+
+<h:body>
+	<h:form>
+	<ul>
+		<h:panelGroup rendered="#{sessionBean.guest}">
+		<li>
+			<h:link value="Log-In" outcome="login.xhtml"></h:link>
+		</li>
+		<li>
+			<h:link value="Register" outcome="registration.xhtml"></h:link>
+		</li>
+		</h:panelGroup>
 		
-		<span style="float:left;font-size:26px;style=color:white">
-			<h:link value="MediPlatt" outcome="index.xhtml"></h:link>
-		</span>
+		<h:panelGroup rendered="#{sessionBean.user}">
+		<li>
+			<h:link value="Chronicle" outcome="chronicle.xhtml"></h:link>
+		</li>
+		</h:panelGroup>
 		
-		<span style="text-align:right;font-size:20px;color:black">
-			
-			<h:form  rendered="#{sessionBean.guest}">
-            	
-            	<h:commandLink value="login" action="#{loginBean.makeLoginFormVisible()}"  rendered="#{not loginBean.loginFormVisible}"></h:commandLink>
-            	
-            	<h:outputText  rendered="#{loginBean.loginFormVisible}" value=" Login"></h:outputText>
-				<h:inputText  rendered="#{loginBean.loginFormVisible}" value="#{loginBean.name}"></h:inputText>
-				<h:outputText  rendered="#{loginBean.loginFormVisible}" value=" Password"></h:outputText>
-				<h:inputSecret  rendered="#{loginBean.loginFormVisible}" value="#{loginBean.password}"></h:inputSecret>
-				<h:commandButton  rendered="#{loginBean.loginFormVisible}" value="Login" action="#{loginBean.login()}"></h:commandButton>
-				
-				<h:outputText value=" | "></h:outputText>
-				
-				<h:commandLink  rendered="#{loginBean.loginFormVisible}" value="  forgot password  " action="login_fail.xhtml?faces-redirect=true"></h:commandLink>
-				<h:outputText  rendered="#{loginBean.loginFormVisible}" value=" | "></h:outputText>
-				
-				<h:commandLink value="  register  " action="register.xhtml?faces-redirect=true"></h:commandLink>
-				
-				
-			</h:form>
-						
-			<h:form rendered="#{sessionBean.user}">
-				<h:commandLink style="font-size:12px" value=" manage users " action="admin.xhtml?faces-redirect=true"  rendered="#{sessionBean.admin}"></h:commandLink>
-				<h:outputText value=" | "  rendered="#{sessionBean.admin}"></h:outputText>
-				<h:commandLink style="font-size:12px" value="#{sessionBean.canSeeChronicleOf}'s chronicle" action="chronicle.xhtml?faces-redirect=true"   rendered="#{not sessionBean.admin}">
-				</h:commandLink>
-				<h:outputText value=" | "  rendered="#{not sessionBean.admin}"></h:outputText>
-				<h:outputText value="#{sessionBean.usersName} | "></h:outputText>				
-				<h:commandLink style="font-size:12px" value=" log out " action="#{loginBean.logout()}"></h:commandLink>
-			</h:form>
-			
-		</span>
+		<h:panelGroup rendered="#{sessionBean.admin}">
+		<li>
+			<h:link value="Manage Users" outcome="admin.xhtml"></h:link>
+		</li>
+		</h:panelGroup>
 		
-	</div>
-</body>
+		<h:panelGroup rendered="#{sessionBean.loggedIn}">
+		<li>
+			<h:commandLink value="Log-Out" action="#{loginBean.logout()}"></h:commandLink>
+		</li>
+		</h:panelGroup>
+	</ul>
+	</h:form>
+</h:body>
 </html>

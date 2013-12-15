@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+	   
+		<div id="registration">
+			<div id="info">
+				<h1>Join MediPlatt</h1>
+				<h3>The best way to monitor your health.</h3>
+			</div>
+			
+		<div id="register-form">
+			<h:form>
+			<ul>
+				<li>
+				<div>
+					<span class="text">Choose a Login-Name</span>
+					<h:inputText styleClass="text-input" value="#{registerBean.name}"></h:inputText>
+				</div>			
+				</li>
+				<li>
+				<div class="container">
+					<span class="text">And a password</span>
+					<h:inputSecret styleClass="text-input" value="#{registerBean.password}"></h:inputSecret>
+				</div>			
+				</li>
+				<li>
+					<h:commandButton class="login_button" value="Register me" action="#{registerBean.registerUser()}"></h:commandButton>
+				</li>
+			</ul>
+			</h:form>
+			</div>
+	   </div>
+	   
+	</ui:define>
+</ui:composition>
+</html>

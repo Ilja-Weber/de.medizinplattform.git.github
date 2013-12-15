@@ -8,164 +8,28 @@
 
 <ui:composition template="/templates/template.xhtml">
 <ui:define name="content">
-
-<!--Here we render "back" link, for admins-->
-<h:form>
-  <h:commandLink rendered="#{sessionBean.admin}" value="back"	action="admin.xhtml?faces-redirect=true"></h:commandLink>
-</h:form>
-<!---->
-
-<!--Here we render button "new chronicle entry" or the form for creation of the new chronicle entry-->
-<h:panelGroup>
-  <h:form	rendered="#{not chronicleBean.newEntriesContainerFormVisible}">
-    <h:commandButton value="new chronicle entry" action="#{chronicleBean.addNewEntriesContainerButton()}"></h:commandButton>
-  </h:form>
-
-  <h:form rendered="#{chronicleBean.newEntriesContainerFormVisible}">
-    <table>
-      <tr>
-        <td>
-          <h:outputText value=" What happened? "></h:outputText><br />
-        </td>
-        <td>
-          <h:outputText value=" When? "></h:outputText></td>
-        <td>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h:inputText size="120" value="#{chronicleBean.newEntryText}"></h:inputText><br />
-        </td>
-        <td>
-          <h:inputText size="2" value="#{chronicleBean.newEntryDay}"></h:inputText> 
-          <h:outputText value="."></h:outputText> 
-          <h:inputText size="2" value="#{chronicleBean.newEntryMonth}"></h:inputText> 
-          <h:outputText value="."></h:outputText> 
-          <h:inputText size="4" value="#{chronicleBean.newEntryYear}"></h:inputText>
-        </td>
-        <td>
-          <h:commandButton value="save" action="#{chronicleBean.saveNewEntriesContainerButton()}"></h:commandButton> 
-          <h:outputText value=" | "></h:outputText> 
-          <h:commandButton value="cancel"	action="#{chronicleBean.cancelNewEntriesContainerButton()}"></h:commandButton>
-        </td>
-      </tr>
-    </table>
-  </h:form>
-</h:panelGroup>
-<!---->
-
-<!--And here we start rendering chronicle itself-->
-
-<h:panelGroup>
-  
-<!--in a repeating cycle we take entries containers from database and render their title and dates-->
-  <h:form>
-  <ui:repeat value="#{chronicleBean.entriesContainers}" var="entryContainer">
-  <table style="background-color:#D8D8D8;border: 1px solid black;margin:6px">
-    <tr>
-      
-      <!--This is the head of entries container; there you have title, from-to date and delete button-->
-      <td>
-        <h:outputText value="#{entryContainer.currentTitle}"></h:outputText>         
-      </td>
-      <td>
-        <h:outputText value="#{entryContainer.fromDate}"></h:outputText> 
-        <h:outputText value=" - "></h:outputText> 
-        <h:outputText value="#{entryContainer.toDate}"></h:outputText>
-      </td>
-      <td>
-        <!--<h:form>-->
-          <h:commandButton value="delete" action="#{chronicleBean.deleteEntriesContainerButton(entryContainer)}"></h:commandButton>
-        <!--</h:form>   -->     
-      </td>
-    </tr>
-    <tr>
-      <td>
-        
-<!--This is the body of entries container; there youll have a form for adding an entry and a list of entries-->
-        <table  style="background-color:#C8C8C8;border: 1px solid black;margin:6px">
-          <tr>
-            <td>
-              <h:panelGroup>
-                <h:panelGroup rendered="#{not entryContainer.newEntryFormVisible}">
-                  <h:commandButton value="+"  action="#{chronicleBean.addNewEntryButton(entryContainer)}"></h:commandButton>
-                </h:panelGroup>
-                <h:panelGroup rendered="#{entryContainer.newEntryFormVisible}">
-                  <table>
-                    <tr>
-                      <td>
-                        <h:outputText value=" What happened? "></h:outputText><br />
-                      </td>
-                      <td>
-                        <h:outputText value=" When? "></h:outputText>
-                      </td>
-                      <td>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h:inputText size="30" value="#{entryContainer.newEntryText}"></h:inputText><br />
-                      </td>
-                      <td>
-                        <h:inputText size="2" value="#{entryContainer.newEntryDay}"></h:inputText> 
-                        <h:outputText value="."></h:outputText> 
-                        <h:inputText size="2" value="#{entryContainer.newEntryMonth}"></h:inputText> 
-                        <h:outputText value="."></h:outputText> 
-                        <h:inputText size="4" value="#{entryContainer.newEntryYear}"></h:inputText>
-                      </td>
-                      <td>
-                        <h:commandButton value="save" action="#{chronicleBean.saveNewEntryButton(entryContainer)}"></h:commandButton> 
-                        <h:outputText value=" | "></h:outputText> 
-                        <h:commandButton value="cancel"  action="#{chronicleBean.cancelNewEntryButton(entryContainer)}"></h:commandButton>
-                      </td>
-                    </tr>
-                  </table>
-                </h:panelGroup>
-              </h:panelGroup>
-            </td>
-            
-          </tr>
-          
-         
-        </table>
-          
-<!--In a cycle we get entries from database and render them-->
-        
-        <ui:repeat value="#{chronicleBean.getEntries(entryContainer)}" var="entry">
-          <table  style="background-color:#C8C8C8;border: 1px solid black;margin:6px">  
-            <tr  style="background-color:#F8F8F8">
-              <td>
-                <h:outputText value="#{entry.entryText}" rendered="#{not entry.editable}"></h:outputText> 
-                <h:inputText value="#{entry.entryText}" rendered="#{entry.editable}"></h:inputText>
-              </td>
-            </tr>
-            <tr  style="background-color:#F8F8F8">
-              <td>
-                <h:outputText value="#{entry.entryDate}" rendered="#{not entry.editable}"></h:outputText> 
-                <h:panelGroup rendered="#{entry.editable}">
-                  <h:inputText value="#{entry.entryDay}"></h:inputText>
-                  <h:outputText value="."></h:outputText>
-                  <h:inputText value="#{entry.entryMonth}"></h:inputText>
-                  <h:outputText value="."></h:outputText>
-                  <h:inputText value="#{entry.entryYear}"></h:inputText>
-                </h:panelGroup>
-              </td>
-              <td>
-                <h:commandButton value="edit" action="#{chronicleBean.editEntryButton(entry)}" rendered="#{not entry.editable}"></h:commandButton>
-                <h:commandButton value="save" action="#{chronicleBean.saveEntryButton(entry)}" rendered="#{entry.editable}"></h:commandButton>  
-                <h:commandButton value="remove" action="#{chronicleBean.removeEntryButton(entry)}"></h:commandButton>
-              </td>
-            </tr>
-          </table>
-        </ui:repeat>       
-      </td>
-      
-    </tr>
-  </table>
-  </ui:repeat>
-  </h:form>
-</h:panelGroup>
-
+  <ui:composition template="/templates/story.xhtml">
+    
+    <ui:define name="sticker">
+      <h:outputText value="STICKER"></h:outputText>
+    </ui:define>
+    
+    <ui:define name="newEnry">
+      <h:outputText value="(!) CREATE NEW ENTRY"></h:outputText>
+    </ui:define>
+    
+    <ui:define name="entriesList">
+      <ul>
+        <li>Date  :  Text</li>
+        <li>Date  :  Text</li>
+        <li>Date  :  Text</li>
+        <li>Date  :  Text</li>
+        <li>Date  :  Text</li>
+        <li>Date  :  Text</li>
+      </ul> 
+    </ui:define>
+     
+  </ui:composition>
 </ui:define>
 </ui:composition>
 </html>
