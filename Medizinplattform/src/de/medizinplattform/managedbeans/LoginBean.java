@@ -93,8 +93,16 @@ public class LoginBean {
 				session.setUsersName(usersList.get(0).getName());
 				session.setCanSeeChronicleOf(usersList.get(0).getName());
 				session.setGuest(false);
-				session.setUser(true);
-				session.setAdmin(usersList.get(0).isAdmin());
+				
+				
+				if(usersList.get(0).isAdmin()){
+					session.setAdmin(true);
+					session.setUser(false);
+				}
+				else{
+					session.setAdmin(false);
+					session.setUser(true);
+				}
 			}
 		}
 		

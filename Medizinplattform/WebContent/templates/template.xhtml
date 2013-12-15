@@ -3,29 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
-<head>
-  <title><ui:insert name="title">MediPlatt</ui:insert></title>
-</head>
+      
+      
 
-<body>
-<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+<h:head>  
+  <title><ui:insert name="title">MediPlatt</ui:insert></title>  
+  <h:outputStylesheet name="style.css" />
+  <h:outputStylesheet name="registration.css" />    
+</h:head>
+
+
+
+<h:body>
 
 <div id="header">
-    <ui:insert name="header">
-    	<ui:include src="header.xhtml"/>
-    </ui:insert>
-</div>
+  
+  <div id="header_content">
+    <h:link id="logo" value="MediPlatt" outcome="index.xhtml"></h:link>
+    <div id="nav"><ui:include src="header.xhtml"/></div>    
+  </div>
 
-<div id="content">
-  <ui:insert name="content"></ui:insert>
 </div>
-
-<div id="footer">
-  <ui:insert name="footer">
-    	<ui:include src="footer.xhtml"/>
-  </ui:insert>
+<div>
+	<ui:insert name="content"></ui:insert>
 </div>
-
-</body>
+</h:body>
 
 </html>
