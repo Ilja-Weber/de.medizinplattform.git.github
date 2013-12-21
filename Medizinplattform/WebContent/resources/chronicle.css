@@ -1,5 +1,4 @@
 #new-story-area {
-	background-color:red;
 }
 
 #stories-area {
@@ -9,7 +8,6 @@
 }
 
 #new-story-form{
-	background-color:blue;
 	width:720px;
 	margin-left:auto;
 	margin-right:auto;
@@ -19,6 +17,7 @@
 	background-color:orange;
 	width:120px;
 	margin-left:32px;
+	padding:3px;
 }
 
 #new-story-form-body{
@@ -41,13 +40,16 @@
 }
 
 #new-story-form-command-elements #t-date{
-	background-color:grey;
-	width:100px;
+	width:70px;
 }
 
 #new-story-form-command-elements #t-time{
-	background-color:grey;
-	width:400px;
+	width:50px;
+}
+#new-story-form-command-elements #t-save{
+	padding-left:455px;
+}
+#new-story-form-command-elements #t-cancel{
 }
 
 
