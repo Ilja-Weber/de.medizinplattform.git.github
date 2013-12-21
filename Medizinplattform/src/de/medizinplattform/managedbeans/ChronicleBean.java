@@ -27,9 +27,10 @@ public class ChronicleBean {
 		System.out.println("ChronicleBean started");
 	}
 	
+		
 	
 	//Variable - OUTER
-	NewStoryComponent newStoryC;
+	private NewStoryComponent newStoryC;
 	public NewStoryComponent getNewStoryComponent(){
 		if(newStoryC==null){
 			newStoryC=new NewStoryComponent(this);
