@@ -10,48 +10,7 @@
 <ui:define name="content">
 <div class="common-content">
 
-	<div id="new-story-area">
-		<h:form>
-			<h:panelGroup rendered="#{not chronicleBean.getNewStoryComponent().formVisible}">
-				<h:commandButton value="Start new story" action="#{chronicleBean.getNewStoryComponent().showFormButton()}"></h:commandButton>
-			</h:panelGroup>
-			
-			<h:panelGroup  rendered="#{chronicleBean.getNewStoryComponent().formVisible}">
-				<div id="new-story-form">
-					<div id="new-story-form-header">
-						<h:selectOneMenu value="#{chronicleBean.getNewStoryComponent().type}">
-   							<f:selectItems value="#{chronicleBean.getNewStoryComponent().types}" />
-   						</h:selectOneMenu>
-					</div>
-					
-					<div id="new-story-form-body">
-						<div id="new-story-form-content">
-							<div id="new-story-form-textline">
-								<h:inputText style="width:99.2%" value="#{chronicleBean.getNewStoryComponent().content}"></h:inputText>
-							</div>
-							
-							<div id="new-story-form-command-elements">
-								<table><tr>
-									<td id="t-date">
-										<h:inputText style="width:95%" value="#{chronicleBean.getNewStoryComponent().date}"></h:inputText>
-									</td>
-									<td id="t-time">
-										<h:inputText style="width:95%" value="#{chronicleBean.getNewStoryComponent().time}"></h:inputText>
-									</td>
-									<td id="t-save">
-										<h:commandButton value="save" action="#{chronicleBean.getNewStoryComponent().startButton()}"></h:commandButton>
-									</td>
-									<td id="t-cancel">
-										<h:commandButton value="cancel" action="#{chronicleBean.getNewStoryComponent().cancelButton()}"></h:commandButton>
-									</td>
-								</tr></table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</h:panelGroup>
-		</h:form>
-	</div>
+	<ui:include src="templates/chronicle-new-story.xhtml"/>
 	
 	<div id="stories-area">
 	First of all a list of storyareas
