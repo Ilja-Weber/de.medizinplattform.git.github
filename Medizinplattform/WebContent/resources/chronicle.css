@@ -14,6 +14,14 @@
 	width:162px;
 }
 
+#choose-an-option{
+	margin-right:auto;
+	margin-left:auto;
+	width:720px;
+	background-color:green;
+}
+
+
 .start-new-story-button {
     background-color: #dd5f32;
     -moz-border-radius: 2px;
