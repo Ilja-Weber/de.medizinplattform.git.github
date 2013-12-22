@@ -52,6 +52,10 @@
 #new-story-form-command-elements #t-cancel{
 }
 
+.story-area{
+	margin:0px;
+	background-color:purple;
+}
 
 
 

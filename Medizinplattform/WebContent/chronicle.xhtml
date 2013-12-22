@@ -13,7 +13,11 @@
 	<ui:include src="templates/chronicle-new-story.xhtml"/>
 	
 	<div id="stories-area">
-	First of all a list of storyareas
+		<ui:repeat value="#{chronicleBean.storiesC}" var="pom">
+			<div class="story-area">
+			STORY
+			</div>
+		</ui:repeat>
 	</div>
 
 </div>
