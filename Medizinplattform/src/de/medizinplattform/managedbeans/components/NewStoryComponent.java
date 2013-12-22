@@ -36,17 +36,11 @@ public class NewStoryComponent {
 	public boolean isNewStoryButtonVisible(){
 		return newStoryButtonVisible;
 	}
-	public void hideNewStoryButton(){
-		newStoryButtonVisible=false;
-	}
 	
 	//Variable - OUTER
 	private boolean optionsVisible;
 	public boolean isOptionsVisible(){
 		return optionsVisible;
-	}
-	public void hideOptions(){
-		optionsVisible=false;
 	}
 	
 	//Buttons logic	
@@ -55,5 +49,10 @@ public class NewStoryComponent {
 		newStoryButtonVisible=false;
 	}
 	
+	//Buttons logic	
+	public void cancel(){
+		optionsVisible=false;
+		newStoryButtonVisible=true;
+	}
 	
 }

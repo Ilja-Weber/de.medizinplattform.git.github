@@ -78,21 +78,23 @@ public class ChronicleBean {
 		return getNewStoryComponent().isNewStoryButtonVisible();
 		
 	}
-	public void hideNewStoryButton(){
-		getNewStoryComponent().hideNewStoryButton();
-	}
+	
 	
 	//Variable - OUTER
 	public boolean isOptionsVisible(){
 		return getNewStoryComponent().isOptionsVisible();
 	}
-	public void hideOptions(){
-		getNewStoryComponent().hideOptions();
-	}
+	
 	
 	//Buttons logic
 	public String gotoOptions(){
 		getNewStoryComponent().gotoOptions();
+		return null;
+	}
+	
+	//Buttons logic
+	public String cancel(){
+		getNewStoryComponent().cancel();
 		return null;
 	}
 

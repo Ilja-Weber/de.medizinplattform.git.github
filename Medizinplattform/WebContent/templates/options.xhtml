@@ -8,13 +8,33 @@
 <ui:composition>
    <div class="frame">
 		<div class="frame-header">
-			asdf
+			What is the starting point of the story?
 		</div>
 		<div class="frame-body">
-			asdffd
+			<table>
+			<tr>
+				<td>
+					<h:commandLink> 
+   						<h:graphicImage value="resources/symptom.gif" />
+   					</h:commandLink>
+				</td>
+				
+				<td>
+					<h:commandLink> 
+   						<h:graphicImage value="resources/diagnosis.gif" />
+   					</h:commandLink>
+				</td>
+				<td>
+					<h:commandLink> 
+   						<h:graphicImage value="resources/action.gif" />
+   					</h:commandLink>
+				</td>
+			</tr>
+			</table>
+			
 		</div>
 		<div class="frame-footer">
-			ffdaf
+			<h:commandLink value="cancel"  action="#{chronicleBean.cancel()}"></h:commandLink>
 		</div>
 	</div>    
 </ui:composition>

@@ -1,15 +1,38 @@
 .frame {
 	width:100%;
+	border:solid grey 1px;
 	background-color:black;
 }
 .frame-header {
-	background-color:yellow;	
+	background-color:#4298b5;
+	line-height:24px;
+	font-weight:bold;
+	font-family:Arial, sans-serif;
+	padding-left:6px;	
 }
 
 .frame-body {
-	background-color:blue;
+	background-color:#adc4cc;
+	text-align:center;
+}
+
+.frame-body table{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.frame-body td {
+	padding-left:30px;
+	padding-right:30px;
 }
 
 .frame-footer {
-	background-color:purple;
+	background-color:#4298b5;
+	text-align:right;
+}
+
+.symptom-img { 
+	width:144px;
+	height:144px;
+	background-image: url('../resources/symptom.gif'); 
 }
