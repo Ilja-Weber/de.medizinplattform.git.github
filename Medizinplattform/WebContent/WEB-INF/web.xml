@@ -17,18 +17,18 @@
    
   
   <filter>
-  	<filter-name>SecurityFilter</filter-name>
-  	<filter-class>de.medizinplattform.filters.SecurityFilter</filter-class>
+          <filter-name>SecurityFilter</filter-name>
+          <filter-class>de.medizinplattform.filters.SecurityFilter</filter-class>
   </filter>
   
   <filter-mapping>
-  	<filter-name>SecurityFilter</filter-name>
-  	<url-pattern>/faces/admin.xhtml</url-pattern>
+          <filter-name>SecurityFilter</filter-name>
+          <url-pattern>/faces/admin.xhtml</url-pattern>
   </filter-mapping>
   
   <filter-mapping>
-  	<filter-name>SecurityFilter</filter-name>
-  	<url-pattern>/faces/chronicle.xhtml</url-pattern>
+          <filter-name>SecurityFilter</filter-name>
+          <url-pattern>/faces/chronicle.xhtml</url-pattern>
   </filter-mapping>
   
   
