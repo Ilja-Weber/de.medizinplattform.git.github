@@ -11,26 +11,30 @@
 
 <div id="login">
 	<h:form>
-	<ul>
+	  <ul>
 		<li>
 			<div>
 				<span class="text">Name</span>
-				<h:inputText styleClass="text-input" value="#{loginBean.name}"></h:inputText>
+				<h:inputText styleClass="text-input" value="#{loginBean.name}"> 
+				<f:validateLength minimum="4" maximum="8" />
+				</h:inputText>
 			</div>			
 		</li>
 		<li>
 			<div class="container">
 				<span class="text">Password (<h:link value="forgot it?" outcome="password-restoration.xhtml"></h:link>)</span>
-				<h:inputSecret styleClass="text-input" value="#{loginBean.password}"></h:inputSecret>
+				<h:inputSecret styleClass="text-input" value="#{loginBean.password}">
+				<f:validateLength minimum="4" maximum="8" />
+				</h:inputSecret>
 			</div>			
 		</li>
 		<li>
-			<h:commandButton class="login_button" value="Log-In" action="#{loginBean.login()}"></h:commandButton>
+			<h:commandButton class="login_button" value="Log-In" action="#{loginBean.login()}"></h:commandButton>		
+			<h:messages style="color:red"/>
 		</li>
-	</ul>
+	  </ul>
 	</h:form>
 </div>
-
 	</ui:define>
 </ui:composition>
 </html>
