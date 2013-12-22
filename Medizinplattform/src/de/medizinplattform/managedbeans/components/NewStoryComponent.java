@@ -17,6 +17,8 @@ public class NewStoryComponent {
 	//Constants
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";	
 	
+	//Variable - INNER
+	private ChronicleBean parent;
 	
 	//Constructor
 	public NewStoryComponent(ChronicleBean cronicleBean){
@@ -26,8 +28,7 @@ public class NewStoryComponent {
 	}
 	
 	
-	//Variable - INNER
-	private ChronicleBean parent;
+	
 	
 	
 	//Variable - OUTER
