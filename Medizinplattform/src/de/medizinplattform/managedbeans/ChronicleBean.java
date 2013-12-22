@@ -71,5 +71,14 @@ public class ChronicleBean {
 		}
 		return storiesC;
 	}
+	
+	
+	//Variable - OUTER
+	public boolean isNewStoryButtonVisible(){
+		return getNewStoryComponent().isNewStoryButtonVisible();
+	}
+	public void hideNewStoryButton(){
+		getNewStoryComponent().hideNewStoryButton();
+	}
 
 }

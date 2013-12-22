@@ -93,6 +93,14 @@ public class NewStoryComponent {
 		this.formVisible=true;
 	}
 	
+	//Variable - OUTER
+	private boolean newStoryButtonVisible;
+	public boolean isNewStoryButtonVisible(){
+		return newStoryButtonVisible;
+	}
+	public void hideNewStoryButton(){
+		newStoryButtonVisible=false;
+	}
 	
 	//Buttons logic
 	public String showFormButton(){
