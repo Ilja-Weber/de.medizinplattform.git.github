@@ -11,6 +11,7 @@
 
 <div class="common-content" id="login">
 	<h:form>
+		<h:messages style="color:red"/>
 		<div class="frame">
 			<div class="frame-header">
 				Log-In
@@ -24,7 +25,9 @@
 					</tr>
 					<tr>
 						<td>
-							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1"></h:inputText>
+							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1">
+								<f:validateLength minimum="4" maximum="8" />
+							</h:inputText>
 						</td>
 					</tr>
 					<tr>
@@ -34,7 +37,9 @@
 					</tr>
 					<tr>
 						<td>
-							<h:inputSecret  styleClass="input-field" value="#{loginBean.password}" tabindex="2"></h:inputSecret>
+							<h:inputSecret  styleClass="input-field" value="#{loginBean.password}" tabindex="2">
+								<f:validateLength minimum="4" maximum="8" />
+							</h:inputSecret>
 						</td>
 					</tr>
 				</table>
