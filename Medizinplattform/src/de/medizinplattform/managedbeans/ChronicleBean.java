@@ -93,7 +93,7 @@ public class ChronicleBean {
 	//Buttons logic
 	public String gotoOptions(){
 		getNewStoryComponent().gotoOptions();
-		return null;
+		return "new-story.xhtml?faces-redirect=true";
 	}
 	
 	//Logic
