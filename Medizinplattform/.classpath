@@ -30,7 +30,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/SanOK/Desktop/hibernate-validator-5.0.2.Final/dist/lib/required/validation-api-1.1.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SanOK/Desktop/hibernate-validator-5.0.2.Final/dist/hibernate-validator-5.0.2.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
