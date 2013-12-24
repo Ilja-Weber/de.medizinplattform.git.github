@@ -22,6 +22,13 @@
 					<ui:include src="options.xhtml"/>	
 				</div>		
 			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{chronicleBean.symptomVisible}">
+				<div id="symptom-anket">
+					<ui:include src="symptom-anket.xhtml"/>	
+				</div>	
+			</h:panelGroup>
+			
 		</h:form>
 	</div>
     

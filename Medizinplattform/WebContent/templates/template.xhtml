@@ -8,11 +8,12 @@
 
 <h:head>  
   <title><ui:insert name="title">MediPlatt</ui:insert></title>  
-  <h:outputStylesheet name="style.css" />
-  <h:outputStylesheet name="registration.css" />
-  <h:outputStylesheet name="admin.css" /> 
-  <h:outputStylesheet name="chronicle.css" />  
-  <h:outputStylesheet name="standart-frame.css" />
+  <h:outputStylesheet name="css/template.css" />
+  <h:outputStylesheet name="css/form-template.css" />
+  <h:outputStylesheet name="css/buttons.css" />
+  <h:outputStylesheet name="css/login.css" />
+  <h:outputStylesheet name="css/registration.css" />  
+  <h:outputStylesheet name="css/admin.css" />
 </h:head>
 
 
@@ -21,7 +22,7 @@
 
 <div id="header">
   
-  <div id="header_content">
+  <div id="header-content">
     <h:link id="logo" value="MediPlatt" outcome="index.xhtml"></h:link>
     <div id="nav"><ui:include src="header.xhtml"/></div>    
   </div>

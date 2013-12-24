@@ -8,7 +8,7 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-	   
+	 <div class="common-content">  
 		<div id="registration">
 			<div id="info">
 				<h1>Join MediPlatt</h1>
@@ -17,27 +17,37 @@
 			
 		<div id="register-form">
 			<h:form>
-			<ul>
-				<li>
-				<div>
-					<span class="text">Choose a Login-Name</span>
-					<h:inputText styleClass="text-input" value="#{registerBean.name}"></h:inputText>
-				</div>			
-				</li>
-				<li>
-				<div class="container">
-					<span class="text">And a password</span>
-					<h:inputSecret styleClass="text-input" value="#{registerBean.password}"></h:inputSecret>
-				</div>			
-				</li>
-				<li>
-					<h:commandButton class="login_button" value="Register me" action="#{registerBean.registerUser()}"></h:commandButton>
-				</li>
-			</ul>
+				<table>
+					<tr>
+						<td>
+							Choose a name
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputText value="#{registerBean.name}"></h:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Create a password
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputSecret value="#{registerBean.password}"></h:inputSecret>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:commandButton value="register" action="#{registerBean.registerUser()}"></h:commandButton>
+						</td>
+					</tr>
+				</table>
 			</h:form>
 			</div>
 	   </div>
-	   
+	 </div>   
 	</ui:define>
 </ui:composition>
 </html>
