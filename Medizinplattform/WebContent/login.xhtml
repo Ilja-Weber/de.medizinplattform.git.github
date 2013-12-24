@@ -9,27 +9,44 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 
-<div id="login">
+<div class="common-content" id="login">
 	<h:form>
-	<ul>
-		<li>
-			<div>
-				<span class="text">Name</span>
-				<h:inputText styleClass="text-input" value="#{loginBean.name}"></h:inputText>
-			</div>			
-		</li>
-		<li>
-			<div class="container">
-				<span class="text">Password (<h:link value="forgot it?" outcome="password-restoration.xhtml"></h:link>)</span>
-				<h:inputSecret styleClass="text-input" value="#{loginBean.password}"></h:inputSecret>
-			</div>			
-		</li>
-		<li>
-			<h:commandButton class="login_button" value="Log-In" action="#{loginBean.login()}"></h:commandButton>
-		</li>
-	</ul>
+		<div class="frame">
+			<div class="frame-header">
+				Log-In
+			</div>
+			<div class="frame-body">
+				<table>
+					<tr>
+						<td>
+							Enter your Login-Name...
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1"></h:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							...and your password <span id="forgot-password">(<h:link value="forgot it?" outcome="password-restoration.xhtml" tabindex="4"></h:link>)</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputSecret  styleClass="input-field" value="#{loginBean.password}" tabindex="2"></h:inputSecret>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="frame-footer">
+				<h:commandButton class="form-button" value="Log-In" action="#{loginBean.login()}" tabindex="3"></h:commandButton>
+			</div>		
+		</div>
 	</h:form>
 </div>
+	
+	
 
 	</ui:define>
 </ui:composition>

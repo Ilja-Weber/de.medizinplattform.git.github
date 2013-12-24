@@ -85,10 +85,20 @@ public class ChronicleBean {
 		return getNewStoryComponent().isOptionsVisible();
 	}
 	
+	//Variable - OUTER
+	public boolean isSymptomVisible(){
+		return getNewStoryComponent().isSymptomVisible();
+	}
 	
 	//Buttons logic
 	public String gotoOptions(){
 		getNewStoryComponent().gotoOptions();
+		return null;
+	}
+	
+	//Logic
+	public String gotoSymptomAnket(){
+		getNewStoryComponent().gotoSymptomAnket();
 		return null;
 	}
 	

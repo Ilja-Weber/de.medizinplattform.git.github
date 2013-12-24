@@ -23,8 +23,7 @@ public class NewStoryComponent {
 	//Constructor
 	public NewStoryComponent(ChronicleBean cronicleBean){
 		this.parent=cronicleBean;
-		this.optionsVisible=false;
-		this.newStoryButtonVisible=true;
+		cancel();
 	}
 	
 	
@@ -43,16 +42,34 @@ public class NewStoryComponent {
 		return optionsVisible;
 	}
 	
+	//Variable - OUTER
+	private boolean symptomVisible;
+	public boolean isSymptomVisible(){
+		return symptomVisible;
+	}
+	
 	//Buttons logic	
 	public void gotoOptions(){
+		reset();
 		optionsVisible=true;
-		newStoryButtonVisible=false;
 	}
 	
 	//Buttons logic	
 	public void cancel(){
-		optionsVisible=false;
+		reset();
 		newStoryButtonVisible=true;
+	}
+	
+	//Logic
+	public void gotoSymptomAnket(){
+		reset();
+		symptomVisible=true;
+	}
+	
+	public void reset(){
+		newStoryButtonVisible=false;
+		optionsVisible=false;
+		symptomVisible=false;
 	}
 	
 }

@@ -12,10 +12,10 @@
 	<ul>
 		<h:panelGroup rendered="#{sessionBean.guest}">
 		<li>
-			<h:link value="Log-In" outcome="login.xhtml"></h:link>
+			<h:commandButton class="menu-button" value="Log-In" action="login.xhtml?faces-redirect=true"></h:commandButton>
 		</li>
 		<li>
-			<h:link value="Register" outcome="registration.xhtml"></h:link>
+			<h:link value="register" outcome="registration.xhtml"></h:link>
 		</li>
 		</h:panelGroup>
 		
