@@ -15,72 +15,70 @@ import de.medizinplattform.entities.User;
 import de.medizinplattform.managedbeans.components.NewUserBeanComponent;
 import de.medizinplattform.managedbeans.components.UserBeanComponent;
 
-
-@ManagedBean(name="adminBean")
+@ManagedBean(name = "adminBean")
 @SessionScoped
 public class AdminBean {
-	
-	//...?
-	private final String PERSISTENCE_UNIT_NAME = "common-entities";	
-	
-	//Injecting sessionBean
-	@ManagedProperty(value="#{sessionBean}")
-	private SessionBean session;	
+
+	// ...?
+	private final String PERSISTENCE_UNIT_NAME = "common-entities";
+
+	// Injecting sessionBean
+	@ManagedProperty(value = "#{sessionBean}")
+	private SessionBean session;
+
 	public SessionBean getSession() {
 		return session;
 	}
+
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
-	
-	//Components
-	private NewUserBeanComponent newUserC=null;
-	private List<UserBeanComponent> usersC=null;
-	
-	
-	//Constructor
-	public AdminBean(){
-		
+
+	// Components
+	private NewUserBeanComponent newUserC = null;
+	private List<UserBeanComponent> usersC = null;
+
+	// Constructor
+	public AdminBean() {
+
 	}
-	
-	//Getters-Setters
-	public NewUserBeanComponent getNewUserC(){
-		if(newUserC==null){
+
+	// Getters-Setters
+	public NewUserBeanComponent getNewUserC() {
+		if (newUserC == null) {
 			newUserC = new NewUserBeanComponent(this);
 		}
 		return newUserC;
 	}
-	
-	public List<UserBeanComponent> getUsersC(){
-		if(usersC==null){
+
+	public List<UserBeanComponent> getUsersC() {
+		if (usersC == null) {
 			usersC = new ArrayList<UserBeanComponent>();
 			List<User> usersList = new ArrayList<User>();
-			
-			//Get list of all users
-			//get entitymanager
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
+			// Get list of all users
+			// get entitymanager
+			EntityManagerFactory emf = Persistence
+					.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
-			//Create a query
+			// Create a query
 			Query q = em.createQuery("SELECT x FROM User x");
 			usersList = (List<User>) q.getResultList();
-			
-			//In for-loop create for each User a userComponent
-			for(User user : usersList){
+
+			// In for-loop create for each User a userComponent
+			for (User user : usersList) {
 				usersC.add(new UserBeanComponent(this, user));
 			}
-			
+
 		}
 		return usersC;
 	}
-	
-	
+
 	public void removeUserComponent(UserBeanComponent userBeanComponent) {
-		if(usersC!=null){
+		if (usersC != null) {
 			usersC.remove(userBeanComponent);
 		}
-		
+
 	}
-	
-	
-	
+
 }

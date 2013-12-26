@@ -7,17 +7,17 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "sessionBean")
 @SessionScoped
 public class SessionBean {
-	
+
 	public String usersName;
 	public String canSeeChronicleOf;
 	private boolean guest = true;
 	private boolean user = false;
 	private boolean admin = false;
-		
-	public SessionBean(){
+
+	public SessionBean() {
 		System.out.println("SessionBean started");
 	}
-	
+
 	public String getUsersName() {
 		return usersName;
 	}
@@ -57,13 +57,13 @@ public class SessionBean {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-	
-	public boolean isLoggedIn(){
-		return admin||user;
+
+	public boolean isLoggedIn() {
+		return admin || user;
 	}
 
 	@PreDestroy
-	public void cry(){
+	public void cry() {
 		System.out.println("SessionBean is about to be destroyed");
 	}
 }

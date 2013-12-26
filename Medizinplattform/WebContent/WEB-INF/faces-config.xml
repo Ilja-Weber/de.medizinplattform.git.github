@@ -5,6 +5,11 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 
+ <application>
+	  <message-bundle>
+	  	de.medizinplattform.managedbeans.MyMessage
+	  </message-bundle>
+     </application>
 	
 	
 </faces-config>
