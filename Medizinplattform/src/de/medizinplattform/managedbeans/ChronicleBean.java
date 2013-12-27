@@ -53,10 +53,12 @@ public class ChronicleBean {
 	public boolean isDiagnosisVisible(){
 		return getNewStoryComponent().isDiagnosisVisible();
 	}
+	public boolean isActionVisible(){
+		return getNewStoryComponent().isActionVisible();
+	}
 		
 		
 	//Facade Methods	
-	
 	public String cancel(){
 		getNewStoryComponent().cancelButton();
 		return null;
@@ -71,6 +73,10 @@ public class ChronicleBean {
 	}
 	public String gotoDiagnosis(){
 		getNewStoryComponent().gotoDiagnosis();
+		return null;
+	}
+	public String gotoAction(){
+		getNewStoryComponent().gotoAction();
 		return null;
 	}
 
