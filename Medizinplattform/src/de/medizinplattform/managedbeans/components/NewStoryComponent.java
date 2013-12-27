@@ -69,6 +69,18 @@ public class NewStoryComponent {
 		symptomVisible=true;
 	}
 	
-	//TODO Actions, Diagnosis - Ankets
+	//Variable - OUTER
+	private boolean diagnosisVisible;
+	public boolean isDiagnosisVisible(){
+		return diagnosisVisible;
+	}
+			
+	//Logic - COMMANDLINK
+	public void gotoDiagnosis(){
+		reset();
+		diagnosisVisible=true;
+	}
+	
+	//TODO Actions - Ankets
 
 }

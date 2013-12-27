@@ -50,6 +50,9 @@ public class ChronicleBean {
 	public boolean isSymptomVisible(){
 		return getNewStoryComponent().isSymptomVisible();
 	}
+	public boolean isDiagnosisVisible(){
+		return getNewStoryComponent().isDiagnosisVisible();
+	}
 		
 		
 	//Facade Methods	
@@ -64,6 +67,10 @@ public class ChronicleBean {
 	}
 	public String gotoSymptom(){
 		getNewStoryComponent().gotoSymptom();
+		return null;
+	}
+	public String gotoDiagnosis(){
+		getNewStoryComponent().gotoDiagnosis();
 		return null;
 	}
 

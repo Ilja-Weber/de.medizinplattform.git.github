@@ -6,34 +6,13 @@
 	  xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition>
-   <div id="options">
+   <div id="diagnosis">
    <div class="frame">
 		<div class="frame-header">
-			Start a story
+			Describe your diagnosis
 		</div>
 		<div class="frame-body">
-			<h:form>
-			<table>
-			<tr>
-				<td>
-					<h:commandLink action="#{chronicleBean.gotoSymptom()}"> 
-   						<h:graphicImage value="resources/img/symptom.gif" />
-   					</h:commandLink>
-				</td>
-				
-				<td>
-					<h:commandLink action="#{chronicleBean.gotoDiagnosis()}"> 
-   						<h:graphicImage value="resources/img/diagnosis.gif" />
-   					</h:commandLink>
-				</td>
-				<td>
-					<h:commandLink> 
-   						<h:graphicImage value="resources/img/action.gif" />
-   					</h:commandLink>
-				</td>
-			</tr>
-			</table>
-			</h:form>
+			description here
 		</div>
 		<div class="frame-footer">
 			<h:form>
@@ -41,7 +20,7 @@
 			</h:form>
 		</div>
 	</div>
-	</div>    
+	</div>
 </ui:composition>
 	
 </html>
