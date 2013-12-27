@@ -11,30 +11,33 @@
 			Log-In
 		</div>
 		<div class="frame-body">
+			<h:form>
 			<table>
 			<tr>
 				<td>
 					<h:commandLink action="#{chronicleBean.gotoSymptomAnket()}"> 
-   						<h:graphicImage value="resources/symptom.gif" />
+   						<h:graphicImage value="resources/img/symptom.gif" />
    					</h:commandLink>
 				</td>
 				
 				<td>
 					<h:commandLink> 
-   						<h:graphicImage value="resources/diagnosis.gif" />
+   						<h:graphicImage value="resources/img/diagnosis.gif" />
    					</h:commandLink>
 				</td>
 				<td>
 					<h:commandLink> 
-   						<h:graphicImage value="resources/action.gif" />
+   						<h:graphicImage value="resources/img/action.gif" />
    					</h:commandLink>
 				</td>
 			</tr>
 			</table>
-			
+			</h:form>
 		</div>
 		<div class="frame-footer">
-			<h:commandLink value="cancel"  action="#{chronicleBean.cancel()}"></h:commandLink>
+			<h:form>
+				<h:commandLink value="cancel"  action="#{chronicleBean.cancel()}"></h:commandLink>
+			</h:form>
 		</div>
 	</div>    
 </ui:composition>

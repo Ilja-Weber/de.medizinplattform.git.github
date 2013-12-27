@@ -9,9 +9,9 @@
 <ui:composition template="/templates/template.xhtml">
 <ui:define name="content">
 	<div class="common-content">
-		<h:form>
-			<h:commandButton value="start new story" action="#{chronicleBean.gotoOptions()}"></h:commandButton>	
-		</h:form>
+		<div>
+			<ui:include src="templates/options.xhtml"/>
+		</div>
 	</div>
 </ui:define>
 </ui:composition>
