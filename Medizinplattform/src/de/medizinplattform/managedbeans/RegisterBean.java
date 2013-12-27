@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,7 +11,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import de.medizinplattform.entities.User;
-import de.medizinplattform.managers.UsersManager;
 
 @ManagedBean(name = "registerBean")
 @RequestScoped
