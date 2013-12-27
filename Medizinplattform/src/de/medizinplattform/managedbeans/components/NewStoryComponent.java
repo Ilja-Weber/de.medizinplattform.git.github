@@ -31,6 +31,9 @@ public class NewStoryComponent {
 	private void reset(){
 		newStoryButtonVisible=false;
 		optionsVisible=false;
+		symptomVisible=false;
+		diagnosisVisible=false;
+		actionVisible=false;
 	}
 	
 	//Variable - OUTER
