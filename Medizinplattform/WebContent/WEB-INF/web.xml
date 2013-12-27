@@ -30,6 +30,15 @@
           <filter-name>SecurityFilter</filter-name>
           <url-pattern>/faces/chronicle.xhtml</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+          <filter-name>SecurityFilter</filter-name>
+          <url-pattern>/admin.xhtml</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+          <filter-name>SecurityFilter</filter-name>
+          <url-pattern>/chronicle.xhtml</url-pattern>
+  </filter-mapping>
   
   
   <context-param>

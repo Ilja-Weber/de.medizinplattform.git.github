@@ -12,7 +12,7 @@
 <div class="common-content" id="login">
         <h:form>
              <h:messages style="color:red"/>
-                <div class="frame">
+        <div class="frame">
 			<div class="frame-header">
 				Log-In
 			</div>
@@ -38,7 +38,7 @@
 					<tr>
 						<td>
 							<h:inputSecret  styleClass="input-field" value="#{loginBean.password}" tabindex="2" label="Password">
-								<f:validateLength minimum="4" />
+								<f:validateLength minimum="3" />
 								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
 								<f:validateRequired/>
 							</h:inputSecret>
@@ -52,10 +52,6 @@
 		</div>
 	</h:form>
 </div>
-	
-	
-	
-	
-	</ui:define>
+</ui:define>
 </ui:composition>
 </html>

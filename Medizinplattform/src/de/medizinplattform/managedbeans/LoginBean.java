@@ -71,7 +71,6 @@ public class LoginBean {
 	}
 
 	public String login() {
-		System.out.println("kyky");
 		if (name.length() > 0 && password.length() > 0) {
 			EntityManagerFactory emf = Persistence
 					.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
