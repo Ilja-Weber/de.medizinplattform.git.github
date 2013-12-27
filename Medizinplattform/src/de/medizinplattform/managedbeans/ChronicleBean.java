@@ -39,5 +39,32 @@ public class ChronicleBean {
 		return newStoryC;
 	}
 	
+	
+	//Facade Variable getters
+	public boolean isNewStoryButtonVisible(){
+		return getNewStoryComponent().isNewStoryButtonVisible();
+	}
+	public boolean isOptionsVisible(){
+		return getNewStoryComponent().isOptionsVisible();
+	}
+	public boolean isSymptomVisible(){
+		return getNewStoryComponent().isSymptomVisible();
+	}
+		
+		
+	//Facade Methods	
+	
+	public String cancel(){
+		getNewStoryComponent().cancelButton();
+		return null;
+	}
+	public String gotoOptions(){
+		getNewStoryComponent().gotoOptions();
+		return null;
+	}
+	public String gotoSymptom(){
+		getNewStoryComponent().gotoSymptom();
+		return null;
+	}
 
 }

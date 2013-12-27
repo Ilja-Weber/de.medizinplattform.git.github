@@ -9,8 +9,10 @@
 <ui:composition template="/templates/template.xhtml">
 <ui:define name="content">
 	<div class="common-content">
-		<div>
-			<ui:include src="composites/options.xhtml"/>
+		<div id="new-story-area">
+			<h:panelGroup rendered="#{chronicleBean.newStoryButtonVisible}"><ui:include src="composites/button.xhtml"/></h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.optionsVisible}"><ui:include src="composites/options.xhtml"/></h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.symptomVisible}"><ui:include src="composites/symptom.xhtml"/></h:panelGroup>
 		</div>
 	</div>
 </ui:define>
