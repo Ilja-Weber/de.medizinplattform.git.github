@@ -26,7 +26,8 @@
 					<tr>
 						<td>
 							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1" label="Name">
-							<f:validateRequired/>
+								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
+								<f:validateRequired/>
 							</h:inputText>
 						</td>
 					</tr>
