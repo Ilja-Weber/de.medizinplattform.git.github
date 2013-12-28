@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.managedbeans.components.StoryComponent;
 
@@ -82,4 +83,5 @@ public class ChronicleBean {
 		stories.add(0, new StoryComponent(this, toBeCreated));		
 		return null;
 	}
+		
 }

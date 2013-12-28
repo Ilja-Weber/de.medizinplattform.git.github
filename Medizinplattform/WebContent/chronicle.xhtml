@@ -14,13 +14,22 @@
 			
 			<h:panelGroup>
 				<h:form><h:commandButton value = "create new story" action="#{chronicleBean.create()}"></h:commandButton></h:form>
-				<ui:repeat value="#{chronicleBean.stories}" var="story" varStatus="status">
+				<ui:repeat value="#{chronicleBean.stories}" var="story" varStatus="status_story">
 					<ui:decorate template="/templates/form_template.xhtml">
 						
-						<ui:define name="frame-header">#{status.index+1}. Story</ui:define>
+						<ui:define name="frame-header">#{status_story.index+1}. Story</ui:define>
 						
 						<ui:define name="frame-footer">
 							<h:commandLink value="delete" action="#{chronicleBean.delete(story)}"></h:commandLink>
+						</ui:define>
+						
+						<ui:define name="frame-body">
+							<h:form><h:commandButton value = "create new entry" action="#{story.create()}"></h:commandButton></h:form>
+							
+							<ui:repeat value="#{story.entries}" var="entry" varStatus="status_entry">
+								<div>#{status_entry.index+1}) Entry            <h:commandLink value="delete" action="#{story.delete(entry)}"></h:commandLink></div>
+							</ui:repeat>
+							
 						</ui:define>
 					
 					</ui:decorate>
