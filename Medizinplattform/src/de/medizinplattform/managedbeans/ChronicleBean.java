@@ -1,10 +1,16 @@
 package de.medizinplattform.managedbeans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import de.medizinplattform.managedbeans.components.NewStoryComponent;
+import de.medizinplattform.managedbeans.components.StoryComponent;
 
 @ManagedBean(name = "chronicleBean")
 @SessionScoped
@@ -15,11 +21,9 @@ public class ChronicleBean {
 	// Injecting sessionBean
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
-
 	public SessionBean getSession() {
 		return session;
 	}
-
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
@@ -29,55 +33,28 @@ public class ChronicleBean {
 		System.out.println("ChronicleBean started");
 	}
 
-	// Variable - OUTER
-	private NewStoryComponent newStoryC;
-
-	public NewStoryComponent getNewStoryComponent() {
-		if (newStoryC == null) {
-			newStoryC = new NewStoryComponent(this);
+	//Variable - OUTER
+	public boolean isEmpty(){
+		return (getStories().size()>0)? false : true;
+	}
+	
+	//Variable - OUTER
+	private List<StoryComponent> stories;
+	public List<StoryComponent> getStories(){
+		if(stories == null){
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			EntityManager em = emf.createEntityManager();
+			Query q = em.createQuery("SELECT x FROM Story x");
+			stories = (List<StoryComponent>) q.getResultList();
 		}
-		return newStoryC;
+		return stories;
 	}
-	
-	
-	//Facade Variable getters
-	public boolean isNewStoryButtonVisible(){
-		return getNewStoryComponent().isNewStoryButtonVisible();
-	}
-	public boolean isOptionsVisible(){
-		return getNewStoryComponent().isOptionsVisible();
-	}
-	public boolean isSymptomVisible(){
-		return getNewStoryComponent().isSymptomVisible();
-	}
-	public boolean isDiagnosisVisible(){
-		return getNewStoryComponent().isDiagnosisVisible();
-	}
-	public boolean isActionVisible(){
-		return getNewStoryComponent().isActionVisible();
-	}
-		
-		
-	//Facade Methods	
-	public String cancel(){
-		getNewStoryComponent().cancelButton();
+	public String updateStory(StoryComponent sc){
+		//TODO
 		return null;
 	}
-	public String gotoOptions(){
-		getNewStoryComponent().gotoOptions();
+	public String removeStory(StoryComponent sc){
+		//TODO
 		return null;
 	}
-	public String gotoSymptom(){
-		getNewStoryComponent().gotoSymptom();
-		return null;
-	}
-	public String gotoDiagnosis(){
-		getNewStoryComponent().gotoDiagnosis();
-		return null;
-	}
-	public String gotoAction(){
-		getNewStoryComponent().gotoAction();
-		return null;
-	}
-
 }

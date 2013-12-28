@@ -30,16 +30,6 @@
           <filter-name>SecurityFilter</filter-name>
           <url-pattern>/faces/chronicle.xhtml</url-pattern>
   </filter-mapping>
-  <filter-mapping>
-          <filter-name>SecurityFilter</filter-name>
-          <url-pattern>/admin.xhtml</url-pattern>
-  </filter-mapping>
-  
-  <filter-mapping>
-          <filter-name>SecurityFilter</filter-name>
-          <url-pattern>/chronicle.xhtml</url-pattern>
-  </filter-mapping>
-  
   
   <context-param>
     <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>

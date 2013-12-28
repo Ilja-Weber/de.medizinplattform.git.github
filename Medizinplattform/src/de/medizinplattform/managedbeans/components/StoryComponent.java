@@ -7,11 +7,8 @@ public class StoryComponent {
 
 	//Variable - INNER
 	private Story story;
-	private ChronicleBean parent;
-	
-	
-	public StoryComponent(ChronicleBean parent, Story story){
-		this.parent=parent;
+		
+	public StoryComponent(Story story){
 		this.story=story;
 	}
 }
