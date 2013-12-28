@@ -1,5 +1,6 @@
 package de.medizinplattform.managedbeans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import de.medizinplattform.entities.Story;
 import de.medizinplattform.managedbeans.components.StoryComponent;
 
 @ManagedBean(name = "chronicleBean")
@@ -45,16 +47,39 @@ public class ChronicleBean {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			Query q = em.createQuery("SELECT x FROM Story x");
-			stories = (List<StoryComponent>) q.getResultList();
+			List<Story> storyEntities = (List<Story>) q.getResultList();
+			
+			stories=new ArrayList<StoryComponent>();
+			for(Story story : storyEntities){
+				stories.add(new StoryComponent(this, story));
+			}
 		}
+		
 		return stories;
 	}
 	public String updateStory(StoryComponent sc){
 		//TODO
 		return null;
 	}
-	public String removeStory(StoryComponent sc){
-		//TODO
+	public String delete(StoryComponent sc){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Story toBeRemoved = em.merge(sc.getStory());
+		em.remove(toBeRemoved);
+		em.getTransaction().commit();
+		stories.remove(sc);		
+		return null;
+	}
+	public String create(){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Story toBeCreated = new Story();
+		toBeCreated.setStoryTeller(session.getCanSeeChronicleOf());
+		em.persist(toBeCreated);
+		em.getTransaction().commit();
+		stories.add(0, new StoryComponent(this, toBeCreated));		
 		return null;
 	}
 }

@@ -8,13 +8,21 @@
 <ui:composition>
 <div class="frame">
 		<div class="frame-header">
-			<ui:insert name="frame-header"></ui:insert>
+			<ui:insert name="frame-header">
+			Template header
+			</ui:insert>
+			
 		</div>
 		<div class="frame-body">
 			<ui:insert name="frame-body"></ui:insert>
+			Template body
 		</div>
 		<div class="frame-footer">
-			<ui:insert name="frame-footer"></ui:insert>
+			<h:form>
+				<ui:insert name="frame-footer">
+					Template footer
+				</ui:insert>
+			</h:form>
 		</div>
 	</div>   
 </ui:composition>

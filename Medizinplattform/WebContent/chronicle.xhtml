@@ -10,11 +10,22 @@
 <ui:define name="content">
 	<div class="common-content">
 		<div id="new-story-area">
-			<h:panelGroup rendered="#{chronicleBean.newStoryButtonVisible}"><ui:include src="composites/button.xhtml"/></h:panelGroup>
-			<h:panelGroup rendered="#{chronicleBean.optionsVisible}"><ui:include src="composites/options.xhtml"/></h:panelGroup>
-			<h:panelGroup rendered="#{chronicleBean.symptomVisible}"><ui:include src="composites/symptom.xhtml"/></h:panelGroup>
-			<h:panelGroup rendered="#{chronicleBean.diagnosisVisible}"><ui:include src="composites/diagnosis.xhtml"/></h:panelGroup>
-			<h:panelGroup rendered="#{chronicleBean.actionVisible}"><ui:include src="composites/action.xhtml"/></h:panelGroup>
+			<h:panelGroup></h:panelGroup>
+			
+			<h:panelGroup>
+				<h:form><h:commandButton value = "create new story" action="#{chronicleBean.create()}"></h:commandButton></h:form>
+				<ui:repeat value="#{chronicleBean.stories}" var="story" varStatus="status">
+					<ui:decorate template="/templates/form_template.xhtml">
+						
+						<ui:define name="frame-header">#{status.index+1}. Story</ui:define>
+						
+						<ui:define name="frame-footer">
+							<h:commandLink value="delete" action="#{chronicleBean.delete(story)}"></h:commandLink>
+						</ui:define>
+					
+					</ui:decorate>
+				</ui:repeat>				
+			</h:panelGroup>
 		</div>
 	</div>
 </ui:define>
