@@ -1,5 +1,7 @@
 package de.medizinplattform.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +29,15 @@ public class Story {
 	}
 	public void setStoryTeller(String newStoryTeller){
 		this.storyTeller=newStoryTeller;
+	}
+	
+	//VARIABLE - OUTER
+	private int createdAt;
+	public int getCreatedAt(){
+		return createdAt;
+	}
+	public void setCreatedAt(int createdAt){
+		this.createdAt=createdAt;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package de.medizinplattform.managedbeans;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.managedbeans.components.StoryComponent;
 
@@ -78,6 +78,7 @@ public class ChronicleBean {
 		em.getTransaction().begin();
 		Story toBeCreated = new Story();
 		toBeCreated.setStoryTeller(session.getCanSeeChronicleOf());
+		toBeCreated.setCreatedAt(20131228);
 		em.persist(toBeCreated);
 		em.getTransaction().commit();
 		stories.add(0, new StoryComponent(this, toBeCreated));		
