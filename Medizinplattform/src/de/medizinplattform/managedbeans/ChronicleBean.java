@@ -1,6 +1,5 @@
 package de.medizinplattform.managedbeans;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.managedbeans.components.StoryComponent;
 
@@ -63,13 +63,17 @@ public class ChronicleBean {
 		return null;
 	}
 	public String delete(StoryComponent sc){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		Story toBeRemoved = em.merge(sc.getStory());
-		em.remove(toBeRemoved);
-		em.getTransaction().commit();
-		stories.remove(sc);		
+		if(sc!= null){
+			sc.collapse();			
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			Story toBeRemoved = em.merge(sc.getStory());
+			em.remove(toBeRemoved);
+			em.getTransaction().commit();
+			stories.remove(sc);	
+		}
+			
 		return null;
 	}
 	public String create(){

@@ -31,13 +31,18 @@ public class StoryComponent {
 	}
 	
 	//Variable - OUTER
-	private List<Entry> entries=new ArrayList<Entry>();
+	private List<Entry> entries=null;;
 	public List<Entry> getEntries(){
 		if(entries == null){
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
-			Query q = em.createQuery("SELECT x FROM Entry x WHERE x.id = "+story.getId()+"");
-			entries = (ArrayList<Entry>)q.getResultList();
+			Query q = em.createQuery("SELECT x FROM Entry x WHERE x.belongsToStory = "+story.getId());
+			List<Entry> entriesList = q.getResultList();
+			
+			entries=new ArrayList<Entry>();
+			for(Entry entry : entriesList){
+				entries.add(entry);
+			}
 		}
 		return entries;
 	}
@@ -62,7 +67,7 @@ public class StoryComponent {
 	}
 	
 	//Logic
-	public String remove(Entry entry){
+	public String delete(Entry entry){
 		if(entry!=null){
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
@@ -74,5 +79,19 @@ public class StoryComponent {
 			
 		}
 		return null;		
+	}
+	
+	//Logic
+	public void collapse(){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		for(Entry entry : getEntries()){
+			em.getTransaction().begin();
+			Entry toBeRemoved = em.merge(entry);
+			em.remove(toBeRemoved);
+			em.getTransaction().commit();
+		}
+		
+		entries=null;
 	}
 }
