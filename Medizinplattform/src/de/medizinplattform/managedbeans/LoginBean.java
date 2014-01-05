@@ -71,7 +71,7 @@ public class LoginBean {
 	}
 
 	public String login() {
-		if (name.length() > 0 && password.length() > 0) {
+		//if (name.length() > 0 && password.length() > 0) {
 			EntityManagerFactory emf = Persistence
 					.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
@@ -84,12 +84,11 @@ public class LoginBean {
 			if (usersList.size() > 1) {
 				// Error: Should throw an Exception, because there cannot be
 				// many users with same name
-				System.out
-						.println("Oooops! Too many Users with same name found!");
+				return "toManyNames.xhtml?faces-redirect=true";
 			} else if (usersList.size() == 0) {
 				// None User with that name found, maybe there was a mistake in
 				// the spelling, or the user is not registered
-				System.out.println("Oooops! No such User found!");
+				return "invalid_LoginName.xhtml?faces-redirect=true";
 			} else {
 				// One User found, now check if password is correct and if, then
 				// set session data
@@ -107,10 +106,8 @@ public class LoginBean {
 					}
 					return "index.xhtml?faces-redirect=true";
 				}
+				return "invalid_password.xhtml?faces-redirect=true";
 			}
-
-		}
-		return null;
 	}
 
 	public String logout() {
