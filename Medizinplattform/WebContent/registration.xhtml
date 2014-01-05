@@ -8,6 +8,7 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
+	
 	 <div class="common-content">  
 		<div id="registration">
 			<div id="info">
@@ -17,6 +18,7 @@
 			
 		<div id="register-form">
 			<h:form>
+			  <h:messages style="color:red"/>
 				<table>
 					<tr>
 						<td>
@@ -25,7 +27,10 @@
 					</tr>
 					<tr>
 						<td>
-							<h:inputText value="#{registerBean.name}"></h:inputText>
+							<h:inputText value="#{registerBean.name}" label="Name">
+								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
+								<f:validateRequired/>
+							</h:inputText>
 						</td>
 					</tr>
 					<tr>
@@ -35,7 +40,11 @@
 					</tr>
 					<tr>
 						<td>
-							<h:inputSecret value="#{registerBean.password}"></h:inputSecret>
+							<h:inputSecret value="#{registerBean.password}" label="Password">
+								<f:validateLength minimum="3" />
+								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
+								<f:validateRequired/>
+							</h:inputSecret>
 						</td>
 					</tr>
 					<tr>

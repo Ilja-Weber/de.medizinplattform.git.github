@@ -15,18 +15,18 @@
              <h:messages style="color:red"/>
         <div class="frame">
 			<div class="frame-header">
-				Log-In
+				Melden Sie sich an
 			</div>
 			<div class="frame-body">
 				<table>
 					<tr>
 						<td>
-							Enter your Login-Name...
+							Login
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1" label="Name" p:placeholder="bitte Login-Name eingeben">
+							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1" label="Name" p:placeholder="bitte Login eingeben">
 								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
 								<f:validateRequired/>
 							</h:inputText>
@@ -34,7 +34,7 @@
 					</tr>
 					<tr>
 						<td>
-							...and your password <span id="forgot-password">(<h:link value="forgot it?" outcome="password-restoration.xhtml" tabindex="4"></h:link>)</span>
+							Password <span id="forgot-password">(<h:link value="forgot it?" outcome="password-restoration.xhtml" tabindex="4"></h:link>)</span>
 						</td>
 					</tr>
 					<tr>
