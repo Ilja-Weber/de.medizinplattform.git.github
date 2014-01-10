@@ -10,8 +10,6 @@
 <ui:define name="content">
 	<div class="common-content">
 		<div id="new-story-area">
-			<h:panelGroup></h:panelGroup>
-			
 			<h:panelGroup>
 				<h:form><h:commandButton value = "create new story" action="#{chronicleBean.create()}"></h:commandButton></h:form>
 				<ui:repeat value="#{chronicleBean.stories}" var="story" varStatus="status_story">

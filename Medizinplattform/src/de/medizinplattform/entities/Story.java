@@ -1,7 +1,5 @@
 package de.medizinplattform.entities;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,24 +19,32 @@ public class Story {
 		this.id=newId;
 	}
 	
+	//VARIABLE - OUTER
+	private String state;
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	
 	//VARIABLE - OUTER
-	private String storyTeller;
-	public String getStoryTeller(){
-		return storyTeller;
+	private long created_at;
+	public long getCreated_at() {
+		return created_at;
 	}
-	public void setStoryTeller(String newStoryTeller){
-		this.storyTeller=newStoryTeller;
+	public void setCreated_at(long created_at) {
+		this.created_at = created_at;
 	}
 	
 	//VARIABLE - OUTER
-	private int createdAt;
-	public int getCreatedAt(){
-		return createdAt;
+	private String story_teller;
+	public String getStory_teller() {
+		return story_teller;
 	}
-	public void setCreatedAt(int createdAt){
-		this.createdAt=createdAt;
+	public void setStory_teller(String story_teller) {
+		this.story_teller = story_teller;
 	}
-	
+
 	
 }

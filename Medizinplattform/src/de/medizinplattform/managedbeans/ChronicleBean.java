@@ -1,6 +1,9 @@
 package de.medizinplattform.managedbeans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -11,8 +14,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
+import de.medizinplattform.managedbeans.components.EntryComponent;
 import de.medizinplattform.managedbeans.components.StoryComponent;
 
 @ManagedBean(name = "chronicleBean")
@@ -33,60 +36,68 @@ public class ChronicleBean {
 
 	// Constructor
 	public ChronicleBean() {
-		System.out.println("ChronicleBean started");
-	}
-
-	//Variable - OUTER
-	public boolean isEmpty(){
-		return (getStories().size()>0)? false : true;
 	}
 	
 	//Variable - OUTER
 	private List<StoryComponent> stories;
 	public List<StoryComponent> getStories(){
-		if(stories == null){
+		if(storiesListDoesNotExist()){
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			Query q = em.createQuery("SELECT x FROM Story x");
 			List<Story> storyEntities = (List<Story>) q.getResultList();
-			
 			stories=new ArrayList<StoryComponent>();
 			for(Story story : storyEntities){
 				stories.add(new StoryComponent(this, story));
 			}
-		}
-		
-		return stories;
 	}
-	public String updateStory(StoryComponent sc){
-		//TODO
-		return null;
-	}
-	public String delete(StoryComponent sc){
-		if(sc!= null){
-			sc.collapse();			
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-			EntityManager em = emf.createEntityManager();
-			em.getTransaction().begin();
-			Story toBeRemoved = em.merge(sc.getStory());
-			em.remove(toBeRemoved);
-			em.getTransaction().commit();
-			stories.remove(sc);	
-		}
 			
-		return null;
+	return stories;
 	}
-	public String create(){
+
+	//Logic
+	public String createStory(){
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
+		
 		Story toBeCreated = new Story();
-		toBeCreated.setStoryTeller(session.getCanSeeChronicleOf());
-		toBeCreated.setCreatedAt(20131228);
+		
+		String story_teller = session.getCanSeeChronicleOf();
+		toBeCreated.setStory_teller(story_teller);
+		
+		long date = calculateDate();		
+		toBeCreated.setCreated_at(date);
+		
+		String state = "running";
+		toBeCreated.setState(state);
+		
 		em.persist(toBeCreated);
 		em.getTransaction().commit();
 		stories.add(0, new StoryComponent(this, toBeCreated));		
 		return null;
+	}
+	
+	//Logic
+	public String createEntryIn(StoryComponent story){
+		EntryComponent entry = new EntryComponent(story);
+		story.addToList(entry);
+		return null;
+	}
+	
+	
+	//Inner Logic
+	private boolean storiesListDoesNotExist(){
+		return (stories == null)?true:false;
+	}
+	
+	//Inner Logic
+	private long calculateDate(){
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		Date date = new Date();
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
 	}
 		
 }
