@@ -150,19 +150,31 @@ public class ChronicleBean {
 			toBeCreated.setStory_teller(story_teller);
 		
 			long year = DateUtility.calculateYear();		
-			toBeCreated.setF_y(year);
-			toBeCreated.setT_y(year);
+			toBeCreated.setF_year(year);
+			toBeCreated.setT_year(year);
 			selectYear(years.size()-1);
 			
 			long month = DateUtility.calculateMonth();		
-			toBeCreated.setF_m(month);
-			toBeCreated.setT_m(month);
+			toBeCreated.setF_month(month);
+			toBeCreated.setT_month(month);
 			selectMonth((int) month);
 			
 			long day = DateUtility.calculateDay();		
-			toBeCreated.setF_d(day);
-			toBeCreated.setT_d(day);
+			toBeCreated.setF_day(day);
+			toBeCreated.setT_day(day);
 			selectDay((int) day);
+			
+			long hour = DateUtility.calculateHour();		
+			toBeCreated.setF_hour(hour);
+			toBeCreated.setT_hour(hour);
+			
+			long minute = DateUtility.calculateMinute();		
+			toBeCreated.setF_minute(minute);
+			toBeCreated.setT_minute(minute);
+			
+			long second = DateUtility.calculateSecond();		
+			toBeCreated.setF_second(second);
+			toBeCreated.setT_second(second);
 		
 		em.persist(toBeCreated);
 		em.getTransaction().commit();
@@ -187,12 +199,12 @@ public class ChronicleBean {
 	
 	//Logic
 	public String renderDateFrom(Story story){
-		long f_y=story.getF_y();
-		long f_m=story.getF_m();
-		long f_d=story.getF_d();
-		long t_y=story.getT_y();
-		long t_m=story.getT_m();
-		long t_d=story.getT_d();		
+		long f_y=story.getF_year();
+		long f_m=story.getF_month();
+		long f_d=story.getF_day();
+		long t_y=story.getT_year();
+		long t_m=story.getT_month();
+		long t_d=story.getT_day();		
 		
 		String result_last = numberToString(t_d)+ "." + numberToString(t_m) + "." + numberToString(t_y);
 		

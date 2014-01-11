@@ -115,6 +115,12 @@ public class DiagnosisBean {
 		toBeSaved.setMonth(month);
 		long year = DateUtility.calculateYear();
 		toBeSaved.setYear(year);
+		long hour = DateUtility.calculateHour();
+		toBeSaved.setHour(hour);
+		long minute = DateUtility.calculateMinute();
+		toBeSaved.setMinute(minute);
+		long second = DateUtility.calculateSecond();
+		toBeSaved.setSecond(second);
 		
 		em.persist(toBeSaved);
 		em.getTransaction().commit();
@@ -123,9 +129,12 @@ public class DiagnosisBean {
 		Story toBeUpdated = em.merge(chronicle.getSelectedStory());
 		toBeUpdated.setTitle(diagnosisText);
 		chronicle.getSelectedStory().setTitle(diagnosisText);
-		toBeUpdated.setT_d(day);
-		toBeUpdated.setT_m(month);
-		toBeUpdated.setT_y(year);		
+		toBeUpdated.setT_day(day);
+		toBeUpdated.setT_month(month);
+		toBeUpdated.setT_year(year);
+		toBeUpdated.setT_hour(hour);
+		toBeUpdated.setT_minute(minute);
+		toBeUpdated.setT_second(second);
 		em.persist(toBeUpdated);
 		em.getTransaction().commit();
 		

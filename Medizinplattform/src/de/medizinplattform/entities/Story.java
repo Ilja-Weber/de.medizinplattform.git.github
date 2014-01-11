@@ -47,62 +47,111 @@ public class Story {
 	}
 	
 	//From year
-	private long f_y;
-	public long getF_y() {
-		return f_y;
+	private long f_year;
+	public long getF_year() {
+		return f_year;
 	}
-	public void setF_y(long f_y) {
-		this.f_y = f_y;
+	public void setF_year(long f_year) {
+		this.f_year = f_year;
 	}
 
 	//To year
-	private long t_y;
-	public long getT_y() {
-		return t_y;
+	private long t_year;
+	public long getT_year() {
+		return t_year;
 	}
-	public void setT_y(long t_y) {
-		this.t_y = t_y;
+	public void setT_year(long t_year) {
+		this.t_year = t_year;
 	}
 	
 	//From day
-	private long f_d;
-	public long getF_d() {
-		return f_d;
+	private long f_day;
+	public long getF_day() {
+		return f_day;
 	}
-	public void setF_d(long f_d) {
-		this.f_d = f_d;
+	public void setF_day(long f_day) {
+		this.f_day = f_day;
 	}
 	
 	//To day
-	private long t_d;
-	public long getT_d() {
-		return t_d;
+	private long t_day;
+	public long getT_day() {
+		return t_day;
 	}
-	public void setT_d(long t_d) {
-		this.t_d = t_d;
+	public void setT_day(long t_day) {
+		this.t_day = t_day;
 	}
 	
 	//From month
-	private long f_m;
-	public long getF_m() {
-		return f_m;
+	private long f_month;
+	public long getF_month() {
+		return f_month;
 	}
-	public void setF_m(long f_m) {
-		this.f_m = f_m;
+	public void setF_month(long f_month) {
+		this.f_month = f_month;
 	}
 	
 	//To month
-	private long t_m;
-	public long getT_m() {
-		return t_m;
+	private long t_month;
+	public long getT_month() {
+		return t_month;
 	}
-	public void setT_m(long t_m) {
-		this.t_m = t_m;
+	public void setT_month(long t_month) {
+		this.t_month = t_month;
 	}
 	
+	//From hour
+	private long f_hour;
+	public long getF_hour() {
+		return f_hour;
+	}
+	public void setF_hour(long f_hour) {
+		this.f_hour = f_hour;
+	}
 	
+	//To hour
+	private long t_hour;
+	public long getT_hour() {
+		return t_hour;
+	}
+	public void setT_hour(long t_hour) {
+		this.t_hour = t_hour;
+	}
 	
+	//From minute
+	private long f_minute;
+	public long getF_minute() {
+		return f_minute;
+	}
+	public void setF_minute(long f_minute) {
+		this.f_minute = f_minute;
+	}
 	
+	//To minute
+	private long t_minute;
+	public long getT_minute() {
+		return t_minute;
+	}
+	public void setT_minute(long t_minute) {
+		this.t_minute = t_minute;
+	}
 	
+	//From second
+	private long f_second;
+	public long getF_second() {
+		return f_second;
+	}
+	public void setF_second(long f_second) {
+		this.f_second = f_second;
+	}
+	
+	//To second
+	private long t_second;
+	public long getT_second() {
+		return t_second;
+	}
+	public void setT_second(long t_second) {
+		this.t_second = t_second;
+	}	
 	
 }

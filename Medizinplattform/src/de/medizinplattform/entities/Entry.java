@@ -46,6 +46,33 @@ public abstract class Entry {
 	}
 	
 	//Variable
+	protected long hour;
+	public long getHour() {
+		return hour;
+	}
+	public void setHour(long hour) {
+		this.hour = hour;
+	}
+	
+	//Variable
+	protected long minute;
+	public long getMinute() {
+		return minute;
+	}
+	public void setMinute(long minute) {
+		this.minute = minute;
+	}
+	
+	//Variable
+	protected long second;
+	public long getSecond() {
+		return second;
+	}
+	public void setSecond(long second) {
+		this.second = second;
+	}
+	
+	//Variable
 	protected long belongs_to_story;
 	public long getBelongs_to_story() {
 		return belongs_to_story;
