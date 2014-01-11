@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition>
+   <div>
+   		<h:form>
+   		<div>
+   			<table>
+   				<tr>
+   					<ui:repeat value="#{chronicleBean.years}" var="year" varStatus="status">
+   						<td>
+   							<h:commandLink value="#{year}" action="#{chronicleBean.selectYear(status.index)}"></h:commandLink>
+   						</td>
+   					</ui:repeat>
+   				</tr>
+   			</table>
+   			
+   		</div>
+   		<div>
+			<table>
+   				<tr>
+   					<ui:repeat value="#{chronicleBean.months}" var="month" varStatus="status">
+   						<td>
+   							<h:commandLink value="#{month}" action="#{chronicleBean.selectMonth(status.index)}"></h:commandLink>
+   						</td>
+   					</ui:repeat>
+   				</tr>
+   			</table>
+   		</div>
+   		<div>
+   			<table>
+   				<tr>
+   					<ui:repeat value="#{chronicleBean.days}" var="day" varStatus="status">
+   						<td>
+   							<h:commandLink value="#{day}" action="#{chronicleBean.selectDay(status.index)}"></h:commandLink>
+   						</td>
+   					</ui:repeat>
+   				</tr>
+   			</table>
+   		</div>
+   		<hr/>
+   		</h:form>   		
+   </div>
+</ui:composition>
+	
+</html>

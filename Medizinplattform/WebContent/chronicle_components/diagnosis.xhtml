@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition>
+	<div class="story">
+		<div class="header">
+			<h:form>
+				<h:commandLink value="back" action="#{diagnosisBean.deselectDiagnosis()}"></h:commandLink>
+			</h:form>
+		</div>
+		<div class="body">
+			<h:form>
+			<table>
+				<tr>
+					<td>What is the diagnosis?</td>
+					<td><h:inputText value="#{diagnosisBean.diagnosisText}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>optional: Location of diagnosis?</td>
+					<td><h:inputText value="#{diagnosisBean.locationOfProblem}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>Who did diagnosis?</td>
+					<td><h:inputText value="#{diagnosisBean.author}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>optional: Where was it done?</td>
+					<td><h:inputText value="#{diagnosisBean.where}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td rowspan="2"><h:commandButton value="Save entry" action="#{diagnosisBean.save()}"></h:commandButton></td>					
+				</tr>
+			</table>
+			</h:form>
+		</div>
+		<div class="footer">
+		
+		</div>
+
+	</div>    
+</ui:composition>
+	
+</html>

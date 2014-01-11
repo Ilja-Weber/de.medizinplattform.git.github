@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13850686615060" configfile="/Medizinplattform/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="336" y="216" id="pf13853039795840" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="register.xhtml" x="228" y="84" id="pf13853325213831" referenceLink="//@navigationRule.0/@fromViewId|" path="/register.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="succesful_registration.html" x="479" y="108" id="pf13853334256394" path="/succesful_registration.html"/>
   <nodes xsi:type="pageflow:PFPage" name="templates/header_with_forms.xhtml" x="577" y="263" id="pf13853334256395" path="*"/>

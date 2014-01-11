@@ -1,54 +1,47 @@
 package de.medizinplattform.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
-public class Diagnosis {
+public class Diagnosis extends Entry{
 
-	@Id @GeneratedValue
-	private long id;
-	public long getId(){
-		return id;
+	//Variable - Diagnosistext
+	private String diag;
+	public String getDiag() {
+		return diag;
 	}
-	public void setId(long newId){
-		this.id=newId;
+	public void setDiag(String diag) {
+		this.diag = diag;
 	}
 	
-	//Text der Diagnose
-	private String diag_text;	
-	public String getDiag_text() {
-		return diag_text;
+	//Variable - optional location
+	private String loc;
+	public String getLoc() {
+		return loc;
 	}
-	public void setDiag_text(String diag_text) {
-		this.diag_text = diag_text;
-	}	
 
-	//Optionale Saitenlokalisation
-	private String site_loc;
-	public String getSite_loc() {
-		return site_loc;
-	}
-	public void setSite_loc(String site_loc) {
-		this.site_loc = site_loc;
+	public void setLoc(String loc) {
+		this.loc = loc;
 	}
 	
-	//Von wem die Diagnose ist
-	private String who_did_diag;
-	public String getWho_did_diag() {
-		return who_did_diag;
+	//Variable - who did diagnosis
+	private String author;
+	public String getAuthor() {
+		return author;
 	}
-	public void setWho_did_diag(String who_did_diag) {
-		this.who_did_diag = who_did_diag;
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
-	//Datum und Zeit im format yyyyMMddhhmm
-	private int when;
-	public int getWhen() {
-		return when;
+	//Variable - where
+	private String where_was_it_done;
+	public String getWhere_was_it_done() {
+		return where_was_it_done;
 	}
-	public void setWhen(int when) {
-		this.when = when;
+
+	public void setWhere_was_it_done(String where_was_it_done) {
+		this.where_was_it_done = where_was_it_done;
 	}
+	
 }

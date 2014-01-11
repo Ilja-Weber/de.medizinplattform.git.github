@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+      
+<ui:composition>
+<div class="story">
+		<div class="header">
+			<h:form>
+				<h:commandLink value="back" action="#{chronicleBean.deselectStory()}"></h:commandLink>
+			</h:form>
+		</div>
+		<div class="body">
+			<h:form>
+				<h2>#{chronicleBean.renderTitleFromSelectedStory()}</h2>
+				<h5>(#{chronicleBean.renderDateFromSelectedStory()})</h5>
+				<h:commandButton value="New entry" action="#{chronicleBean.showOptions()}"></h:commandButton>
+				<ui:repeat value="#{chronicleBean.allEntries}" var="entry" varStatus="status">
+					<h:panelGroup rendered="#{textBean.isDiagnosis(entry)}">
+						<div><b>#{textBean.getAuthor(entry)}</b> diagnoses <b>#{textBean.getDiagnosis(entry)}</b></div>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{not textBean.isDiagnosis(entry)}">
+						<div>NOT DIAGNOSIS</div>
+					</h:panelGroup>
+				</ui:repeat>		
+			</h:form>			
+		</div>
+		<div class="footer">
+			
+		</div>
+</div>   
+</ui:composition>
+</html>

@@ -5,7 +5,9 @@
   
   <persistence-unit name="common-entities" transaction-type="RESOURCE_LOCAL">
     <class>de.medizinplattform.entities.User</class>
-    <class>de.medizinplattform.entities.Story</class>
+    <class>de.medizinplattform.entities.Story</class>    
+    <class>de.medizinplattform.entities.Entry</class>      
+    <class>de.medizinplattform.entities.Diagnosis</class>
     <properties>
      
      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

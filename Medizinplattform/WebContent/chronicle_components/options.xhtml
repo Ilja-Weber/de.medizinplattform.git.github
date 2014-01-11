@@ -6,41 +6,44 @@
 	  xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition>
-   <div id="options">
-   <div class="frame">
-		<div class="frame-header">
-			Start a story
+	<div class="story">
+		<div class="header">
+			<h:form>
+				<h:commandLink value="back" action="#{chronicleBean.showSelectedStory()}"></h:commandLink>
+			</h:form>
 		</div>
-		<div class="frame-body">
+		<div class="body">
+			
+			<div id="options">
 			<h:form>
 			<table>
 			<tr>
 				<td>
-					<h:commandLink action="#{chronicleBean.gotoSymptom()}"> 
+					<h:commandLink> 
    						<h:graphicImage value="resources/img/symptom.gif" />
    					</h:commandLink>
 				</td>
 				
 				<td>
-					<h:commandLink action="#{chronicleBean.gotoDiagnosis()}"> 
+					<h:commandLink action="#{chronicleBean.showDiagnosisForm()}"> 
    						<h:graphicImage value="resources/img/diagnosis.gif" />
    					</h:commandLink>
 				</td>
 				<td>
-					<h:commandLink action="#{chronicleBean.gotoAction()}"> 
+					<h:commandLink> 
    						<h:graphicImage value="resources/img/action.gif" />
    					</h:commandLink>
 				</td>
 			</tr>
 			</table>
+			
 			</h:form>
+			</div>
 		</div>
-		<div class="frame-footer">
-			<h:form>
-				<h:commandLink value="cancel"  action="#{chronicleBean.cancel()}"></h:commandLink>
-			</h:form>
+		<div class="footer">
+		
 		</div>
-	</div>
+
 	</div>    
 </ui:composition>
 	
