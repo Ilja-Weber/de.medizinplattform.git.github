@@ -8,13 +8,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import de.medizinplattform.entities.Diagnosis;
-import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
+import de.medizinplattform.entities.Symptom;
 import de.medizinplattform.utilitybeans.DateUtility;
 
-@ManagedBean(name="diagnosisBean")
+@ManagedBean(name="symptomBean")
 @RequestScoped
-public class DiagnosisBean {
+public class SymptomBean {
 	// Injecting chronicleBean
 	@ManagedProperty(value = "#{chronicleBean}")
 	private ChronicleBean chronicle;
@@ -27,68 +27,42 @@ public class DiagnosisBean {
 	
 	// Constants - INNER
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";
-	
+		
 	//Constructor
-	public DiagnosisBean(){
+	public SymptomBean(){
 		resetFields();
 	}
 	
 	//Variable - OUTER
-	private String diagnosisText;
-	public String getDiagnosisText() {
-		return diagnosisText;
+	private String term;
+	public String getTerm(){
+		return term;
 	}
-	public void setDiagnosisText(String diagnosisText) {
-		this.diagnosisText = diagnosisText;
-		System.out.println("Hi");
-	}
-	
-	//Variable - OUTER
-	private String locationOfProblem;
-	public String getLocationOfProblem() {
-		return locationOfProblem;
-	}
-	public void setLocationOfProblem(String locationOfProblem) {
-		this.locationOfProblem = locationOfProblem;
+	public void setTerm(String term){
+		this.term=term;
 	}
 	
 	//Variable - OUTER
-	private String author;
-	public String getAuthor() {
-		return author;
+	private int intensity;
+	public int getIntensity(){
+		return intensity;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setIntensity(int intensity){
+		this.intensity = intensity;
 	}
 	
-	//Variable - OUTER
-	private String where;
-	public String getWhere() {
-		return where;
+	//Logic INNER
+	private void resetFields(){
+		term = "";
+		intensity=0;
 	}
-	public void setWhere(String where) {
-		this.where = where;
-	}
-
-	//Variable - OUTER
-	private Entry selectedDiagnosis;
-	public String select(Entry diagnosis){
-		selectedDiagnosis=diagnosis;
-		return null;
-	}
-	public String deselectDiagnosis(){
+	
+	//Logic
+	public String deselectSymptom(){
 		resetFields();
 		chronicle.deselectEntry();
 		chronicle.showOptions();
 		return null;
-	}
-	
-	//Logic - INNER
-	private void resetFields(){
-		diagnosisText="";
-		locationOfProblem="";
-		author="";
-		where="";
 	}
 	
 	//Logic 
@@ -96,19 +70,17 @@ public class DiagnosisBean {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Diagnosis toBeSaved;
+		Symptom toBeSaved;
 		if(chronicle.getSelectedEntry() != null){
-			toBeSaved = em.merge((Diagnosis) chronicle.getSelectedEntry());
+			toBeSaved = em.merge((Symptom) chronicle.getSelectedEntry());
 		}
 		else{
-			toBeSaved = new Diagnosis();
+			toBeSaved = new Symptom();
 		}
 		
-		toBeSaved.setAuthor(author);
-		toBeSaved.setDiag(diagnosisText);
-		toBeSaved.setLoc(locationOfProblem);
+		toBeSaved.setTerm(term);
+		toBeSaved.setIntensity(intensity);
 		toBeSaved.setBelongs_to_story(chronicle.getSelectedStory().getId());
-		toBeSaved.setWhere_was_it_done(where);
 		long day = DateUtility.calculateDay();
 		toBeSaved.setDay(day);
 		long month = DateUtility.calculateMonth();
@@ -126,9 +98,8 @@ public class DiagnosisBean {
 		em.getTransaction().commit();
 		
 		em.getTransaction().begin();
+		
 		Story toBeUpdated = em.merge(chronicle.getSelectedStory());
-		toBeUpdated.setTitle(diagnosisText);
-		chronicle.getSelectedStory().setTitle(diagnosisText);
 		toBeUpdated.setT_day(day);
 		toBeUpdated.setT_month(month);
 		toBeUpdated.setT_year(year);
@@ -140,6 +111,5 @@ public class DiagnosisBean {
 		
 		chronicle.showSelectedStory();
 		return null;
-	}
-
+	}	
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition>
+	<div class="story">
+		<div class="header">
+			<h:form>
+				<h:commandLink value="back"  action="#{symptomBean.deselectSymptom()}"></h:commandLink>
+			</h:form>
+		</div>
+		<div class="body">
+			<h:form>
+			<table>
+				<tr>
+					<td>What's your symptom?</td>
+					<td><h:inputText value="#{symptomBean.term}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>Intensity from almost none to unbearable</td>
+					<td>
+						<h:selectOneRadio  value="#{symptomBean.intensity}">
+   							<f:selectItem itemValue="1" />
+   							<f:selectItem itemValue="2" />
+   							<f:selectItem itemValue="3" />
+   							<f:selectItem itemValue="4" />
+   							<f:selectItem itemValue="5" />
+						</h:selectOneRadio>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="2"><h:commandButton value="Save entry" action="#{symptomBean.save()}"></h:commandButton></td>					
+				</tr>
+			</table>
+			</h:form>
+		</div>
+		<div class="footer">
+		
+		</div>
+
+	</div>    
+</ui:composition>
+	
+</html>

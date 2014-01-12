@@ -288,6 +288,18 @@ public class ChronicleBean {
 		selectedStoryVisible=false;
 		optionsVisible=false;
 		diagnosisFormVisible=false;
+		symptomFormVisible=false;
+	}
+	
+	//Variable - OUTER
+	private boolean symptomFormVisible;
+	public boolean isSymptomFormVisible(){
+		return symptomFormVisible;
+	}
+	public String showSymptomForm(){
+		resetVisibility();
+		symptomFormVisible=true;
+		return null;
 	}
 	
 	//Variable - OUTER
@@ -355,7 +367,11 @@ public class ChronicleBean {
 		return selectedEntry;
 	}
 	
-	
+	//Logic 
+	public String deselectEntry(){
+		selectedEntry=null;
+		return null;
+	}
 	
 		
 }

@@ -19,10 +19,10 @@
 				<h:commandButton value="New entry" action="#{chronicleBean.showOptions()}"></h:commandButton>
 				<ui:repeat value="#{chronicleBean.allEntries}" var="entry" varStatus="status">
 					<h:panelGroup rendered="#{textBean.isDiagnosis(entry)}">
-						<div><b>#{textBean.getAuthor(entry)}</b> diagnoses <b>#{textBean.getDiagnosis(entry)}</b></div>
+						<div><i>#{textBean.getDate(entry)} </i><b>#{textBean.getAuthor(entry)}</b> diagnoses <b>#{textBean.getDiagnosis(entry)}</b></div>
 					</h:panelGroup>
-					<h:panelGroup rendered="#{not textBean.isDiagnosis(entry)}">
-						<div>NOT DIAGNOSIS</div>
+					<h:panelGroup rendered="#{textBean.isSymptom(entry)}">
+						<div><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i><b>#{sessionBean.canSeeChronicleOf}</b> has <b>#{textBean.getSymptomText(entry)}</b></div>
 					</h:panelGroup>
 				</ui:repeat>		
 			</h:form>			
