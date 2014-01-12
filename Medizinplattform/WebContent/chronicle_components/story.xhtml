@@ -24,6 +24,9 @@
 					<h:panelGroup rendered="#{textBean.isSymptom(entry)}">
 						<div><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i><b>#{sessionBean.canSeeChronicleOf}</b> has <b>#{textBean.getSymptomText(entry)}</b></div>
 					</h:panelGroup>
+					<h:panelGroup rendered="#{textBean.isAction(entry)}">
+						<div><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i><b>#{textBean.getAmount(entry)}</b> of <b>#{textBean.getAction(entry)}</b> <i>#{textBean.getPeriod(entry)}</i></div>
+					</h:panelGroup>
 				</ui:repeat>		
 			</h:form>			
 		</div>

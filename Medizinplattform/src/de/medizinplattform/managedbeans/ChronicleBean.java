@@ -289,6 +289,18 @@ public class ChronicleBean {
 		optionsVisible=false;
 		diagnosisFormVisible=false;
 		symptomFormVisible=false;
+		actionFormVisible=false;
+	}
+	
+	//Variable - OUTER
+	private boolean actionFormVisible;
+	public boolean isActionFormVisible(){
+		return actionFormVisible;
+	}
+	public String showActionForm(){
+		resetVisibility();
+		actionFormVisible=true;
+		return null;
 	}
 	
 	//Variable - OUTER
