@@ -10,6 +10,11 @@
 	  	de.medizinplattform.managedbeans.MyMessage
 	  </message-bundle>
  </application>
+ <managed-bean>
+ 	<managed-bean-name>krankheiten</managed-bean-name>
+ 	<managed-bean-class>de.medizinplattform.managedbeans.AbcSuche</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
 
 	
 	
