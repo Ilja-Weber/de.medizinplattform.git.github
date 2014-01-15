@@ -22,12 +22,15 @@
 				<tr>
 					<td>Intensity from almost none to unbearable</td>
 					<td>
-						<h:selectOneRadio  value="#{symptomBean.intensity}">
-   							<f:selectItem itemValue="1" />
-   							<f:selectItem itemValue="2" />
-   							<f:selectItem itemValue="3" />
-   							<f:selectItem itemValue="4" />
-   							<f:selectItem itemValue="5" />
+						<h:selectOneRadio layout="pageDirection" value="#{symptomBean.intensity}">
+						<!--  <f:selectItem id="item1" itemLabel="News" itemValue="1" /> -->
+						
+						
+   							<f:selectItem id="Hardly" itemLabel="hardly noticeable" itemValue="1" /> 
+   							<f:selectItem id="notice" itemLabel="noticeable" itemValue="2" />
+   							<f:selectItem id="medi" itemLabel= "mediocre" itemValue="3" />
+   							<f:selectItem id="strong" itemLabel="strong" itemValue="4" />
+   							<f:selectItem id="unbearable" itemLabel="unbearable" itemValue="5" />
 						</h:selectOneRadio>
 					</td>
 				</tr>
