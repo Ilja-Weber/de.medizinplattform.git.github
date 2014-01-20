@@ -18,6 +18,7 @@ public class ActionBean {
 	// Injecting chronicleBean
 	@ManagedProperty(value = "#{chronicleBean}")
 	private ChronicleBean chronicle;
+	
 	public ChronicleBean getChronicle() {
 		return chronicle;
 	}

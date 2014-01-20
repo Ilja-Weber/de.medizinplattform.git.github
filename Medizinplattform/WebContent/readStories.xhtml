@@ -7,14 +7,11 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
+	
 	<ui:define name="content">
-	<h:outputText value="Ihre E-Mail Adresse: "/>
-	<h:form>
-		<h:inputText value="#{emailRestore.mailTo}"/>
-		<h:commandButton action="#{emailRestore.testEmail}" value="Weiter" />
-	<br/>
-	</h:form>
-	<h:outputText value="111 #{emailRestore.mailTo}"/>
+	<div>Geschichten lesen über</div>
+	<h:form><h:outputText value="#{readStoriesBean.about}"/></h:form>
+	<hr/>
 	</ui:define>
 </ui:composition>
 </html>

@@ -12,7 +12,12 @@
  </application>
  <managed-bean>
  	<managed-bean-name>krankheiten</managed-bean-name>
- 	<managed-bean-class>de.medizinplattform.managedbeans.AbcSuche</managed-bean-class>
+ 	<managed-bean-class>de.medizinplattform.managedbeans.AbcSucheBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>emailRestore</managed-bean-name>
+ 	<managed-bean-class>de.medizinplattform.managedbeans.EmailRestore</managed-bean-class>
  	<managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
 
