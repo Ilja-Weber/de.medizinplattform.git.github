@@ -18,13 +18,13 @@ public abstract class Entry {
 	}
 	
 	//Variable
-		/*protected String diag;
+		protected String diag;
 		public String getDiag() {
 			return diag;
 		}
 		public void setDiag(long year) {
 			this.diag = diag;
-		}*/
+		}
 		
 	//Variable
 	protected long year;

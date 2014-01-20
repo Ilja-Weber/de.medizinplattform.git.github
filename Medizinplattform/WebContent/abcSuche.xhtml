@@ -42,7 +42,7 @@
 		<h:commandButton action="#{abcSucheBean.editAction}" value="Z"><f:param name="action" value="Z" /></h:commandButton>
 	<h:dataTable value="#{krankheiten.outputListe}" var="l">
 		<h:column>
-   			<h:link value="#{l}" outcome="readStories" action="#{readStoriesBean.param}" style="color:black">
+   			<h:link value="#{l}" outcome="readStories" style="color:black">
    			<f:param name="about" value="aaa" />	
    			</h:link>
    		</h:column>
