@@ -9,8 +9,10 @@
 <ui:composition template="/templates/template.xhtml">
 	
 	<ui:define name="content">
-	<div>Geschichten lesen über</div>
-	<h:form><h:outputText value="#{readStoriesBean.about}"/></h:form>
+	<h:form>
+		<div>Geschichten lesen über &nsbr;<h:outputText value="about" style="color:red"/>
+	</div>
+	</h:form>
 	<hr/>
 	</ui:define>
 </ui:composition>

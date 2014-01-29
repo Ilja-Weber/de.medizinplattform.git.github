@@ -40,10 +40,11 @@
 		<h:commandButton action="#{abcSucheBean.editAction}" value="X"><f:param name="action" value="X" /></h:commandButton>
 		<h:commandButton action="#{abcSucheBean.editAction}" value="Y"><f:param name="action" value="Y" /></h:commandButton>
 		<h:commandButton action="#{abcSucheBean.editAction}" value="Z"><f:param name="action" value="Z" /></h:commandButton>
+
 	<h:dataTable value="#{krankheiten.outputListe}" var="l">
 		<h:column>
-   			<h:link value="#{l}" outcome="readStories" style="color:black">
-   			<f:param name="about" value="aaa" />	
+   			<h:link value="#{l}" outcome="readStories" style="color:red">
+   				
    			</h:link>
    		</h:column>
    	</h:dataTable>

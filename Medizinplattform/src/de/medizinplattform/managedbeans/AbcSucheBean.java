@@ -18,7 +18,7 @@ public class AbcSucheBean implements Serializable {
 	public static String text;
 			// Getter-Setter
 			public String getText() {
-				return text;
+				return text; //text
 			}
 			
 			public void setText(String text) {
