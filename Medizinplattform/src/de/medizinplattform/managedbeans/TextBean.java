@@ -85,7 +85,7 @@ public class TextBean {
 	
 	//Logic
 	public String getDate(Entry entry){
-		return entry.getYear() + "-" + entry.getMonth() + "-"+entry.getDay();
+		return entry.getDay() + "-" + entry.getMonth() + "-"+entry.getYear();
 	}
 	
 	//Logic

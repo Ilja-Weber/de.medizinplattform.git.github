@@ -14,6 +14,7 @@ import javax.persistence.Query;
 
 import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
+import de.medizinplattform.entities.User;
 import de.medizinplattform.utilitybeans.DateUtility;
 
 @ManagedBean(name = "chronicleBean")
@@ -22,6 +23,9 @@ public class ChronicleBean {
 	// Injecting sessionBean
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
+	
+	private static boolean beingEdited;
+	
 	public SessionBean getSession() {
 		return session;
 	}
@@ -385,5 +389,35 @@ public class ChronicleBean {
 		return null;
 	}
 	
+	//Edit visibility
+	public String editButton(){
+		beingEdited=true;
+		return null;
+	}
+	
+	public String saveButton(){
+		beingEdited=false;		
+		
+		//Obtain em
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+				
+		//start transaction, delete user and commit changes
+		em.getTransaction().begin();
+		/*User toBeUpdated = em.merge(user);
+		toBeUpdated.setName(name);
+		toBeUpdated.setPassword(password);
+		toBeUpdated.setRole(role);
+		em.getTransaction().commit();*/
+		return null;
+	}
+	
+	public String cancelButton(){
+		/*beingEdited=false;
+		this.name=this.t_name;;
+		this.password=this.t_password;
+		this.role=this.t_role;*/
+		return null;
+	}
 		
 }

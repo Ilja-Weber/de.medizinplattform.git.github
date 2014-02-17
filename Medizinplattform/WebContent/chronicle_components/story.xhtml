@@ -16,7 +16,7 @@
 			<h:form>
 				<h2>#{chronicleBean.renderTitleFromSelectedStory()}</h2>
 				<h5>(#{chronicleBean.renderDateFromSelectedStory()})</h5>
-				<h:commandButton value="New entry" action="#{chronicleBean.showOptions()}"></h:commandButton>
+				<h:commandButton value="New entry" action="#{chronicleBean.showOptions()}"></h:commandButton>					
 				<ui:repeat value="#{chronicleBean.allEntries}" var="entry" varStatus="status">
 					<h:panelGroup rendered="#{textBean.isDiagnosis(entry)}">
 						<div><i>#{textBean.getDate(entry)} </i><b>#{textBean.getAuthor(entry)}</b> diagnoses <b>#{textBean.getDiagnosis(entry)}</b></div>
@@ -27,7 +27,12 @@
 					<h:panelGroup rendered="#{textBean.isAction(entry)}">
 						<div><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i><b>#{textBean.getAmount(entry)}</b> of <b>#{textBean.getAction(entry)}</b> <i>#{textBean.getPeriod(entry)}</i></div>
 					</h:panelGroup>
-				</ui:repeat>		
+				</ui:repeat>	
+					<td class="story-edit">
+						<h:commandButton value="Edit Story" action="#{chronicleBean.editButton()}" ></h:commandButton>
+						<h:commandButton value="Speichern" action="#{chronicleBean.saveButton()}" ></h:commandButton>
+						<h:commandButton value="Abbruch" action="#{chronicleBean.cancelButton()}" ></h:commandButton>
+					</td>	
 			</h:form>			
 		</div>
 		<div class="footer">
