@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"  >
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+	  <div class="navigation" id ="menu">
+	  	Here is my main menu<br />
+	  	<br />
+	  	<br />
+	  	<br />
+	  	hier kommt ein feld mit verschiedenen navigationsknöpfen, entweder knöpfe oder bilder<br/>
+	  	knöpfe sind noch nicht alle funktionstüchtig...werden je nachdem erweitert<br/>
+	  	wenn jemand ne gute methode kennt das mit bildern zu machen...funktionieren tuen sie..nur sehen sie mist aus..<br/>
+	  	aber da kann ich mich später nochmal drannsetzen.
+	  	<br />
+	  	<br />
+	  	<br />
+	  	
+	 <ul id="cont">
+    	<li><a href="chronicle.xhtml?faces-redirect=true" title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten">Chronicle</a></li>
+    	<li><a href="abcSuche.xhtml?faces-redirect=true" title="Hier können Sie nach Krankheiten suchen">Suche</a></li>
+  		<li><a href="#"  title="hier gehts zum button 1">Seite 3</a></li>
+   		<li><a href="#" title="Hier gehts zum button 2">
+   						<img src="resources/img/plus.ico" width="100"
+						height="100" alt="bild1" /></a></li>
+						
+   		<li><h:commandButton class="menu" value="Test" action="admin.xhtml?faces-redirect=true"></h:commandButton></li>
+  		
+  		
+    	
+  	</ul>
+
+ 	</div>
+
+ 
+	</ui:define>
+</ui:composition>
+
+</html>

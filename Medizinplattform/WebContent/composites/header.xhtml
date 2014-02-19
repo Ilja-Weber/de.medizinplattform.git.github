@@ -11,6 +11,7 @@
 	<h:form>
 	<ul>
 		<h:panelGroup rendered="#{sessionBean.guest}">
+		
 		<li>
 			<h:commandButton class="login-button" value="Log-In" action="login.xhtml?faces-redirect=true"></h:commandButton>
 		</li>
@@ -20,6 +21,12 @@
 		</h:panelGroup>
 		
 		<h:panelGroup rendered="#{sessionBean.user}">
+		<li>
+		<h:commandButton class="MainMenu-button" value="Hauptmenü" action="MainMenu.xhtml?faces-redirect=true"></h:commandButton>
+		</li>
+		<li>
+		<h:commandButton class="chronicle-button" value="Suche" action="abcSuche.xhtml?faces-redirect=true"></h:commandButton>
+		</li>
 		<li>
 			<h:commandButton class="chronicle-button" value="Chronicle" action="chronicle.xhtml?faces-redirect=true"></h:commandButton>
 		</li>
