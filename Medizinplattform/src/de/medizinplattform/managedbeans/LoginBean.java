@@ -1,13 +1,19 @@
 package de.medizinplattform.managedbeans;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
 import de.medizinplattform.entities.User;
 
 @ManagedBean(name = "loginBean")
@@ -70,7 +76,7 @@ public class LoginBean {
 		return null;
 	}
 
-	public String login() {
+	public void login(ActionEvent actionEvent) {
 		//if (name.length() > 0 && password.length() > 0) {
 			EntityManagerFactory emf = Persistence
 					.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -84,11 +90,13 @@ public class LoginBean {
 			if (usersList.size() > 1) {
 				// Error: Should throw an Exception, because there cannot be
 				// many users with same name
-				return "toManyNames.xhtml?faces-redirect=true";
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fehler: zu viele Accounts für den E-mail!")); 
+				return;
 			} else if (usersList.size() == 0) {
 				// None User with that name found, maybe there was a mistake in
 				// the spelling, or the user is not registered
-				return "invalid_LoginName.xhtml?faces-redirect=true";
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Kein Account mit der E-mail registriert!", "wrongemail")); 
+				return;
 			} else {
 				// One User found, now check if password is correct and if, then
 				// set session data
@@ -104,9 +112,16 @@ public class LoginBean {
 						session.setAdmin(false);
 						session.setUser(true);
 					}
-					return "index.xhtml?faces-redirect=true";
+					try {
+						FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return;
 				}
-				return "invalid_password.xhtml?faces-redirect=true";
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password falsch!", "wrongpass"));
+				return;
 			}
 	}
 
