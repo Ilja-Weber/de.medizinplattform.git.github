@@ -4,11 +4,15 @@ import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import de.medizinplattform.entities.Action;
 import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Symptom;
+import de.medizinplattform.entities.User;
 
 @ManagedBean(name="textBean")
 @SessionScoped
@@ -17,6 +21,7 @@ public class TextBean {
 	//Variable - INNER
 	HashMap<Integer, String> intensities;
 	HashMap<Integer, String> periods;
+	
 	//Constructor
 	public TextBean(){
 		intensities = new HashMap<Integer, String>();
