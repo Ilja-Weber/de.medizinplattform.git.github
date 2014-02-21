@@ -192,6 +192,9 @@ public class AdminBean {
     	em.persist(toBeSaved);
     	em.getTransaction().commit();
     	users.add(toBeSaved);
+    	this.newEmail="";
+    	this.newPassword="";
+    	this.newRole="";
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "User gespeichert", toBeSaved.getName());        
         FacesContext.getCurrentInstance().addMessage(null, msg);        
     }
