@@ -19,12 +19,12 @@
   
         			<h:panelGrid columns="3">  
             		<h:outputLabel for="email" value="E-mail: *" />  
-            		<p:inputText id="email" value="#{loginBean.name}" required="true" label="E-mail">  
+            		<p:inputText id="email" value="#{loginBean.name}" tabindex="1" required="true" label="E-mail" placeholder="MaxMuster@gmail.com">  
                 		<f:validateLength minimum="2" />  
             		</p:inputText>  
             		<p:message for="email" display="icon"/>
             		<h:outputLabel for="password" value="Passwort: *" />  
-            		<p:password id="password" value="#{loginBean.password}" label="Password" required="true">  
+            		<p:password id="password" value="#{loginBean.password}" tabindex="2" label="Password" required="true" placeholder="Passwort">  
                 		<f:validateLength minimum="2" />  
                 	<p:ajax update="msgPassword" event="keyup" />  
             		</p:password>  
