@@ -90,12 +90,12 @@ public class LoginBean {
 			if (usersList.size() > 1) {
 				// Error: Should throw an Exception, because there cannot be
 				// many users with same name
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fehler: zu viele Accounts für den E-mail!")); 
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fehler: Diese E-Mail Adresse ist schon vergeben!")); 
 				return;
 			} else if (usersList.size() == 0) {
 				// None User with that name found, maybe there was a mistake in
 				// the spelling, or the user is not registered
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Kein Account mit der E-mail registriert!", "wrongemail")); 
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Kein Account mit dieser E-mail registriert!", "wrongemail")); 
 				return;
 			} else {
 				// One User found, now check if password is correct and if, then
@@ -120,7 +120,7 @@ public class LoginBean {
 					}
 					return;
 				}
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password falsch!", "wrongpass"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falsches Passwort", "wrongpass"));
 				return;
 			}
 	}
