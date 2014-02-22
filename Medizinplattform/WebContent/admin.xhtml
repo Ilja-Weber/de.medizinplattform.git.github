@@ -21,14 +21,14 @@
         <h:panelGrid columns="3">  
             <h:outputLabel for="new_email" value="Email *" />  
             <p:inputText id="new_email" value="#{adminBean.newEmail}" required="true" label="Email">  
-                <f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
+                <f:validateRegex pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
                 <p:ajax update="msgEmail" event="keyup" />   
             </p:inputText>  
             <p:message for="new_email" id="msgEmail" display="icon"/>  
   
             <h:outputLabel for="new_password" value="Password *" />  
             <p:inputText id="new_password" value="#{adminBean.newPassword}" label="Password" required="true">  
-                <f:validateRegex pattern="^[a-z0-9_-]{6,18}$"></f:validateRegex> 
+                <f:validateRegex pattern="^[a-zA-Z0-9_-]{6,18}$"></f:validateRegex> 
                 <p:ajax update="msgPassword" event="keyup" />  
             </p:inputText>  
             <p:message for="new_password" id="msgPassword" display="icon"/>
