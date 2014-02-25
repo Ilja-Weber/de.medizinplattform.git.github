@@ -39,9 +39,31 @@
                 	<p:ajax update="msgPassword" event="keyup" />  
             		</p:password>  
             		<p:message for="password" id="msgPassword" display="icon"/>  
-  
+
         			</h:panelGrid>  
+        		<br></br>	
+       			<h4>Daten zu Ihrer Person: </h4>
+		<table>
+				<tr>
+					<td>
+						<h:selectOneRadio layout="pageDirection" value="?">
+	
+   							<f:selectItem id="männlich" itemLabel="Herr" itemValue="1" /> 
+   							<f:selectItem id="weiblich" itemLabel="Frau" itemValue="2" />
+ 
+						</h:selectOneRadio>
+						
+						
+					</td>
+				</tr>
+			</table>
+			
+        	
+        			
+        			
   					<p:commandButton id="btn" value="Registrieren" update="panel" action="#{registerBean.registerUser()}"/>  
+  					
+  					
     		</p:panel>  
   
 	</h:form>  
