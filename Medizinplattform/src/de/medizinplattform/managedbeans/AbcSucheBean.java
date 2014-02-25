@@ -75,7 +75,7 @@ public class AbcSucheBean implements Serializable {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT e.diag FROM Entry e WHERE e.diag LIKE '"+this.text+"%' ");
+		Query q = em.createQuery("SELECT DISTINCT e.diag FROM Entry e WHERE e.diag LIKE '"+this.text+"%' ORDER BY e.diag ASC");
 		List<String> hilfsvar = (List<String>) q.getResultList();
 		
 		if ((hilfsvar == null) || (hilfsvar.size() == 0)) {

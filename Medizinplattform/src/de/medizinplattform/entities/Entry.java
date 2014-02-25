@@ -22,7 +22,7 @@ public abstract class Entry {
 		public String getDiag() {
 			return diag;
 		}
-		public void setDiag(long year) {
+		public void setDiag(String diag) {
 			this.diag = diag;
 		}
 		

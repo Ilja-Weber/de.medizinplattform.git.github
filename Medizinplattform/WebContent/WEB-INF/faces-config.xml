@@ -20,6 +20,11 @@
  	<managed-bean-class>de.medizinplattform.managedbeans.EmailRestoreBean</managed-bean-class>
  	<managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>readStoriesBean</managed-bean-name>
+ 	<managed-bean-class>de.medizinplattform.managedbeans.ReadStoriesBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
 
 	
 	

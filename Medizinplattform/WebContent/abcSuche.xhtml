@@ -43,9 +43,13 @@
 
 	<h:dataTable value="#{krankheiten.outputListe}" var="l">
 		<h:column>
-   			<h:link value="#{l}" outcome="readStories" style="color:red">
-   				
-   			</h:link>
+   			<!-- <h:link value="#{l}" outcome="readStories" style="color:red" /> -->
+   			
+   			<h:outputLink value="readStories.xhtml" onclick="#{readStoriesBean.setAbout('Erkältung')}">
+				<h:outputText style="color:black" value="#{l}" />
+				<f:param name="about" value="#{l}" />
+			</h:outputLink>
+			
    		</h:column>
    	</h:dataTable>
    	</h:form>

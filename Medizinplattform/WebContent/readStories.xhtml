@@ -4,14 +4,107 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core">
 
 <ui:composition template="/templates/template.xhtml">
 	
 	<ui:define name="content">
-	<h:form>
-		<div>Geschichten lesen über &nsbr;<h:outputText value="about" style="color:red"/>
-	</div>
+	<h:form id="form">
+		<div>
+			Hier können Sie diverse Einträge bzg.&nsbr; <h:outputText value="#{readStoriesBean.about}" style="color:red"/>&nsbr; lesen
+		</div>
+		<br/>
+		
+		<h:selectManyListbox value="#{readStoriesBean.symListbox}">
+    		<f:selectItems value="#{readStoriesBean.selectSymptom}" />
+		</h:selectManyListbox>
+		
+		<h:selectManyListbox value="#{readStoriesBean.behListbox}">
+    		<f:selectItems value="#{readStoriesBean.selectBehandlung}" />
+		</h:selectManyListbox>
+		<!--
+		 
+        	<h:panelGrid columns="2" cellpadding="10" >  
+        		<h:outputText value="Sortieren nach Datum: " />  
+        		<p:selectOneRadio id="sortieren_datum" value="" >  
+           			<f:selectItem itemLabel="aufteigend" itemValue="s1" />  
+            		<f:selectItem itemLabel="absteigend" itemValue="s2" />  
+       			</p:selectOneRadio>  
+       				
+       			<h:outputText value="Filtrieren nach Geschlecht: " />  
+        		<p:selectOneRadio id="filtrieren_geschlecht" value="" >  
+           			<f:selectItem itemLabel="m" itemValue="m" />  
+            		<f:selectItem itemLabel="w" itemValue="w" />  
+            		<f:selectItem itemLabel="keine" itemValue="keine" />
+       			</p:selectOneRadio>  
+       				
+       			<h:outputText value="Alter: " />  
+    			<h:panelGrid columns="1" style="margin-bottom:10px">                      
+       				<h:outputText id="displayRange" value="Between #{sliderBean.number6} and #{sliderBean.number7}"/>                      
+        			<p:slider for="alter_min,alter_max" display="displayRange" style="width:400px" range="true"   
+                			  displayTemplate="Zwischen {min} und {max}"/>  
+   				</h:panelGrid>  
+   				<h:inputHidden id="alter_min" value="#{readStoriesBean.alter_min}" />  
+    			<h:inputHidden id="alter_max" value="#{readStoriesBean.alter_max}" />  
+        
+        		
+        		<h:outputText value="Symptome: " />
+        		<h:selectManyListbox value="">
+		   			<f:selectItem itemValue="Fry Checken" itemLabel="Food1 - Fry Checken" />
+		   			<f:selectItem itemValue="Tomyam Soup" itemLabel="Food1 - Tomyam Soup" />
+		   			<f:selectItem itemValue="Mixed Rice" itemLabel="Food1 - Mixed Rice" />
+		   		</h:selectManyListbox>
+
+				<h:outputText value="Behandlungen: " />
+				<h:selectManyListbox value="">
+		   			<f:selectItem itemValue="Fry Checken" itemLabel="Food1 - Fry Checken" />
+		   			<f:selectItem itemValue="Tomyam Soup" itemLabel="Food1 - Tomyam Soup" />
+		   			<f:selectItem itemValue="Mixed Rice" itemLabel="Food1 - Mixed Rice" />
+		   		</h:selectManyListbox>
+		   		
+	        </h:panelGrid>  
+	      --> 
+		
+		
+		
+		
+		<p:accordionPanel id="accordion" value="#{readStoriesBean.readDiagnosen}" var="r" dynamic="true" multiple="false" >  
+			<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
+	    	<p:tab title="#{r.id} #{r.title} #{r.state}" closable="false">  
+	            <h:dataTable value="#{readStoriesBean.symptom}" var="s">
+	    			<h:column>
+	    				<f:facet name="header">Symptom ID</f:facet>
+	    				#{s.id}
+    				</h:column>
+    				<h:column>
+	    				<f:facet name="header">Symptom</f:facet>
+	    				#{s.term}
+    				</h:column>
+    			</h:dataTable>
+    			<hr/>
+    			<h:dataTable value="#{readStoriesBean.action}" var="a">
+	    			<h:column>
+	    				<f:facet name="header">Behandlung ID</f:facet>
+	    				#{a.id}
+    				</h:column>
+    				<h:column>
+	    				<f:facet name="header">Behandlung</f:facet>
+	    				#{a.action}
+    				</h:column>
+    			</h:dataTable>
+	            
+	             
+			</p:tab>  
+		</p:accordionPanel> 
+		
+		
+ 
+
+
+		
+		
 	</h:form>
 	<hr/>
 	</ui:define>
