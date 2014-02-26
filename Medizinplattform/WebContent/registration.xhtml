@@ -42,26 +42,27 @@
 
         			</h:panelGrid>  
         		<br></br>	
-       			<h4>Daten zu Ihrer Person: </h4>
-		<table>
-				<tr>
-					<td>
-						<h:selectOneRadio layout="pageDirection" value="?">
+
+	<fieldset>
 	
-   							<f:selectItem id="männlich" itemLabel="Herr" itemValue="1" /> 
-   							<f:selectItem id="weiblich" itemLabel="Frau" itemValue="2" />
+  	<legend>Freiwillige Daten zu ihrer Person</legend>
+  	
+	 <h:selectOneRadio layout="pageDirection" value="?">
+	
+   		<f:selectItem id="männlich" itemLabel="Männlich" itemValue="1" /> 
+   		<f:selectItem id="weiblich" itemLabel="Weiblich" itemValue="2" />
  
-						</h:selectOneRadio>
-						
-						
-					</td>
-				</tr>
-			</table>
-			
-        	
+	</h:selectOneRadio>	
+    <label>Geburtstag:</label><br></br>
+    <input type="date" name="textinput2" id="textinput2"></input><br></br>
+    <label>Gewicht:</label><br></br>
+    <input type="text" name="textinput2" id="textinput2" placeholder="in Kilogramm"></input><br></br>
+    <label>Größe:</label><br></br>
+    <input type="text" name="textinput2" id="textinput2" placeholder="in Zentimeter"></input><br></br>
+
+	</fieldset>	
         			
-        			
-  					<p:commandButton id="btn" value="Registrieren" update="panel" action="#{registerBean.registerUser()}"/>  
+  		<p:commandButton id="btn" value="Registrieren" update="panel" action="#{registerBean.registerUser()}"/>  
   					
   					
     		</p:panel>  
