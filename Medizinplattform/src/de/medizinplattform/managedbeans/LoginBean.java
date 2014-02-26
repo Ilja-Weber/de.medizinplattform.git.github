@@ -113,7 +113,7 @@ public class LoginBean {
 						session.setUser(true);
 					}
 					try {
-						FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+						FacesContext.getCurrentInstance().getExternalContext().redirect("MainMenu.xhtml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
