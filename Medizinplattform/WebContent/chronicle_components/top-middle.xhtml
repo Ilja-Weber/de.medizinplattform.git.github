@@ -8,7 +8,7 @@
 <ui:composition>
    <div>
    		<h:form>
-   		<div>
+   		<div class="filter-date">
    			<table>
    				<tr>
    					<ui:repeat value="#{chronicleBean.years}" var="year" varStatus="status">
@@ -20,7 +20,7 @@
    			</table>
    			
    		</div>
-   		<div>
+   		<div class="filter-date">
 			<table>
    				<tr>
    					<ui:repeat value="#{chronicleBean.months}" var="month" varStatus="status">
@@ -31,7 +31,7 @@
    				</tr>
    			</table>
    		</div>
-   		<div>
+   		<div class="filter-date">
    			<table>
    				<tr>
    					<ui:repeat value="#{chronicleBean.days}" var="day" varStatus="status">

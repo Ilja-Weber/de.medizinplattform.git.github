@@ -1,20 +1,24 @@
 package de.medizinplattform.managedbeans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.primefaces.event.CloseEvent;
+
 import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
-import de.medizinplattform.entities.User;
 import de.medizinplattform.utilitybeans.DateUtility;
 
 @ManagedBean(name = "chronicleBean")
@@ -385,5 +389,20 @@ public class ChronicleBean {
 		selectedEntry=null;
 		return null;
 	}
+	
+	public void handleClose(CloseEvent event) {  
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent().getId() + "'");  
+        deselectStory();
+        addMessage(message);
+        try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    } 
+	private void addMessage(FacesMessage message) {  
+        FacesContext.getCurrentInstance().addMessage(null, message);  
+    }
 		
 }

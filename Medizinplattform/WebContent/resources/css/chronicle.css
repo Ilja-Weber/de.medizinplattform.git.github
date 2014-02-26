@@ -7,6 +7,16 @@
 	
 }
 
+.chronicle .filter-date a{
+	color:gray;
+	text-decoration: none
+}
+
+.chronicle .filter-date a:hover{
+	color:purple;
+	text-decoration: none
+}
+
 .chronicle td{
 	
 }

@@ -9,7 +9,14 @@
 	<div class = "stories">
 		<h:form>
 			<ui:repeat value="#{chronicleBean.allStories}" var="story" varStatus="status">
-				<div class="story"><h:commandLink value="#{chronicleBean.renderDateFrom(story)} : #{chronicleBean.renderTitleFrom(story)}" action="#{chronicleBean.select(story)}"></h:commandLink></div>
+				<div class="story">
+					<div style="text-align:left;width:50%;float:left">
+						<h:commandLink value="#{chronicleBean.renderDateFrom(story)} : #{chronicleBean.renderTitleFrom(story)}" action="#{chronicleBean.select(story)}"></h:commandLink>
+					</div>
+					<div style="text-align:right;width:50%;float:left">
+						l&ouml;schen
+					</div>
+				</div>				
 			</ui:repeat>				
 		</h:form>
 	</div> 
