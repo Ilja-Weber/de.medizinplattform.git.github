@@ -184,7 +184,6 @@ public class ChronicleBean {
 		
 		em.persist(toBeCreated);
 		em.getTransaction().commit();
-		getAllStories().add(0, toBeCreated);
 		select(toBeCreated);
 		addOnStoryCreateMessage("Geschichte erstellt");
 	}
@@ -192,15 +191,13 @@ public class ChronicleBean {
 
 	
 	//Variable - OUTER
-	private List<Story> allStories;
 	public List<Story> getAllStories(){
-		if(allStories==null){
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-			EntityManager em = emf.createEntityManager();
-			Query q = em.createQuery("SELECT x FROM Story x");
-			allStories = (List<Story>) q.getResultList();
-			Collections.sort(allStories);
-		}
+		List<Story> allStories;
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("SELECT x FROM Story x WHERE x.story_teller='"+session.getUsersName()+"'");
+		allStories = (List<Story>) q.getResultList();
+		Collections.sort(allStories);
 		return allStories;
 	}
 	

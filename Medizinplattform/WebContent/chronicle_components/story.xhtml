@@ -13,8 +13,9 @@
 		<p:panel id="selected-story" header="#{chronicleBean.renderTitleFromSelectedStory()} #{chronicleBean.renderDateFromSelectedStory()}" closable="true" closeSpeed="500" widgetVar="panel">  
   
        	    <p:ajax event="close" listener="#{chronicleBean.handleClose}" update="growl" />
-       		<p:commandButton value="Neuer Eintrag" actionListener="#{chronicleBean.showOptions}" ajax="false" />  
-       		
+       		<p:commandButton value="Neuer Eintrag" actionListener="#{chronicleBean.showOptions}" ajax="false" />
+			<p:commandButton value="Ähnliche Geschichten zeigen" actionListener="#{chronicleBean.showOptions}" ajax="false" />
+       		<div style="height:12px"></div>
        		<ui:repeat value="#{chronicleBean.allEntries}" var="entry" varStatus="status">
 					<h:panelGroup rendered="#{textBean.isDiagnosis(entry)}">
 						<div><i>#{textBean.getDate(entry)}</i> #{textBean.getAuthor(entry)} diagnostiziert #{textBean.getDiagnosis(entry)}</div>

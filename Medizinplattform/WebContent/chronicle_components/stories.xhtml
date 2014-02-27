@@ -7,21 +7,27 @@
       
       
 <ui:composition>
-	<div class = "stories">
-		<h:form id="form">
-			<p:growl id="messages"/>  
-			<p:commandButton value="Neue Geschichte hinzufügen" actionListener="#{chronicleBean.createStory}" update="messages" ajax="false" />  
-			<ui:repeat value="#{chronicleBean.allStories}" var="story" varStatus="status">
-				<div class="story">
-					<div style="text-align:left;width:50%;float:left">
-						<h:commandLink value="#{chronicleBean.renderDateFrom(story)} : #{chronicleBean.renderTitleFrom(story)}" action="#{chronicleBean.select(story)}"></h:commandLink>
-					</div>
-					<div style="text-align:right;width:50%;float:left">
-						l&ouml;schen
-					</div>
-				</div>				
-			</ui:repeat>				
-		</h:form>
+	<div>		
+		<h:form id="stories-form"> 
+			<p:growl id="messages" showDetail="true"/>   
+			
+			<p:panel id="chronicle-panel" header="Chronik" widgetVar="panel">  
+	  
+	       		<p:commandButton value="Neue Geschichte hinzufügen" actionListener="#{chronicleBean.createStory}" update="messages" ajax="false" />  
+	       		<div style="height:12px"></div>
+	       		<ui:repeat value="#{chronicleBean.allStories}" var="story" varStatus="status">
+					<div style="width:100%;height:24px">	
+						<div style="text-align:left;width:50%;float:left">
+							<h:commandLink value="#{chronicleBean.renderDateFrom(story)} : #{chronicleBean.renderTitleFrom(story)}" action="#{chronicleBean.select(story)}"></h:commandLink>
+						</div>
+						<div style="text-align:right;width:50%;float:left">
+							l&ouml;schen
+						</div>
+					</div>		
+				</ui:repeat>
+	          
+	   		</p:panel> 
+   	 	</h:form>
 	</div> 
 </ui:composition>
 </html>
