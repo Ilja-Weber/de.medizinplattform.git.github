@@ -25,17 +25,17 @@ public class TextBean {
 	//Constructor
 	public TextBean(){
 		intensities = new HashMap<Integer, String>();
-		intensities.put(1, "hardly noticeable");
-		intensities.put(2, "noticeable");
-		intensities.put(3, "mediocre");
-		intensities.put(4, "strong");
-		intensities.put(5, "unbearable");
+		intensities.put(1, "kaum merkbare");
+		intensities.put(2, "merkbare");
+		intensities.put(3, "mittelmäßige");
+		intensities.put(4, "starke");
+		intensities.put(5, "unerträgliche");
 		
 		periods = new HashMap<Integer, String>();
-		periods.put(1, "once");
-		periods.put(2, "daily");
-		periods.put(3, "weekly");
-		periods.put(4, "monthly");
+		periods.put(1, "einmalig");
+		periods.put(2, "täglich");
+		periods.put(3, "wöchentlich");
+		periods.put(4, "monatlich");
 	}
 	
 	//Logic 
@@ -75,7 +75,7 @@ public class TextBean {
 	
 	//Logic
 	public String getDiagnosis(Entry entry){
-		return ((Diagnosis)entry).getDiag();
+		return ((Diagnosis)entry).getDiagnosis();
 	}
 	
 	//Logic
@@ -90,11 +90,20 @@ public class TextBean {
 	
 	//Logic
 	public String getDate(Entry entry){
-		return entry.getDay() + "-" + entry.getMonth() + "-"+entry.getYear();
+		return entry.getDay() + "." + entry.getMonth() + "."+entry.getYear();
 	}
 	
 	//Logic
 	public String getTime(Entry entry){
-		return entry.getHour() + ":" +entry.getMinute();
+		return entry.getHour() + ":" +numberToString(entry.getMinute());
+	}
+	
+	private String numberToString(long number){
+		String string="";
+		if(number<10){
+			string="0";
+		}
+		string= string + String.valueOf(number);
+		return string;
 	}
 }

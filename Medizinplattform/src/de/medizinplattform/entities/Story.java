@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="STORY")
-public class Story {
+public class Story  implements Comparable<Story> {
 	
 	//VARIABLE - OUTER
 	@Id @GeneratedValue
@@ -152,6 +152,41 @@ public class Story {
 	}
 	public void setT_second(long t_second) {
 		this.t_second = t_second;
-	}	
+	}
+	
+	public int compareTo(Story story) {
+		 
+		int year = ((int)story.getT_year()-(int)this.t_year);
+		if(year!=0){
+			return year;
+		}
+		
+		int month = ((int)story.getT_month()-(int)this.t_month);
+		if(month!=0){
+			return month;
+		}
+		
+		int day = ((int)story.getT_day()-(int)this.t_day);
+		if(day!=0){
+			return day;
+		}
+		
+		int hour = ((int)story.getT_hour()-(int)this.t_hour);
+		if(hour!=0){
+			return hour;
+		}
+		
+		int minute = ((int)story.getT_minute()-(int)this.t_minute);
+		if(minute!=0){
+			return minute;
+		}
+		
+		int second = ((int)story.getT_second()-(int)this.t_second);
+		if(second!=0){
+			return second;
+		}
+		
+		return 0;		 
+	}
 	
 }

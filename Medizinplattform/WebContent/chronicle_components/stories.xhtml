@@ -2,12 +2,15 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
       
       
 <ui:composition>
 	<div class = "stories">
-		<h:form>
+		<h:form id="form">
+			<p:growl id="messages"/>  
+			<p:commandButton value="Neue Geschichte hinzufügen" actionListener="#{chronicleBean.createStory}" update="messages" ajax="false" />  
 			<ui:repeat value="#{chronicleBean.allStories}" var="story" varStatus="status">
 				<div class="story">
 					<div style="text-align:left;width:50%;float:left">

@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public abstract class Entry {
+public abstract class Entry implements Comparable<Entry> {
 	
 	//Variable
 	@Id @GeneratedValue
@@ -17,15 +17,6 @@ public abstract class Entry {
 		this.id = id;
 	}
 	
-	//Variable
-		protected String diag;
-		public String getDiag() {
-			return diag;
-		}
-		public void setDiag(String diag) {
-			this.diag = diag;
-		}
-		
 	//Variable
 	protected long year;
 	public long getYear() {
@@ -90,4 +81,38 @@ public abstract class Entry {
 		this.belongs_to_story = belongs_to_story;
 	}
 	
+	public int compareTo(Entry entry) {
+		 
+		int year = ((int)entry.getYear()-(int)this.year);
+		if(year!=0){
+			return year;
+		}
+		
+		int month = ((int)entry.getMonth()-(int)this.month);
+		if(month!=0){
+			return month;
+		}
+		
+		int day = ((int)entry.getDay()-(int)this.day);
+		if(day!=0){
+			return day;
+		}
+		
+		int hour = ((int)entry.getHour()-(int)this.hour);
+		if(hour!=0){
+			return hour;
+		}
+		
+		int minute = ((int)entry.getMinute()-(int)this.minute);
+		if(minute!=0){
+			return minute;
+		}
+		
+		int second = ((int)entry.getSecond()-(int)this.second);
+		if(second!=0){
+			return second;
+		}
+		
+		return 0;		 
+	}
 }

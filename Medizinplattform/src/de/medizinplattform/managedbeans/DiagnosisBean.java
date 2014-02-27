@@ -40,7 +40,6 @@ public class DiagnosisBean {
 	}
 	public void setDiagnosisText(String diagnosisText) {
 		this.diagnosisText = diagnosisText;
-		System.out.println("Hi");
 	}
 	
 	//Variable - OUTER
@@ -104,8 +103,8 @@ public class DiagnosisBean {
 			toBeSaved = new Diagnosis();
 		}
 		
-		toBeSaved.setAuthor(author);
-		toBeSaved.setDiag(diagnosisText);
+		toBeSaved.setAuthor(author);	
+		toBeSaved.setDiagnosis(diagnosisText);
 		toBeSaved.setLoc(locationOfProblem);
 		toBeSaved.setBelongs_to_story(chronicle.getSelectedStory().getId());
 		toBeSaved.setWhere_was_it_done(where);
@@ -121,7 +120,6 @@ public class DiagnosisBean {
 		toBeSaved.setMinute(minute);
 		long second = DateUtility.calculateSecond();
 		toBeSaved.setSecond(second);
-		
 		em.persist(toBeSaved);
 		em.getTransaction().commit();
 		

@@ -2,6 +2,7 @@ package de.medizinplattform.managedbeans;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,19 +45,19 @@ public class ChronicleBean {
 	// Constructor
 	public ChronicleBean() {
 		month_days = new HashMap<String, Integer>();
-		month_days.put("all", 31);
-		month_days.put("January", 31);
-		month_days.put("February", 28);
-		month_days.put("March", 31);
+		month_days.put("alle", 31);
+		month_days.put("Januar", 31);
+		month_days.put("Februar", 28);
+		month_days.put("März", 31);
 		month_days.put("April", 30);
-		month_days.put("May", 31);
-		month_days.put("June", 30);
-		month_days.put("July", 31);
+		month_days.put("Mai", 31);
+		month_days.put("Juni", 30);
+		month_days.put("Juli", 31);
 		month_days.put("August", 31);
 		month_days.put("September", 30);
 		month_days.put("October", 31);
 		month_days.put("November", 30);
-		month_days.put("December", 31);
+		month_days.put("Dezember", 31);
 		
 		resetVisibility();
 		listOfStoriesVisible=true;
@@ -71,7 +72,7 @@ public class ChronicleBean {
 			for(int i=0; i<13; i++){
 				years.add(0,String.valueOf(starting_year-i));
 			}
-			years.add(0, "all");
+			years.add(0, "alle");
 		}
 		return years;
 	}
@@ -81,19 +82,19 @@ public class ChronicleBean {
 	public List<String> getMonths(){
 		if(months==null){
 			months=new ArrayList<String>();
-			months.add("all");
-			months.add("January");
-			months.add("February");
-			months.add("March");
+			months.add("alle");
+			months.add("Januar");
+			months.add("Februar");
+			months.add("März");
 			months.add("April");
-			months.add("May");
-			months.add("June");
-			months.add("July");
+			months.add("Mai");
+			months.add("Juni");
+			months.add("Juli");
 			months.add("August");
 			months.add("September");
 			months.add("October");
 			months.add("November");
-			months.add("December");
+			months.add("Dezember");
 		}
 		return months;
 	}
@@ -107,7 +108,7 @@ public class ChronicleBean {
 			for(int i=1; i<=limit; i++){
 				days.add(String.valueOf(i));
 			}
-			days.add(0, "all");
+			days.add(0, "alle");
 		}
 		return days;
 	}
@@ -138,14 +139,14 @@ public class ChronicleBean {
 	}
 	
 	//Logic
-	public String createStory(){
+	public void createStory(){
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
 		Story toBeCreated = new Story();
 			
-			String title = "Unknown...";
+			String title = "Diagnose unbekannt...";
 			toBeCreated.setTitle(title);
 			
 			String state = "running";
@@ -185,7 +186,7 @@ public class ChronicleBean {
 		em.getTransaction().commit();
 		getAllStories().add(0, toBeCreated);
 		select(toBeCreated);
-		return null;
+		addOnStoryCreateMessage("Geschichte erstellt");
 	}
 	
 
@@ -198,8 +199,9 @@ public class ChronicleBean {
 			EntityManager em = emf.createEntityManager();
 			Query q = em.createQuery("SELECT x FROM Story x");
 			allStories = (List<Story>) q.getResultList();
+			Collections.sort(allStories);
 		}
-	return allStories;
+		return allStories;
 	}
 	
 	//Logic
@@ -335,10 +337,9 @@ public class ChronicleBean {
 	public boolean isOptionsVisible(){
 		return optionsVisible;
 	}
-	public String showOptions(){
+	public void showOptions(){
 		resetVisibility();
 		optionsVisible=true;
-		return null;
 	}
 	
 	//Variable - OUTER
@@ -364,13 +365,13 @@ public class ChronicleBean {
 	}
 	
 	//Variable - OUTER
-	private List<Entry> allEntries=null;
 	public List<Entry> getAllEntries(){
-		allEntries = null;
+		List<Entry> allEntries = null;
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		Query q = em.createQuery("SELECT x FROM Entry x WHERE x.belongs_to_story = "+getSelectedStory().getId()+"");
 		allEntries = (List<Entry>) q.getResultList();
+		Collections.sort(allEntries);
 		return allEntries;
 	}
 	
@@ -402,6 +403,11 @@ public class ChronicleBean {
 		} 
     } 
 	private void addMessage(FacesMessage message) {  
+        FacesContext.getCurrentInstance().addMessage(null, message);  
+    }
+	
+	public void addOnStoryCreateMessage(String summary) {  
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }
 		

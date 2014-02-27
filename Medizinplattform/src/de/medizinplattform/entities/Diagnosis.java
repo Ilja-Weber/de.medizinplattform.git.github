@@ -6,12 +6,12 @@ import javax.persistence.Entity;
 public class Diagnosis extends Entry{
 
 	//Variable - Diagnosistext
-	private String diag;
-	public String getDiag() {
-		return diag;
+	private String diagnosis;
+	public String getDiagnosis() {
+		return diagnosis;
 	}
-	public void setDiag(String diag) {
-		this.diag = diag;
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
 	}
 	
 	//Variable - optional location
