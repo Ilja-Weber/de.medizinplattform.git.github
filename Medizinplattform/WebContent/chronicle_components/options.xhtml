@@ -3,48 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
 	<div class="story">
-		<div class="header">
-			<h:form>
-				<h:commandLink value="back" action="#{chronicleBean.showSelectedStory()}"></h:commandLink>
-			</h:form>
-		</div>
-		<div class="body">
-			
-			<div id="options">
-			<h:form>
-			<table>
-			<tr>
-				<td>
-					<h:commandLink action="#{chronicleBean.showSymptomForm()}"> 
-   						<h:graphicImage value="resources/img/symptom.gif" />
-   					</h:commandLink>
-				</td>
-				
-				<td>
-					<h:commandLink action="#{chronicleBean.showDiagnosisForm()}"> 
-   						<h:graphicImage value="resources/img/diagnosis.gif" />
-   					</h:commandLink>
-				</td>
-				<td>
-					<h:commandLink action="#{chronicleBean.showActionForm()}"> 
-   						<h:graphicImage value="resources/img/action.gif" />
-   					</h:commandLink>
-				</td>
-			</tr>
-			</table>
-			
-			</h:form>
-			</div>
-		</div>
-		<div class="footer">
-		
-		</div>
-
-	</div>    
+		<h:form> 
+		<p:growl id="growl" showDetail="true"/>   
+		<p:panel id="options-panel" header="Wählen Sie den Art des Eintrags" closable="true" closeSpeed="500" widgetVar="panel">  
+  			
+  			<p:ajax event="close" listener="#{chronicleBean.handleCloseOptions}" update="growl" />
+       		
+       		<div style="height:12px"></div>
+       		<div style="text-align:center">
+       		
+       		<h:commandLink action="#{chronicleBean.showSymptomForm()}"> 
+   				<h:graphicImage value="resources/img/symptom.gif" />
+   			</h:commandLink>
+   			<div style="display:inline">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+   			<h:commandLink action="#{chronicleBean.showDiagnosisForm()}"> 
+   				<h:graphicImage value="resources/img/diagnosis.gif" />
+   			</h:commandLink>
+   			<div style="display:inline">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+   			<h:commandLink action="#{chronicleBean.showActionForm()}"> 
+   				<h:graphicImage value="resources/img/action.gif" />
+   			</h:commandLink>
+          	</div>	
+   		</p:panel> 
+   	 	</h:form>
+	</div>  
 </ui:composition>
 	
 </html>

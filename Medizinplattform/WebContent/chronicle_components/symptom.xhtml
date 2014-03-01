@@ -3,48 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
 	<div class="story">
-		<div class="header">
-			<h:form>
-				<h:commandLink value="back"  action="#{symptomBean.deselectSymptom()}"></h:commandLink>
-			</h:form>
-		</div>
-		<div class="body">
-			<h:form>
-			<table>
-				<tr>
-					<td>What's your symptom?</td>
-					<td><h:inputText value="#{symptomBean.term}"></h:inputText></td>
-				</tr>
-				<tr>
-					<td>Intensity from almost none to unbearable</td>
-					<td>
-						<h:selectOneRadio layout="pageDirection" value="#{symptomBean.intensity}">
-						<!--  <f:selectItem id="item1" itemLabel="News" itemValue="1" /> -->
-						
-						
-   							<f:selectItem id="Hardly" itemLabel="hardly noticeable" itemValue="1" /> 
-   							<f:selectItem id="notice" itemLabel="noticeable" itemValue="2" />
-   							<f:selectItem id="medi" itemLabel= "mediocre" itemValue="3" />
-   							<f:selectItem id="strong" itemLabel="strong" itemValue="4" />
-   							<f:selectItem id="unbearable" itemLabel="unbearable" itemValue="5" />
-						</h:selectOneRadio>
-					</td>
-				</tr>
-				<tr>
-					<td rowspan="2"><h:commandButton value="Save entry" action="#{symptomBean.save()}"></h:commandButton></td>					
-				</tr>
-			</table>
-			</h:form>
-		</div>
-		<div class="footer">
-		
-		</div>
-
-	</div>    
+		<h:form> 
+		<p:panel id="symptome-panel" header="Symptom eintragen" closable="true" closeSpeed="500" widgetVar="panel">  
+  			
+  			<p:ajax event="close" listener="#{symptomBean.deselectSymptom}"/>
+       		
+       		<h:outputLabel value="Symptom :" for="symptom" />  
+            <p:autoComplete id="symptom" value="#{symptomBean.term}"   
+                    completeMethod="#{symptomBean.complete}"/>  
+   		</p:panel> 
+   	 	</h:form>
+	</div>
 </ui:composition>
 	
 </html>

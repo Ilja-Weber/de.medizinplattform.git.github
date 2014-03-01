@@ -308,10 +308,17 @@ public class ChronicleBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-    } 
-	private void addMessage(FacesMessage message) {  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
     }
+	
+	public void handleCloseOptions(CloseEvent event) {  
+		showSelectedStory();
+        try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    } 
 	
 	public void addOnStoryCreateMessage(String summary) {  
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  

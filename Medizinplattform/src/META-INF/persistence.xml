@@ -11,6 +11,7 @@
     <class>de.medizinplattform.entities.Symptom</class>    
     <class>de.medizinplattform.entities.Action</class>
     <class>de.medizinplattform.entities.Status</class>
+    <class>de.medizinplattform.entities.SymptomCollection</class>
     <properties>
      
      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

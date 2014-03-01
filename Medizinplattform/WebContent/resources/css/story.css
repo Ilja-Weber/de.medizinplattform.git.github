@@ -35,5 +35,7 @@
 	margin:0 auto;
 }
 
-
+.chronicle ul li{
+	display: block;
+}
 

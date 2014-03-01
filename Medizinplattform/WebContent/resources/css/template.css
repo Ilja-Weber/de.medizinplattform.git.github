@@ -33,7 +33,7 @@ body {
 	margin-bottom:0px;
 }
 
-#nav ul, li{
+#nav ul li{
 	font-family: Verdana, sans-serif;
 	display: inline;
 }
@@ -82,4 +82,9 @@ body {
 	color:white;
 	font-weight:bold;
 	text-align:center;
+}
+
+#fixed ul li{
+	font-family: Verdana, sans-serif;
+	display: inline;
 }

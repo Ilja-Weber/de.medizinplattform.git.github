@@ -1,15 +1,22 @@
 package de.medizinplattform.managedbeans;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.entities.Symptom;
+import de.medizinplattform.entities.SymptomCollection;
 import de.medizinplattform.utilitybeans.DateUtility;
 
 @ManagedBean(name="symptomBean")
@@ -27,10 +34,25 @@ public class SymptomBean {
 	
 	// Constants - INNER
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";
+	
+	private ArrayList<String> symptoms;
 		
 	//Constructor
 	public SymptomBean(){
 		resetFields();
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		
+		List<SymptomCollection> allRows = null;		
+		Query q = em.createQuery("SELECT x FROM SymptomCollection x");
+		allRows = (List<SymptomCollection>) q.getResultList();
+		
+		symptoms = new ArrayList<String>();
+		for(SymptomCollection row : allRows){
+			symptoms.add(row.getSymptom());
+		}
+		
 	}
 	
 	//Variable - OUTER
@@ -51,6 +73,15 @@ public class SymptomBean {
 		this.intensity = intensity;
 	}
 	
+	//Variable - OUTER
+	private Date date;
+	public Date getDate(){
+		return date;
+	}
+	public void setDate(Date date){
+		this.date = date;
+	}
+	
 	//Logic INNER
 	private void resetFields(){
 		term = "";
@@ -58,11 +89,16 @@ public class SymptomBean {
 	}
 	
 	//Logic
-	public String deselectSymptom(){
+	public void deselectSymptom(){
 		resetFields();
 		chronicle.deselectEntry();
-		chronicle.showOptions();
-		return null;
+		chronicle.showOptions(); 
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	//Logic 
@@ -111,5 +147,16 @@ public class SymptomBean {
 		
 		chronicle.showSelectedStory();
 		return null;
-	}	
+	}
+	
+	 public List<String> complete(String query) {  
+	    List<String> results = new ArrayList<String>();  
+	        
+	    for (String item : symptoms) {  
+	    	if(item.contains(query)){
+	    		results.add(item);
+	    	}
+	    } 	          
+	    return results;  
+	 } 
 }
