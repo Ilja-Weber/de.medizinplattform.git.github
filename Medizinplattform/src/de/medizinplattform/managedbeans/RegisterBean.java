@@ -45,7 +45,43 @@ public class RegisterBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	/*
+	// Geschlecht
+	private String sex = null;
+	
+	public String getSex(){
+		return sex;
+	}
+	
+	public void setSex(String sex){
+		this.sex = sex;
+	}
+	
+	//Alter wie aus der eingabe?
+	
+	//Gewicht
+	private String gewicht = null;
+	
+	public String getGewicht(){
+		return gewicht; 
+	}
+	
+	public void setGewicht(String gewicht){
+		this.gewicht=gewicht;
+	}
+	
+	//Größe
+	private String groesse = null;
+	
+	public String getGroesse(){
+		return groesse;
+		
+	}
 
+	public void setGreosse(String groesse){
+		this.groesse = groesse;
+	}
+	*/
 	// Buttons logic
 	public String registerUser() {
 		if (name.length() > 0 && password.length() > 0) {
@@ -74,6 +110,7 @@ public class RegisterBean {
 				user.setName(name);
 				user.setPassword(password);
 				user.setRole("user");
+				
 
 				em.getTransaction().begin();
 				em.persist(user);

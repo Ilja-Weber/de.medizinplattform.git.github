@@ -15,7 +15,12 @@ public class User{
 	private String name;	
 	private String password;
 	private String role;
-	
+	/*
+	private String sex;
+	private String alter;
+	private String gewicht;
+	private String groesse;
+	*/
 		
 	public long getId() {
 		return id;
@@ -50,6 +55,40 @@ public class User{
 		this.role = (isAdmin)?"admin":"user";
 	}
 	
+	/*
+	//Geschlecht
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	
+	//alter
+	public String getAlter() {
+		return alter;
+	}
+	
+	public void setAlter(String alter) {
+		this.alter = alter;
+	}
+	
+	//gewicht
+	public String getGewicht() {
+		return gewicht;
+	}
+	public void setGewicht(String gewicht) {
+		this.gewicht = gewicht;
+	}
+	//groesse
+	public String getGroesse() {
+		return groesse;
+	}
+	public void setGroesse(String groesse) {
+		this.groesse = groesse;
+	}
+	
+	*/
 	
 
 }
