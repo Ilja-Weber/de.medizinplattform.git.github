@@ -3,7 +3,6 @@ package de.medizinplattform.managedbeans;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,8 +18,8 @@ import javax.persistence.Query;
 import org.primefaces.event.CloseEvent;
 
 import de.medizinplattform.entities.Entry;
+import de.medizinplattform.entities.Status;
 import de.medizinplattform.entities.Story;
-import de.medizinplattform.entities.User;
 import de.medizinplattform.utilitybeans.DateUtility;
 
 @ManagedBean(name = "chronicleBean")
@@ -323,8 +321,6 @@ public class ChronicleBean {
 	public void deleteStory(Story story) {  
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
-		
-		System.out.println("lalala"+story.getTitle());
 		List<Entry> allEntries = null;		
 		Query q = em.createQuery("SELECT x FROM Entry x WHERE x.belongs_to_story = "+story.getId()+"");
 		allEntries = (List<Entry>) q.getResultList();
@@ -356,6 +352,84 @@ public class ChronicleBean {
 			return (story.getState().equals("running"))?"#ffe5e0" : "#dbeac4 ";
 		}
 		
+	}
+	
+	public boolean isSelectedStoryEmpty(){
+		List<Entry> allEntries = null;
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("SELECT x FROM Entry x WHERE x.belongs_to_story = "+getSelectedStory().getId()+"");
+		allEntries = (List<Entry>) q.getResultList();
+		return allEntries.isEmpty();
+	}
+	
+	public boolean isSelectedStoryRunning(){
+		return (getSelectedStory().getState().equals("running"));
+	}
+	
+	public void closeStory(){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		Story toUpdate = em.merge(selectedStory);
+		toUpdate.setState("closed");
+		em.getTransaction().commit();
+		
+		em.getTransaction().begin();
+		Status status = new Status();
+		status.setStatus("Gesund");
+		status.setBelongs_to_story(selectedStory.getId());
+		long day = DateUtility.calculateDay();
+		status.setDay(day);
+		long month = DateUtility.calculateMonth();
+		status.setMonth(month);
+		long year = DateUtility.calculateYear();
+		status.setYear(year);
+		long hour = DateUtility.calculateHour();
+		status.setHour(hour);
+		long minute = DateUtility.calculateMinute();
+		status.setMinute(minute);
+		long second = DateUtility.calculateSecond();
+		status.setSecond(second);
+		em.persist(status);
+		em.getTransaction().commit();
+		
+		
+        deselectStory();
+        try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
+	public void openStory(){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Story toUpdate = em.merge(selectedStory);
+		toUpdate.setState("running");
+		em.getTransaction().commit();
+		
+		Query q = em.createQuery("SELECT x FROM Status x WHERE x.belongs_to_story = "+getSelectedStory().getId()+"");
+		List<Status> statuss = (List<Status>) q.getResultList();
+		
+		for(Status entry : statuss){
+			em.getTransaction().begin();
+			Status toDelete = em.merge(entry);
+    		em.remove(toDelete);
+    		em.getTransaction().commit();
+		}
+		
+        deselectStory();
+        try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 		
 }

@@ -4,15 +4,12 @@ import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import de.medizinplattform.entities.Action;
 import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Entry;
+import de.medizinplattform.entities.Status;
 import de.medizinplattform.entities.Symptom;
-import de.medizinplattform.entities.User;
 
 @ManagedBean(name="textBean")
 @SessionScoped
@@ -59,6 +56,11 @@ public class TextBean {
 	}
 	
 	//Logic
+	public boolean isStatus(Entry entry){
+		return (entry.getClass().equals(Status.class))?true:false;
+	}
+	
+	//Logic
 	public boolean isSymptom(Entry entry){
 		return (entry.getClass().equals(Symptom.class))?true:false;
 	}
@@ -79,6 +81,11 @@ public class TextBean {
 	}
 	
 	//Logic
+	public String getStatus(Entry entry){
+		return ((Status)entry).getStatus();
+	}
+	
+	//Logic
 	public String test(){
 		return "test";
 	}
@@ -90,12 +97,12 @@ public class TextBean {
 	
 	//Logic
 	public String getDate(Entry entry){
-		return entry.getDay() + "." + entry.getMonth() + "."+entry.getYear();
+		return numberToString(entry.getDay()) + "." + numberToString(entry.getMonth()) + "."+entry.getYear();
 	}
 	
 	//Logic
 	public String getTime(Entry entry){
-		return entry.getHour() + ":" +numberToString(entry.getMinute());
+		return numberToString(entry.getHour()) + ":" +numberToString(entry.getMinute());
 	}
 	
 	private String numberToString(long number){
