@@ -438,5 +438,23 @@ public class ChronicleBean {
 			e.printStackTrace();
 		} 
 	}
+	
+	public void deleteEntry(Entry entry) {  
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		Entry toDelete = em.merge(entry);
+		em.remove(toDelete);
+		em.getTransaction().commit();
+		
+        FacesMessage msg;
+        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Eintrag gelöscht", "");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+	
+	public void editEntry(Entry entry) {  
+		
+    }
 		
 }

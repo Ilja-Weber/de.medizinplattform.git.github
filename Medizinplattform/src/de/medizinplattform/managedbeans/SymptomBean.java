@@ -3,7 +3,9 @@ package de.medizinplattform.managedbeans;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -36,6 +38,11 @@ public class SymptomBean {
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";
 	
 	private ArrayList<String> symptoms;
+	
+	private Map<String, Integer> intensities = new HashMap<String, Integer>(); 
+	public Map<String, Integer> getIntensities() {  
+        return intensities;  
+    }  
 		
 	//Constructor
 	public SymptomBean(){
@@ -52,6 +59,12 @@ public class SymptomBean {
 		for(SymptomCollection row : allRows){
 			symptoms.add(row.getSymptom());
 		}
+		
+		intensities.put("kaum merkbare", 1);
+		intensities.put("merkbare", 2);
+		intensities.put("mittelmäßige", 3);
+		intensities.put("starke", 4);
+		intensities.put("unerträgliche", 5);
 		
 	}
 	
@@ -102,7 +115,7 @@ public class SymptomBean {
 	}
 	
 	//Logic 
-	public String save(){
+	public void save(){
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -117,36 +130,111 @@ public class SymptomBean {
 		toBeSaved.setTerm(term);
 		toBeSaved.setIntensity(intensity);
 		toBeSaved.setBelongs_to_story(chronicle.getSelectedStory().getId());
-		long day = DateUtility.calculateDay();
+		long day = DateUtility.calculateDay(date);
 		toBeSaved.setDay(day);
-		long month = DateUtility.calculateMonth();
+		long month = DateUtility.calculateMonth(date);
 		toBeSaved.setMonth(month);
-		long year = DateUtility.calculateYear();
+		long year = DateUtility.calculateYear(date);
 		toBeSaved.setYear(year);
-		long hour = DateUtility.calculateHour();
+		long hour = DateUtility.calculateHour(date);
 		toBeSaved.setHour(hour);
-		long minute = DateUtility.calculateMinute();
+		long minute = DateUtility.calculateMinute(date);
 		toBeSaved.setMinute(minute);
-		long second = DateUtility.calculateSecond();
+		long second = DateUtility.calculateSecond(date);
 		toBeSaved.setSecond(second);
 		
 		em.persist(toBeSaved);
 		em.getTransaction().commit();
 		
+		String update = "none"; //from, to
+		
 		em.getTransaction().begin();
 		
 		Story toBeUpdated = em.merge(chronicle.getSelectedStory());
-		toBeUpdated.setT_day(day);
-		toBeUpdated.setT_month(month);
-		toBeUpdated.setT_year(year);
-		toBeUpdated.setT_hour(hour);
-		toBeUpdated.setT_minute(minute);
-		toBeUpdated.setT_second(second);
+		
+		if(toBeUpdated.getF_year() > year){
+			update = "from";
+		}
+		else if(toBeUpdated.getT_year() < year){
+			update = "to";
+		}
+		else{
+			if(toBeUpdated.getF_month() > month){
+				update = "from";
+			}
+			else if(toBeUpdated.getT_month() < month){
+				update = "to";
+			}
+			else{
+				if(toBeUpdated.getF_day() > day){
+					update = "from";
+				}
+				else if(toBeUpdated.getT_day() < day){
+					update = "to";
+				}
+				else{
+					if(toBeUpdated.getF_hour() > hour){
+						update = "from";
+					}
+					else if(toBeUpdated.getT_hour() < hour){
+						update = "to";
+					}
+					else{
+						if(toBeUpdated.getF_minute() > minute){
+							update = "from";
+						}
+						else if(toBeUpdated.getT_minute() < minute){
+							update = "to";
+						}
+						else{
+							
+						}
+					}
+				}
+			}
+		}
+		
+		if(update.equals("from")){
+			toBeUpdated.setF_year(year);
+			toBeUpdated.setF_month(month);
+			toBeUpdated.setF_day(day);
+			toBeUpdated.setF_hour(hour);
+			toBeUpdated.setF_minute(minute);
+			
+			chronicle.getSelectedStory().setF_year(year);
+			chronicle.getSelectedStory().setF_month(month);
+			chronicle.getSelectedStory().setF_day(day);
+			chronicle.getSelectedStory().setF_hour(hour);
+			chronicle.getSelectedStory().setF_minute(minute);
+			
+			
+		}
+		
+		if(update.equals("to")){
+			toBeUpdated.setT_year(year);
+			toBeUpdated.setT_month(month);
+			toBeUpdated.setT_day(day);
+			toBeUpdated.setT_hour(hour);
+			toBeUpdated.setT_minute(minute);
+			
+			chronicle.getSelectedStory().setT_year(year);
+			chronicle.getSelectedStory().setT_month(month);
+			chronicle.getSelectedStory().setT_day(day);
+			chronicle.getSelectedStory().setT_hour(hour);
+			chronicle.getSelectedStory().setT_minute(minute);
+		}
+		
 		em.persist(toBeUpdated);
 		em.getTransaction().commit();
 		
 		chronicle.showSelectedStory();
-		return null;
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	 public List<String> complete(String query) {  
@@ -158,5 +246,9 @@ public class SymptomBean {
 	    	}
 	    } 	          
 	    return results;  
-	 } 
+	 }
+	 
+	 public void intensityChange() {  
+	     return;  
+	 }
 }

@@ -16,9 +16,25 @@ public class DateUtility {
 	}
 	
 	//Logic
+	public static long calculateYear(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy");
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
+	}
+	
+	//Logic
 	public static long calculateMonth(){
 		DateFormat dateFormat = new SimpleDateFormat("MM");
 		Date date = new Date();
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
+	}
+	
+	//Logic
+	public static long calculateMonth(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("MM");
 		String date_as_string = dateFormat.format(date);
 		long date_as_long = Long.parseLong(date_as_string);
 		return date_as_long;
@@ -34,9 +50,25 @@ public class DateUtility {
 	}
 	
 	//Logic
+	public static long calculateDay(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("dd");
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
+	}
+	
+	//Logic
 	public static long calculateHour(){
-		DateFormat dateFormat = new SimpleDateFormat("hh");
+		DateFormat dateFormat = new SimpleDateFormat("HH");
 		Date date = new Date();
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
+	}
+	
+	//Logic
+	public static long calculateHour(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("HH");
 		String date_as_string = dateFormat.format(date);
 		long date_as_long = Long.parseLong(date_as_string);
 		return date_as_long;
@@ -52,9 +84,25 @@ public class DateUtility {
 	}
 	
 	//Logic
+	public static long calculateMinute(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("mm");
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
+	}
+	
+	//Logic
 	public static long calculateSecond(){
 		DateFormat dateFormat = new SimpleDateFormat("ss");
 		Date date = new Date();
+		String date_as_string = dateFormat.format(date);
+		long date_as_long = Long.parseLong(date_as_string);
+		return date_as_long;
+	}
+	
+	//Logic
+	public static long calculateSecond(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("ss");
 		String date_as_string = dateFormat.format(date);
 		long date_as_long = Long.parseLong(date_as_string);
 		return date_as_long;

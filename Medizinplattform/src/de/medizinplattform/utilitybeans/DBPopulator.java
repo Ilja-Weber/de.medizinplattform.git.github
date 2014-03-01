@@ -20,7 +20,7 @@ public class DBPopulator {
 	
 		em.getTransaction().begin();
 		SymptomCollection sc = new SymptomCollection();
-		sc.setSymptom("Zungenbrennen ");
+		sc.setSymptom("Schwäche");
 		em.persist(sc);
 		em.getTransaction().commit();
 	}
