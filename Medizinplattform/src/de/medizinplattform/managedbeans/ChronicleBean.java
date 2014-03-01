@@ -40,7 +40,7 @@ public class ChronicleBean {
 	// Constants - INNER
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";
 	
-	
+	private int toggle=1;
 
 
 	// Constructor
@@ -98,12 +98,20 @@ public class ChronicleBean {
 	
 	//Variable - OUTER
 	public List<Story> getAllStories(){
-		List<Story> allStories;
+		List<Story> allStories = new ArrayList<Story>();
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT x FROM Story x WHERE x.story_teller='"+session.getUsersName()+"'");
-		allStories = (List<Story>) q.getResultList();
-		Collections.sort(allStories);
+		
+		Query q1 = em.createQuery("SELECT x FROM Story x WHERE x.story_teller='"+session.getUsersName()+"' and x.state='running'");
+		List<Story> runningStories = (List<Story>) q1.getResultList();
+		Collections.sort(runningStories);
+		allStories.addAll(runningStories);
+		
+		Query q2 = em.createQuery("SELECT x FROM Story x WHERE x.story_teller='"+session.getUsersName()+"' and x.state='closed'");
+		List<Story> closedStories = (List<Story>) q2.getResultList();
+		Collections.sort(closedStories);
+		allStories.addAll(closedStories);
+		
 		return allStories;
 	}
 	
@@ -339,7 +347,15 @@ public class ChronicleBean {
     }
 	
 	public String getColorForStory(Story story){
-		return (story.getState().equals("running"))?"#ffd8d1" : "#d0e3b0";
+		if(toggle==1){
+			toggle=2;
+			return (story.getState().equals("running"))?"#ffd8d1" : "#d0e3b0";
+		}
+		else{
+			toggle=1;
+			return (story.getState().equals("running"))?"#ffe5e0" : "#dbeac4 ";
+		}
+		
 	}
 		
 }
