@@ -1,67 +1,8 @@
 .chronicle{
-	width:1080px;
+	width:720px;
 	margin:0 auto;
 }
 .chronicle table{
 	width:100%;
 	
 }
-
-.chronicle .filter-date a{
-	color:gray;
-	text-decoration: none
-}
-
-.chronicle .filter-date a:hover{
-	color:purple;
-	text-decoration: none
-}
-
-.chronicle td{
-	
-}
-
-.chronicle .left{
-	width:180px;
-}
-.chronicle .middle{
-	width:720px;
-}
-.chronicle .right{
-	width:180px;
-}
-
-.chronicle #top-row .left{
-	vertical-align: middle;
-	text-align: right;
-	padding:12px;
-}
-
-.chronicle #top-row .middle{
-	vertical-align: middle;
-	text-align: center;
-	padding:12px;
-}
-
-.chronicle #top-row .right{
-	padding:12px;
-}
-
-.chronicle #bottom-row .left{
-	vertical-align: top;
-	text-align: right;
-	padding:12px;
-}
-
-.chronicle #bottom-row .middle{
-	vertical-align: top;
-	text-align: center;
-	padding:12px;
-}
-
-.chronicle #bottom-row .right{
-	vertical-align: top;
-	text-align: left;
-	padding:12px;
-}
-

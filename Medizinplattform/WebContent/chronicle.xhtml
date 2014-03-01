@@ -8,20 +8,14 @@
 
 <ui:composition template="/templates/template.xhtml">
 <ui:define name="content">
-	
+		<div style="height:20px"></div>
 		<div class="chronicle">
-			<table>
-				<tr id="top-row">
-					<td class="left"><ui:include src="/chronicle_components/top-left.xhtml" /></td>
-					<td class="middle"><ui:include src="/chronicle_components/top-middle.xhtml" /></td>
-					<td class="right"><ui:include src="/chronicle_components/top-right.xhtml" /></td>
-				</tr>
-				<tr id="bottom-row">
-					<td class="left"><ui:include src="/chronicle_components/bottom-left.xhtml" /></td>
-					<td class="middle"><ui:include src="/chronicle_components/bottom-middle.xhtml" /></td>
-					<td class="right"><ui:include src="/chronicle_components/bottom-right.xhtml" /></td>
-				</tr>
-			</table>
+			 <h:panelGroup rendered = "#{chronicleBean.selectedStoryVisible}"><ui:include src="/chronicle_components/story.xhtml" /></h:panelGroup>
+  			 <h:panelGroup rendered = "#{chronicleBean.listOfStoriesVisible}"><ui:include src="/chronicle_components/stories.xhtml" /></h:panelGroup>
+   			 <h:panelGroup rendered = "#{chronicleBean.optionsVisible}"><ui:include src="/chronicle_components/options.xhtml" /></h:panelGroup>
+  			 <h:panelGroup rendered = "#{chronicleBean.diagnosisFormVisible}"><ui:include src="/chronicle_components/diagnosis.xhtml" /></h:panelGroup>
+ 			 <h:panelGroup rendered = "#{chronicleBean.symptomFormVisible}"><ui:include src="/chronicle_components/symptom.xhtml" /></h:panelGroup>
+  			 <h:panelGroup rendered = "#{chronicleBean.actionFormVisible}"><ui:include src="/chronicle_components/action.xhtml" /></h:panelGroup>
 		</div>
 </ui:define>
 </ui:composition>
