@@ -14,7 +14,7 @@
 		<p:panel id="selected-story" header="#{chronicleBean.renderTitleFromSelectedStory()} #{chronicleBean.renderDateFromSelectedStory()}" closable="true" closeSpeed="500" widgetVar="panel">  
   			
   			<f:facet name="footer">  
-             <p:commandButton value="Neuer Eintrag" actionListener="#{chronicleBean.showOptions}" ajax="false" />
+             <p:commandButton value="Neuer Eintrag" disabled="#{not chronicleBean.selectedStoryRunning}" actionListener="#{chronicleBean.showOptions}" ajax="false" />
 			 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty}"><p:commandButton value="Ähnliche Geschichten zeigen" actionListener="#{chronicleBean.showOptions}" ajax="false" /></h:panelGroup> 
 			 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty and chronicleBean.selectedStoryRunning}"><p:commandButton value="Als geheilt markieren" actionListener="#{chronicleBean.closeStory}" ajax="false" /></h:panelGroup>
        		 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty and not chronicleBean.selectedStoryRunning}"><p:commandButton value="Als laufend markieren" actionListener="#{chronicleBean.openStory}" ajax="false" /></h:panelGroup>
@@ -23,32 +23,42 @@
        	    <p:ajax event="close" listener="#{chronicleBean.handleClose}" update="growl" />
        		
        		<div style="height:12px"></div>
-       		
+       		<table>
        		<ui:repeat value="#{chronicleBean.allEntries}" var="entry" varStatus="status">
 					<h:panelGroup rendered="#{textBean.isStatus(entry)}">
-						<div><i>#{textBean.getDate(entry)}</i> #{textBean.getStatus(entry)}</div>
+						<tr>
+							<td class="left"><i>#{textBean.getDate(entry)}</i></td>
+							<td class="middle">#{textBean.getStatus(entry)}</td>
+							<td class="right"></td>
+						</tr>										 
 					</h:panelGroup>
 					<h:panelGroup rendered="#{textBean.isDiagnosis(entry)}">
-						<div><i>#{textBean.getDate(entry)}</i> #{textBean.getAuthor(entry)} diagnostiziert #{textBean.getDiagnosis(entry)} </div>
+						<tr>
+							<td class="left"><i>#{textBean.getDate(entry)}</i></td>
+							<td class="middle">#{textBean.getAuthor(entry)} diagnostiziert #{textBean.getDiagnosis(entry)} </td>
+							<td class="right"></td>
+						</tr>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{textBean.isSymptom(entry)}">
-						<div></div>
-						<div style="width:100%;height:24px">	
-						<div style="text-align:left;width:50%;float:left">
-							<i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i><b>#{textBean.getSymptomText(entry)}</b> 
-						</div>
-						<div style="text-align:right;width:50%;float:left">
-							<h:commandLink value="bearbeiten" action="#{chronicleBean.editEntry(entry)}"></h:commandLink>
-							<span>&nbsp;</span>
-							<h:commandLink value="löschen" action="#{chronicleBean.deleteEntry(entry)}"></h:commandLink>
-						</div>
-					</div>
+						<tr>
+							<td class="left"><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i></td>
+							<td class="middle"><b>#{textBean.getSymptomText(entry)}</b> </td>
+							<td class="right">
+								<h:commandLink value="bearbeiten" action="#{chronicleBean.editEntry(entry)}"></h:commandLink>
+								<span>&nbsp;</span>
+								<h:commandLink value="löschen" action="#{chronicleBean.deleteEntry(entry)}"></h:commandLink>
+							</td>
+						</tr>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{textBean.isAction(entry)}">
-						<div><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i><b>#{textBean.getAmount(entry)}</b> <b>#{textBean.getAction(entry)}</b> <i>#{textBean.getPeriod(entry)}</i></div>
+						<tr>
+							<td class="left"><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i></td>
+							<td class="middle"><b>#{textBean.getAmount(entry)}</b> <b>#{textBean.getAction(entry)}</b> <i>#{textBean.getPeriod(entry)}</i></td>
+							<td class="right"></td>
+						</tr>
 					</h:panelGroup>
 			</ui:repeat>
-			
+			</table>
 			<h:panelGroup rendered = "#{chronicleBean.selectedStoryEmpty}">keine Einträge</h:panelGroup>
 			 
           

@@ -1,12 +1,15 @@
 package de.medizinplattform.managedbeans;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -16,7 +19,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import de.medizinplattform.entities.Story;
 import de.medizinplattform.entities.Symptom;
 import de.medizinplattform.entities.SymptomCollection;
 import de.medizinplattform.utilitybeans.DateUtility;
@@ -65,7 +67,38 @@ public class SymptomBean {
 		intensities.put("mittelmäßige", 3);
 		intensities.put("starke", 4);
 		intensities.put("unerträgliche", 5);
-		
+	}
+	
+	@PostConstruct 
+	public void setupVariables(){
+		if(chronicle.getSelectedEntry()!=null){
+			term = ((Symptom)chronicle.getSelectedEntry()).getTerm();
+			intensity = ((Symptom)chronicle.getSelectedEntry()).getIntensity();
+			
+			long year = ((Symptom)chronicle.getSelectedEntry()).getYear();
+			long month = ((Symptom)chronicle.getSelectedEntry()).getMonth();
+			long day = ((Symptom)chronicle.getSelectedEntry()).getDay();
+			long hour = ((Symptom)chronicle.getSelectedEntry()).getHour();
+			long minute = ((Symptom)chronicle.getSelectedEntry()).getMinute();
+			
+			String datestring = DateUtility.numberToString(day)+"."+DateUtility.numberToString(month)+"."+DateUtility.numberToString(year)+" "+
+								DateUtility.numberToString(hour)+":"+DateUtility.numberToString(minute);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			try {
+				 
+				date = formatter.parse(datestring);
+				System.out.println(date);
+				System.out.println(formatter.format(date));
+		 
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public String getTitle(){
+		return (chronicle.getSelectedEntry()==null)?"eintragen":"bearbeiten";
 	}
 	
 	//Variable - OUTER
@@ -104,8 +137,16 @@ public class SymptomBean {
 	//Logic
 	public void deselectSymptom(){
 		resetFields();
-		chronicle.deselectEntry();
-		chronicle.showOptions(); 
+		
+		if(chronicle.getSelectedEntry()==null){
+			chronicle.deselectEntry();
+			chronicle.showOptions();
+		}
+		else{
+			chronicle.deselectEntry();
+			chronicle.deselectStory();
+		}
+		
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
 		} catch (IOException e) {
@@ -146,86 +187,7 @@ public class SymptomBean {
 		em.persist(toBeSaved);
 		em.getTransaction().commit();
 		
-		String update = "none"; //from, to
-		
-		em.getTransaction().begin();
-		
-		Story toBeUpdated = em.merge(chronicle.getSelectedStory());
-		
-		if(toBeUpdated.getF_year() > year){
-			update = "from";
-		}
-		else if(toBeUpdated.getT_year() < year){
-			update = "to";
-		}
-		else{
-			if(toBeUpdated.getF_month() > month){
-				update = "from";
-			}
-			else if(toBeUpdated.getT_month() < month){
-				update = "to";
-			}
-			else{
-				if(toBeUpdated.getF_day() > day){
-					update = "from";
-				}
-				else if(toBeUpdated.getT_day() < day){
-					update = "to";
-				}
-				else{
-					if(toBeUpdated.getF_hour() > hour){
-						update = "from";
-					}
-					else if(toBeUpdated.getT_hour() < hour){
-						update = "to";
-					}
-					else{
-						if(toBeUpdated.getF_minute() > minute){
-							update = "from";
-						}
-						else if(toBeUpdated.getT_minute() < minute){
-							update = "to";
-						}
-						else{
-							
-						}
-					}
-				}
-			}
-		}
-		
-		if(update.equals("from")){
-			toBeUpdated.setF_year(year);
-			toBeUpdated.setF_month(month);
-			toBeUpdated.setF_day(day);
-			toBeUpdated.setF_hour(hour);
-			toBeUpdated.setF_minute(minute);
-			
-			chronicle.getSelectedStory().setF_year(year);
-			chronicle.getSelectedStory().setF_month(month);
-			chronicle.getSelectedStory().setF_day(day);
-			chronicle.getSelectedStory().setF_hour(hour);
-			chronicle.getSelectedStory().setF_minute(minute);
-			
-			
-		}
-		
-		if(update.equals("to")){
-			toBeUpdated.setT_year(year);
-			toBeUpdated.setT_month(month);
-			toBeUpdated.setT_day(day);
-			toBeUpdated.setT_hour(hour);
-			toBeUpdated.setT_minute(minute);
-			
-			chronicle.getSelectedStory().setT_year(year);
-			chronicle.getSelectedStory().setT_month(month);
-			chronicle.getSelectedStory().setT_day(day);
-			chronicle.getSelectedStory().setT_hour(hour);
-			chronicle.getSelectedStory().setT_minute(minute);
-		}
-		
-		em.persist(toBeUpdated);
-		em.getTransaction().commit();
+		chronicle.updateSelectedStory();
 		
 		chronicle.showSelectedStory();
 		

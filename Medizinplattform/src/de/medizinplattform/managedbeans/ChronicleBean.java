@@ -166,7 +166,7 @@ public class ChronicleBean {
 	}
 	
 	//Logic - INNER
-	private String numberToString(long number){
+	public String numberToString(long number){
 		String string="";
 		if(number<10){
 			string="0";
@@ -183,7 +183,7 @@ public class ChronicleBean {
 	public String select(Story story){
 		selectedStory=story;
 		showSelectedStory();
-		System.out.println("Story "+story+" selected");
+		System.out.println("Story "+story+" selected: status="+story.getState());
 		return null;
 	}
 	public String deselectStory(){
@@ -199,7 +199,7 @@ public class ChronicleBean {
 	}
 	
 	//Logic - INNER
-	private void resetVisibility(){
+	public void resetVisibility(){
 		listOfStoriesVisible=false;
 		selectedStoryVisible=false;
 		optionsVisible=false;
@@ -448,13 +448,42 @@ public class ChronicleBean {
 		em.remove(toDelete);
 		em.getTransaction().commit();
 		
+		updateSelectedStory();
+		
         FacesMessage msg;
         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Eintrag gelöscht", "");  
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 	
 	public void editEntry(Entry entry) {  
-		
+		select(entry);
+		showSymptomForm();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
+	
+	public void updateSelectedStory(){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		
+		List<Entry> allEntries = getAllEntries();
+		int lastindex = allEntries.size()-1;
+		selectedStory.setF_year(allEntries.get(lastindex).getYear());
+		selectedStory.setF_month(allEntries.get(lastindex).getMonth());
+		selectedStory.setF_day(allEntries.get(lastindex).getDay());
+		
+		selectedStory.setT_year(allEntries.get(0).getYear());
+		selectedStory.setT_month(allEntries.get(0).getMonth());
+		selectedStory.setT_day(allEntries.get(0).getDay());
+		
+		em.getTransaction().begin();		
+		Story toBeUpdated = em.merge(selectedStory);				
+		em.persist(toBeUpdated);
+		em.getTransaction().commit();
+	}
 		
 }

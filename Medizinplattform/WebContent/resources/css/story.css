@@ -39,3 +39,16 @@
 	display: block;
 }
 
+.story .left{
+	width:22%
+}
+
+.story .middle{
+	width:53%;
+	text-align:left;
+}
+
+.story .right{
+	text-align:right;
+	width:55%
+}

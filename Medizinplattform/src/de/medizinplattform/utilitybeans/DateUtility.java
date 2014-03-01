@@ -5,7 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtility {
-	
+	public static String numberToString(long number){
+		String string="";
+		if(number<10){
+			string="0";
+		}
+		string= string + String.valueOf(number);
+		return string;
+	}
 	//Logic
 	public static long calculateYear(){
 		DateFormat dateFormat = new SimpleDateFormat("yyyy");

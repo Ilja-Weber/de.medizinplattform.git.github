@@ -10,7 +10,7 @@
 	<div class="story">
 		<h:form> 
 		<p:messages id="msgs"/>  
-		<p:panel id="symptome-panel" header="Symptom eintragen" closable="true" closeSpeed="500" widgetVar="panel">  
+		<p:panel id="symptome-panel" header="Symptom #{symptomBean.title}" closable="true" closeSpeed="500" widgetVar="panel">  
   			
   			<p:ajax event="close" listener="#{symptomBean.deselectSymptom}"/>
        		
