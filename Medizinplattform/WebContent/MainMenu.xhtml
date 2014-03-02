@@ -9,78 +9,53 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-	  <div class="navigation" id ="menu" style="position:absolute; top:100px; left:100px;">
-	  	Here is my main menu<br />
-	 
+	  <div class="navigation" id ="menu" style="position:absolute; top:50px; left:250px;">
 	  
 	  	<br />
 	  	<br />
 	  	<br />
-	  	hier kommt ein feld mit verschiedenen navigationsknöpfen, entweder knöpfe oder bilder<br/>
-	  	knöpfe sind noch nicht alle funktionstüchtig...werden je nachdem erweitert<br/>
-	  	wenn jemand ne gute methode kennt das mit bildern zu machen...funktionieren tuen sie..nur sehen sie mist aus..<br/>
-	  	aber da kann ich mich später nochmal drannsetzen.
+		<div id="template">
+    		<h:link id="logo2" value="Hauptmenü: " outcome="index.xhtml"></h:link>
+ 		</div>
+	  
+
 	  	<br />
+	 	<strong>Chronik:</strong><br/>
+	 	<br/>
+	  	Hier können Sie ihre Krankheitsgeschichte erstellen, verfolgen und ändern.<br/>
+	  	<br/>
+	  	<strong>Suche:</strong><br/>
+	  	<br/>
+	  	Hier können sie nach Krankheiten oder Chroniken von Ihnen und Anderen suchen.<br/>
+	
 	  	<br />
-	  	<br />
+	 
 	  	
 	 <ul id="">
     	<li><a href="chronicle.xhtml?faces-redirect=true" title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten">Chronik</a></li>
     	<li><a href="abcSuche.xhtml?faces-redirect=true" title="Hier können Sie nach Krankheiten suchen">Suche</a></li>
-  		<li><a href="#"  title="hier gehts zum button 1">Seite 3</a></li>
-   		<li><a href="#" title="Hier gehts zum button 2">
-   						<img src="resources/img/plus.ico" width="100"
-						height="100" alt="bild1" /></a></li>
-				
-   		<li><h:commandButton class="menu" value="Test" action="admin.xhtml?faces-redirect=true"></h:commandButton></li>
-  		
-  		<div>
+
+  		  	</ul>
+  		  	
+  		  	
+   		<div style="position:absolute; top:10px; left:650px;">
  			<div style="float: left; display: inline; margin-bottom: 5px; margin-top: 5px; background-color: #ffffff;">
- 				<iframe src="http://www.nachrichten.de/widget.html?feed=gesundheit&amp;amount=90&amp;teasers=true&amp;thumbnails=true&amp;width=365&amp;height=560&amp;title=Gesundheits+News" frameBorder="10" style="border: none; width: 365px; height: 560px;">
+ 				<iframe src="http://www.nachrichten.de/widget.html?feed=gesundheit&amp;amount=90&amp;teasers=true&amp;thumbnails=true&amp;width=400&amp;height=560&amp;title=Gesundheits+News" frameBorder="10" style="border: none; width: 400px; height: 560px;">
  				</iframe>
  					<div id="nachrichtenWidgetFooter" style="border: none; height: 32px; padding: 0px; margin: 0px; font-size: 11px; width: 365px;">
  					
  					<div style="padding-top: 5px; width: 98%; text-align: right;">
  						<a href="http://www.nachrichten.de/widget/" style="text-decoration: none; color: #666666; font-family: Arial;"></a>
- 					<br/>
- 					<br/>
- 					<br/>
- 					<br/>
- 					<br/>
- 							<br/>
- 					<br/>
- 					<br/>
- 					<br/>
- 					<br/>
- 							<br/>
- 					<br/>
- 					<br/>
- 					<br/>
- 					<br/>
- 					<br/>
+ 		
  					
  					</div>
  					</div>
  			</div>
  		</div>	
-  		  	
-  		  	</ul>
- 
 
   
-	<br />
-	  	<br />
-	  	<br />	
-	  	<br />
-	  	<br />
-	  	<br />
-	  	<br />
- 	</div>
- 	<div style="position:absolute; top:50px; left:800px;">
- 		<script src="//www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/113730720325748336324/n24_feed.xml&amp;up_title=Gesundheits%20News&amp;up_tabFontSize=14px&amp;up_feed1=http%3A%2F%2Ffeeds.n24.de%2Fn24%2Fgesundheit&amp;up_feedTitle1=Gesundheit&amp;up_feed2=http%3A%2F%2Fwww.presseportal.de%2Frss%2Fgesundheit.rss2&amp;up_feedTitle2=Gesundheit%20Presseportal&amp;up_feed3=&amp;up_feedTitle3=&amp;up_feed4=&amp;up_feedTitle4=&amp;up_entries=10&amp;up_summaries=300&amp;up_renderHtml=1&amp;up_showTimestamp=1&amp;up_selectedTab=&amp;synd=open&amp;w=382&amp;h=500&amp;title=Gesundheits+News&amp;border=%23ffffff%7C0px%2C1px+solid+%23595959%7C0px%2C1px+solid+%23797979%7C0px%2C2px+solid+%23898989&amp;output=js"></script>
- 			</div>
- 			
-s
+</div>
+
 	</ui:define>
 </ui:composition>
 

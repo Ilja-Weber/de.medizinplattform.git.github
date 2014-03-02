@@ -26,6 +26,20 @@ body {
 	font-family:Verdana, Geneva, sans-serif;
 	color:white;
 }
+#logo2 {
+	float:center;
+	text-decoration: none;
+	font-size:30px;
+	font-family:Verdana, Geneva, sans-serif;
+	color:#eda933;
+}
+#Schrifft {
+	float:center;
+	text-decoration: none;
+	font-size:30px;
+	font-family:Verdana, Geneva, sans-serif;
+	color:black;
+}
 
 #nav {
 	text-align:right;
