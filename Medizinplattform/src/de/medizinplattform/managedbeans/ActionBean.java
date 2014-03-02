@@ -1,13 +1,27 @@
 package de.medizinplattform.managedbeans;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import de.medizinplattform.entities.Action;
+import de.medizinplattform.entities.ActionCollection;
+import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.entities.Symptom;
 import de.medizinplattform.utilitybeans.DateUtility;
@@ -29,9 +43,76 @@ public class ActionBean {
 	// Constants - INNER
 	private final String PERSISTENCE_UNIT_NAME = "common-entities";
 	
+	private ArrayList<String> actions;
+	
+	private Map<String, Integer> periods = new HashMap<String, Integer>(); 
+	public Map<String, Integer> getPeriods() {  
+        return periods;  
+    }  
+	
 	//Constructor
 	public ActionBean(){
 		resetFields();
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = emf.createEntityManager();
+		
+		List<ActionCollection> allRows = null;		
+		Query q = em.createQuery("SELECT x FROM ActionCollection x");
+		allRows = (List<ActionCollection>) q.getResultList();
+		
+		actions = new ArrayList<String>();
+		for(ActionCollection row : allRows){
+			actions.add(row.getAction());
+		}
+		
+		periods.put("einmalig", 1);
+		periods.put("täglich", 2);
+		periods.put("wöchentlich", 3);
+		periods.put("monatlich", 4);
+	}
+	
+	@PostConstruct 
+	public void setupVariables(){
+		if(chronicle.getSelectedEntry()!=null && chronicle.getSelectedEntry().getClass().equals(Action.class)){
+			action = ((Action)chronicle.getSelectedEntry()).getAction();
+			period = ((Action)chronicle.getSelectedEntry()).getPeriod();
+			amount = ((Action)chronicle.getSelectedEntry()).getAmount();
+			
+			long year = ((Action)chronicle.getSelectedEntry()).getYear();
+			long month = ((Action)chronicle.getSelectedEntry()).getMonth();
+			long day = ((Action)chronicle.getSelectedEntry()).getDay();
+			long hour = ((Action)chronicle.getSelectedEntry()).getHour();
+			long minute = ((Action)chronicle.getSelectedEntry()).getMinute();
+			
+			String datestring = DateUtility.numberToString(day)+"."+DateUtility.numberToString(month)+"."+DateUtility.numberToString(year)+" "+
+								DateUtility.numberToString(hour)+":"+DateUtility.numberToString(minute);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			try {
+				 
+				date = formatter.parse(datestring);
+				System.out.println(date);
+				System.out.println(formatter.format(date));
+		 
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+
+	public String getTitle(){
+		return (chronicle.getSelectedEntry()==null)?"eintragen":"bearbeiten";
+	}
+	
+	//Variable - OUTER
+	private Date date;
+	public Date getDate(){
+		return date;
+	}
+	public void setDate(Date date){
+		this.date = date;
 	}
 	
 	//Variable - OUTER
@@ -69,15 +150,28 @@ public class ActionBean {
 	}
 	
 	//Logic
-	public String deselectAction(){
+	public void deselectAction(){
 		resetFields();
-		chronicle.deselectEntry();
-		chronicle.showOptions();
-		return null;
+		
+		if(chronicle.getSelectedEntry()==null){
+			chronicle.deselectEntry();
+			chronicle.showOptions();
+		}
+		else{
+			chronicle.deselectEntry();
+			chronicle.showSelectedStory();
+		}
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//Logic 
-	public String save(){
+	public void save(){
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -88,41 +182,53 @@ public class ActionBean {
 		else{
 			toBeSaved = new Action();
 		}
-		
+				
 		toBeSaved.setAction(action);
 		toBeSaved.setPeriod(period);
 		toBeSaved.setAmount(amount);
 		toBeSaved.setBelongs_to_story(chronicle.getSelectedStory().getId());
-		long day = DateUtility.calculateDay();
+		long day = DateUtility.calculateDay(date);
 		toBeSaved.setDay(day);
-		long month = DateUtility.calculateMonth();
+		long month = DateUtility.calculateMonth(date);
 		toBeSaved.setMonth(month);
-		long year = DateUtility.calculateYear();
+		long year = DateUtility.calculateYear(date);
 		toBeSaved.setYear(year);
-		long hour = DateUtility.calculateHour();
+		long hour = DateUtility.calculateHour(date);
 		toBeSaved.setHour(hour);
-		long minute = DateUtility.calculateMinute();
+		long minute = DateUtility.calculateMinute(date);
 		toBeSaved.setMinute(minute);
-		long second = DateUtility.calculateSecond();
+		long second = DateUtility.calculateSecond(date);
 		toBeSaved.setSecond(second);
 		
 		em.persist(toBeSaved);
 		em.getTransaction().commit();
-		
-		em.getTransaction().begin();
-		
-		Story toBeUpdated = em.merge(chronicle.getSelectedStory());
-		toBeUpdated.setT_day(day);
-		toBeUpdated.setT_month(month);
-		toBeUpdated.setT_year(year);
-		toBeUpdated.setT_hour(hour);
-		toBeUpdated.setT_minute(minute);
-		toBeUpdated.setT_second(second);
-		em.persist(toBeUpdated);
-		em.getTransaction().commit();
+				
+		chronicle.updateSelectedStory();
 		
 		chronicle.showSelectedStory();
-		return null;
+		
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void periodChange() {  
+	     return;  
+	 }
+	
+	public List<String> complete(String query) {  
+	    List<String> results = new ArrayList<String>();  
+	        
+	    for (String item : actions) {  
+	    	if(item.contains(query)){
+	    		results.add(item);
+	    	}
+	    } 	          
+	    return results;  
 	}
 	
 }

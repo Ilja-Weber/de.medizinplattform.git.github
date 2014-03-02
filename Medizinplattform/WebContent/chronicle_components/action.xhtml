@@ -3,47 +3,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
 	<div class="story">
-		<div class="header">
-			<h:form>
-				<h:commandLink value="back"  action="#{actionBean.deselectAction()}"></h:commandLink>
-			</h:form>
-		</div>
-		<div class="body">
-			<h:form>
-			<table>
-				<tr>
-					<td>What's your action?</td>
-					<td><h:inputText value="#{actionBean.action}"></h:inputText></td>
-				</tr>
-				<tr>
-					<td>Intensity from almost none to unbearable</td>
-					<td>
-						<h:selectOneRadio  value="#{actionBean.period}">
-   							<f:selectItem itemValue="1" itemLabel="once" />
-   							<f:selectItem itemValue="2" itemLabel="daily" />
-   							<f:selectItem itemValue="3" itemLabel="weekly"/>
-   							<f:selectItem itemValue="4" itemLabel="from time to time"/>
-						</h:selectOneRadio>
-					</td>
-				</tr>
-				<tr>
-					<td>Optional: amount</td>
-					<td><h:inputText value="#{actionBean.amount}"></h:inputText></td>
-				</tr>
-				<tr>
-					<td rowspan="2"><h:commandButton value="Save entry" action="#{actionBean.save()}"></h:commandButton></td>					
-				</tr>
-			</table>
-			</h:form>
-		</div>
-		<div class="footer">
-		
-		</div>
-
+		<h:form> 
+		<p:messages id="msgs"/>  
+		<p:panel id="action-panel" header="Behandlung #{actionBean.title}" closable="true" closeSpeed="500" widgetVar="panel">  
+  			
+  			<p:ajax event="close" listener="#{actionBean.deselectAction}"/>
+       		
+       		<h:outputLabel value="Wann? : "/>  
+    		<p:calendar value="#{actionBean.date}" pattern="dd.MM.yyyy HH:mm" /> 
+       		
+       		<div style="height:20px"></div>  
+       		
+       		<h:outputLabel value="Was: " for="action" />  
+            <p:autoComplete id="action" value="#{actionBean.action}" completeMethod="#{actionBean.complete}">
+           		<f:validateRegex pattern="[a-zA-Z0-9 öäüßÖÄÜ]+"></f:validateRegex>
+                <p:ajax update="msgAction" event="keyup" />
+            </p:autoComplete>             
+            <p:watermark for="action" value="Behandlung" />
+            <p:message id="msgAction" for="action" display="icon"/> 
+            
+            <div style="height:20px"></div>  
+            
+            <h:outputLabel value="Wie oft?: "/>           	       
+            <p:selectOneMenu id="period" value="#{actionBean.period}">
+                <f:selectItems value="#{actionBean.periods}" />  
+                <p:ajax listener="#{actionBean.periodChange}" />
+            </p:selectOneMenu>  
+            <p:message for="period" display="icon"/>  
+            
+            <div style="height:20px"></div>  
+            
+            <h:outputLabel value="Welche Menge?: " for="amount" />  
+            <p:inputText id="amount" value="#{actionBean.amount}" required="true">  
+                <f:validateRegex pattern="[a-zA-Z0-9.() öäüßÖÄÜ]+"></f:validateRegex>
+                <p:ajax update="msgAmount" event="keyup" />  
+            </p:inputText>            
+            <p:watermark for="amount" value="Menge" />
+            <p:message id="msgAmount" for="amount" display="icon"/>            
+            
+           
+            <f:facet name="footer">  
+            	<p:commandButton id="btn" value="Speichern" update="action-panel" actionListener="#{actionBean.save}"/> 
+       		</f:facet> 
+           
+   		</p:panel> 
+   	 	</h:form>
 	</div>    
 </ui:composition>
 	

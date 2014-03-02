@@ -58,7 +58,11 @@
 						<tr>
 							<td class="left"><i>#{textBean.getDate(entry)}  #{textBean.getTime(entry)} </i></td>
 							<td class="middle"><b>#{textBean.getAmount(entry)}</b> <b>#{textBean.getAction(entry)}</b> <i>#{textBean.getPeriod(entry)}</i></td>
-							<td class="right"></td>
+							<td class="right">
+								<h:commandLink value="bearbeiten" action="#{chronicleBean.editEntry(entry)}"></h:commandLink>
+								<span>&nbsp;</span>
+								<h:commandLink value="löschen" action="#{chronicleBean.deleteEntry(entry)}"></h:commandLink>
+							</td>
 						</tr>
 					</h:panelGroup>
 			</ui:repeat>

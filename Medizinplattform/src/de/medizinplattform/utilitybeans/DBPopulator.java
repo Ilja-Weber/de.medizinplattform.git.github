@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import de.medizinplattform.entities.DiagnosisCollection;
+import de.medizinplattform.entities.ActionCollection;
 import de.medizinplattform.entities.Entry;
 
 public class DBPopulator {
@@ -19,8 +19,8 @@ public class DBPopulator {
 		EntityManager em = emf.createEntityManager();
 	
 		em.getTransaction().begin();
-		DiagnosisCollection sc = new DiagnosisCollection();
-		sc.setDiagnosis("Zystische Fibrose");
+		ActionCollection sc = new ActionCollection();
+		sc.setAction("Schlafen");
 		em.persist(sc);
 		em.getTransaction().commit();
 	}
