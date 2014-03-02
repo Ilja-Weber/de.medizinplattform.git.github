@@ -17,9 +17,12 @@ import javax.persistence.Query;
 
 import org.primefaces.event.CloseEvent;
 
+import de.medizinplattform.entities.Action;
+import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Status;
 import de.medizinplattform.entities.Story;
+import de.medizinplattform.entities.Symptom;
 import de.medizinplattform.utilitybeans.DateUtility;
 
 @ManagedBean(name = "chronicleBean")
@@ -448,6 +451,8 @@ public class ChronicleBean {
 		em.remove(toDelete);
 		em.getTransaction().commit();
 		
+		selectedEntry=null;
+		
 		updateSelectedStory();
 		
         FacesMessage msg;
@@ -456,8 +461,18 @@ public class ChronicleBean {
     }
 	
 	public void editEntry(Entry entry) {  
+		System.out.println("select "+entry.getClass().getName());
 		select(entry);
-		showSymptomForm();
+		if(selectedEntry.getClass().equals(Symptom.class)){
+			showSymptomForm();
+		}
+		else if (selectedEntry.getClass().equals(Diagnosis.class)){
+			showDiagnosisForm();
+		}
+		else if (selectedEntry.getClass().equals(Action.class)){
+			showActionForm();
+		}
+		
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("chronicle.xhtml");
 		} catch (IOException e) {

@@ -36,7 +36,11 @@
 						<tr>
 							<td class="left"><i>#{textBean.getDate(entry)}</i></td>
 							<td class="middle">#{textBean.getAuthor(entry)} diagnostiziert #{textBean.getDiagnosis(entry)} </td>
-							<td class="right"></td>
+							<td class="right">
+								<h:commandLink value="bearbeiten" action="#{chronicleBean.editEntry(entry)}"></h:commandLink>
+								<span>&nbsp;</span>
+								<h:commandLink value="löschen" action="#{chronicleBean.deleteEntry(entry)}"></h:commandLink>
+							</td>
 						</tr>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{textBean.isSymptom(entry)}">

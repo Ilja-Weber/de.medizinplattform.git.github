@@ -19,6 +19,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Symptom;
 import de.medizinplattform.entities.SymptomCollection;
 import de.medizinplattform.utilitybeans.DateUtility;
@@ -71,7 +72,7 @@ public class SymptomBean {
 	
 	@PostConstruct 
 	public void setupVariables(){
-		if(chronicle.getSelectedEntry()!=null){
+		if(chronicle.getSelectedEntry()!=null && chronicle.getSelectedEntry().getClass().equals(Symptom.class)){
 			term = ((Symptom)chronicle.getSelectedEntry()).getTerm();
 			intensity = ((Symptom)chronicle.getSelectedEntry()).getIntensity();
 			
@@ -144,7 +145,7 @@ public class SymptomBean {
 		}
 		else{
 			chronicle.deselectEntry();
-			chronicle.deselectStory();
+			chronicle.showSelectedStory();
 		}
 		
 		try {
