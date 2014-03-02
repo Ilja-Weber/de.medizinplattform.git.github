@@ -20,7 +20,7 @@ public class DBPopulator {
 	
 		em.getTransaction().begin();
 		DiagnosisCollection sc = new DiagnosisCollection();
-		sc.setDiagnosis("Krebs");
+		sc.setDiagnosis("Zystische Fibrose");
 		em.persist(sc);
 		em.getTransaction().commit();
 	}

@@ -396,11 +396,11 @@ public class ChronicleBean {
 		status.setMonth(month);
 		long year = DateUtility.calculateYear();
 		status.setYear(year);
-		long hour = DateUtility.calculateHour();
+		long hour = 99L;
 		status.setHour(hour);
-		long minute = DateUtility.calculateMinute();
+		long minute = 99L;
 		status.setMinute(minute);
-		long second = DateUtility.calculateSecond();
+		long second = 99L;
 		status.setSecond(second);
 		em.persist(status);
 		em.getTransaction().commit();
