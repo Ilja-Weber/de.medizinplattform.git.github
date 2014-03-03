@@ -16,25 +16,20 @@ import javax.persistence.Query;
 @SessionScoped
 public class AbcSucheBean implements Serializable {
 	public static String text;
-			// Getter-Setter
-			public String getText() {
-				return text; //text
-			}
-			
-			public void setText(String text) {
-				this.text=text;
-			}
+	public String getText() {
+		return text; //text
+	}
+	public void setText(String text) {
+		this.text=text;
+	}
 			
 	public static String[] outputListe;
-			// Getter-Setter
-			public String[] getOutputListe() {
-				return outputListe;
-			}
-			
-			public void setOutputListe(String[] outputListe) {
-				this.outputListe=outputListe;
-			}
-	
+	public String[] getOutputListe() {
+		return outputListe;
+	}
+	public void setOutputListe(String[] outputListe) {
+		this.outputListe=outputListe;
+	}
 	
 	// Konstruktor
 	public AbcSucheBean() {
@@ -45,29 +40,6 @@ public class AbcSucheBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String PERSISTENCE_UNIT_NAME = "common-entities";
 	
-	/*
-	Krankheiten[] diagnosenList; 
-	public Krankheiten[] getDiagnosenList() {
-		diagnosenList = new Krankheiten[3];
-		diagnosenList[0] = new Krankheiten("EEEEE"+this.getText());
-		diagnosenList[1] = new Krankheiten("OOOOO"+this.getText());
-		diagnosenList[2] = new Krankheiten("EEE1EE"+this.getText());
-		return diagnosenList;
-	}
-					public static class Krankheiten{
-						String diag;
-						public Krankheiten(String diag) {
-							this.diag = diag;
-						}
-						public void setDiag(String diag) {
-							this.diag=diag;
-						}
-						public String getDiag() {
-							return diag;
-						}
-					}
-	*/
-	
 	public String editAction() {
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String action = params.get("action");
@@ -75,7 +47,7 @@ public class AbcSucheBean implements Serializable {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT DISTINCT e.diag FROM Entry e WHERE e.diag LIKE '"+this.text+"%' ORDER BY e.diag ASC");
+		Query q = em.createQuery("SELECT DISTINCT d.diagnosis FROM Diagnosis d WHERE d.diagnosis LIKE '"+this.text+"%' ORDER BY d.diagnosis ASC");
 		List<String> hilfsvar = (List<String>) q.getResultList();
 		
 		if ((hilfsvar == null) || (hilfsvar.size() == 0)) {
@@ -96,18 +68,3 @@ public class AbcSucheBean implements Serializable {
 		return null;
 	}
 }
-
-/*
-<!-- 
-	<h:dataTable value="#{krankheiten.diagnosenList}" var="d">
-		<h:column>
-			<f:facet name="header">Diagnose Id</f:facet>
-			#{d.diag}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Diagnose</f:facet>
-			#{d.diag}
-		</h:column>
-</h:dataTable>
--->
-*/
