@@ -3,6 +3,7 @@ encoding//src/de/medizinplattform/managedbeans/ActionBean.java=UTF-8
 encoding//src/de/medizinplattform/managedbeans/AdminBean.java=UTF-8
 encoding//src/de/medizinplattform/managedbeans/ChronicleBean.java=UTF-8
 encoding//src/de/medizinplattform/managedbeans/LoginBean.java=UTF-8
+encoding//src/de/medizinplattform/managedbeans/StatisticsBean.java=UTF-8
 encoding//src/de/medizinplattform/managedbeans/SymptomBean.java=UTF-8
 encoding//src/de/medizinplattform/managedbeans/TextBean.java=UTF-8
 encoding//src/de/medizinplattform/utilitybeans/DBPopulator.java=UTF-8

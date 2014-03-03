@@ -500,5 +500,14 @@ public class ChronicleBean {
 		em.persist(toBeUpdated);
 		em.getTransaction().commit();
 	}
+	
+	public void showStatistics(){
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("statistics.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 		
 }

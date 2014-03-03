@@ -15,7 +15,7 @@
   			
   			<f:facet name="footer">  
              <p:commandButton value="Neuer Eintrag" disabled="#{not chronicleBean.selectedStoryRunning}" actionListener="#{chronicleBean.showOptions}" ajax="false" />
-			 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty}"><p:commandButton value="Ähnliche Geschichten zeigen" actionListener="#{chronicleBean.showOptions}" ajax="false" /></h:panelGroup> 
+			 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty}"><p:commandButton value="Ähnliche Geschichten zeigen" actionListener="#{chronicleBean.showStatistics}" ajax="false" /></h:panelGroup> 
 			 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty and chronicleBean.selectedStoryRunning}"><p:commandButton value="Als geheilt markieren" actionListener="#{chronicleBean.closeStory}" ajax="false" /></h:panelGroup>
        		 <h:panelGroup rendered = "#{not chronicleBean.selectedStoryEmpty and not chronicleBean.selectedStoryRunning}"><p:commandButton value="Als laufend markieren" actionListener="#{chronicleBean.openStory}" ajax="false" /></h:panelGroup>
        		</f:facet> 
