@@ -1,0 +1,23 @@
+.fillManyListbox {
+	width:15em;
+}
+
+#slider {
+	width:30em;
+}
+
+.zentriert {
+	margin: 0 auto;
+	text-align: center;
+}
+
+table.details tbody tr td {
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+}
+table.details thead tr th {
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+}

@@ -21,6 +21,7 @@ import org.primefaces.event.TabChangeEvent;
 
 import de.medizinplattform.entities.Action;
 import de.medizinplattform.entities.Diagnosis;
+import de.medizinplattform.entities.Entry;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.entities.Symptom;
 
@@ -30,22 +31,6 @@ public class ReadStoriesBean {
 	
 	private static final long serialVersionUID = 1L;
 	private static final String PERSISTENCE_UNIT_NAME = "common-entities";
-	
-	private int alter_min = 0; 
-    public int getAlter_min() {  
-        return alter_min;  
-    }  
-    public void setAlter_min(int alter_min) {  
-        this.alter_min = alter_min;  
-    }  
-  
-    private int alter_max = 100;
-    public int getAlter_max() {  
-        return alter_max;  
-    }  
-    public void setAlter_max(int alter_max) {  
-        this.alter_max = alter_max;  
-    }  
     
 	public static String about;
 	public String getAbout() {
@@ -79,6 +64,30 @@ public class ReadStoriesBean {
 		this.selectSymptom=selectSymptom;
 	}
 	
+	List<Story> story;
+	public List<Story> getStory() {
+		return story; 
+	}
+	public void setStory(List<Story> story) {
+		this.story=story;
+	}
+	
+	List<Long> storyId;
+	public List<Long> getStoryId() {
+		return storyId; 
+	}
+	public void setStoryId(List<Long> storyId) {
+		this.storyId=storyId;
+	}
+	
+	List<Diagnosis> diagnosis;
+	public List<Diagnosis> getDiagnosis() {
+		return diagnosis; 
+	}
+	public void setDiagnosis(List<Diagnosis> diagnosis) {
+		this.diagnosis=diagnosis;
+	}
+	
 	List<Symptom> symptom;
 	public List<Symptom> getSymptom() {
 		return symptom; 
@@ -94,8 +103,6 @@ public class ReadStoriesBean {
 	public void setAction(List<Action> action) {
 		this.action=action;
 	}
-	
-	//final int x=0;
 	
 	List<String> behListbox;
 	public List<String> getBehListbox() {
@@ -113,20 +120,34 @@ public class ReadStoriesBean {
 		this.selectBehandlung=selectBehandlung;
 	}
 	
-	List<Story> readDiagnosen;
-	public List<Story> getReadDiagnosen() {
+	List<Diagnosis> readDiagnosen;
+	public List<Diagnosis> getReadDiagnosen() {
 		return readDiagnosen; 
 	}
-	public void setReadDiagnosen(List<Story> readDiagnosen) {
+	public void setReadDiagnosen(List<Diagnosis> readDiagnosen) {
 		this.readDiagnosen=readDiagnosen;
+	}
+	
+	public String sort = "ASC";
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 	
 	// Konstruktor
 	public ReadStoriesBean() {
-		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		//String about = params.get("about");
-		//this.about = about;
-		this.about="";
+		/*Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String about = params.get("about");
+		this.about = about;*/
+		this.about="Erkältung";
+		//this.story = new ArrayList<Story>();
+		//this.story.add(null);
+		
+		this.storyId = new ArrayList<Long>();
+		this.story = new ArrayList<Story>();
+		//this.story.add(null);
 		
 		this.symListbox = new ArrayList<String>();
 		this.symListbox.add("kein Symptom");
@@ -138,75 +159,6 @@ public class ReadStoriesBean {
 		this.listFill();
 	}
 		
-		
-		
-		
-		
-		
-		
-		Krankheiten[] diagnosenList;
-		public Krankheiten[] getDiagnosenList() {
-			diagnosenList = new Krankheiten[5];
-			diagnosenList[0] = new Krankheiten("Erkältung", "Schnupfen", "Tropfen", "m", 25, new Date(2014,0,18));
-			diagnosenList[1] = new Krankheiten("Erkältung", "Husten", "Saft", "w", 18, new Date(2013,11,12));
-			diagnosenList[2] = new Krankheiten("Erkältung", "Husten", "Tablette", "m", 46, new Date(2013,11,24));
-			diagnosenList[3] = new Krankheiten("Erkältung", "Kopfschmerzen", "Tablette", "w", 67, new Date(2010,1,25));
-			diagnosenList[4] = new Krankheiten("Erkältung", "Husten", "Tablette", "m", 34, new Date(2010,1,24));
-			return diagnosenList;
-		}
-		public static class Krankheiten {
-			String diag, symp, beha, ges;
-			Date datum;
-			int alter;
-			public Krankheiten(String diag,String symp, String beha, String ges, int alter, Date datum) {
-				this.diag = diag;
-				this.symp = symp;
-				this.beha = beha;
-				this.ges = ges;
-				this.alter = alter;
-				this.datum = datum;
-			}
-			public void setDiag(String diag) {
-				this.diag=diag;
-			}
-			public String getDiag() {
-				return diag;
-			}
-			public void setSymp(String symp) {
-				this.symp=symp;
-			}
-			public String getSymp() {
-				return symp;
-			}
-			public void setBeha(String beha) {
-				this.beha=beha;
-			}
-			public String getBeha() {
-				return beha;
-			}
-			public void setGes(String ges) {
-				this.ges=ges;
-			}
-			public String getGes() {
-				return ges;
-			}
-			public void setAlter(int alter) {
-				this.alter=alter;
-			}
-			public int getAlter() {
-				return alter;
-			}
-			public void setDatum(Date datum) {
-				this.datum=datum;
-			}
-			public Date getDatum() {
-				return datum;
-			}
-		};
-	
-		
-		
-							
 		public String zeigeRecord(String about) {
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 			//String about = params.get("about");
@@ -218,49 +170,46 @@ public class ReadStoriesBean {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			
-			Query q = em.createQuery("SELECT s FROM Story s WHERE s.title LIKE '%"+this.about+"%' ORDER BY s.id ASC");
-			this.readDiagnosen = (List<Story>) q.getResultList();
+			Query q = em.createQuery("SELECT DISTINCT d FROM Diagnosis d WHERE d.diagnosis LIKE '%"+this.about+"%' ORDER BY d.id ASC");
+			this.readDiagnosen = (List<Diagnosis>) q.getResultList();
 			System.out.println("Size readDiagnosen: "+this.readDiagnosen.size());
-			System.out.println("---");
+			for(Diagnosis d:this.readDiagnosen ) {
+				this.storyId.add(d.getBelongs_to_story());
+
+				q = em.createQuery("SELECT s FROM Story s WHERE s.id = " + d.getBelongs_to_story());
+				Story story = (Story) q.getSingleResult();
+				this.story.add(story);
+			}
+			System.out.println(this.storyId);
 		}
 		
 		public void sortieren(String sort) {
 			System.out.println(sort);
 		}
 		
-		/*public void onTabChange(TabChangeEvent event) {
-			String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();
-	        System.out.println("Active: "+activeIndex);
-	        
-	    }*/
 		public void onTabChange(TabChangeEvent event) {
 			String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();
 			System.out.println("Active: "+activeIndex);
 			int y = Integer.parseInt(activeIndex);
 			
-			long id = this.readDiagnosen.get(y).getId();
+			long id = this.storyId.get(y);
 			System.out.println("suche id: "+id);
 			Query q;
-			
-			/*try {
-				id = Long.parseLong(str);
-				System.out.println("eingabe: "+id);
-			} 
-			catch (NumberFormatException e) {
-			}*/
 			
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			q = em.createQuery("SELECT s FROM Symptom s WHERE s.belongs_to_story='"+id+"' ");
+			System.out.println("q: "+q);
 			this.symptom = (List<Symptom>) q.getResultList();
+			System.out.println("this.symptom: "+this.symptom);
 			q = em.createQuery("SELECT a FROM Action a WHERE a.belongs_to_story='"+id+"' ");
 			this.action = (List<Action>) q.getResultList();
-			
+			System.out.println("this.action: "+this.action);
 			
 	    }
 		
 		public void listFill() {
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			/*EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			Query q;
 			List<String> sym = null;
@@ -313,7 +262,7 @@ public class ReadStoriesBean {
 			}
 			for(SelectItem item : this.selectBehandlung)
 				System.out.println(item.getValue()+"-"+item.getLabel());
-			System.out.println("-------------------------------");
+			System.out.println("-------------------------------");*/
 		}
 		
 }
