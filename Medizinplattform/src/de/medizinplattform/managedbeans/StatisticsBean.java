@@ -80,7 +80,7 @@ public class StatisticsBean {
 			totalSymptoms++;
 		}
 		}
-		for(int j=0; j<7;j++){
+		for(int j=0; j<11;j++){
 			selectAndSaveHighest(categoryModel, statisticalData);
 		}
 		categoryModel.addSeries(symptoms);
