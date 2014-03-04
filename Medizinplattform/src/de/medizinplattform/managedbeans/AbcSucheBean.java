@@ -53,7 +53,7 @@ public class AbcSucheBean implements Serializable {
 		if ((hilfsvar == null) || (hilfsvar.size() == 0)) {
 			System.out.println("Its null");
 			this.outputListe = new String[1];
-			this.outputListe[0] = new String("Keine Krankheit gefunden");
+			this.outputListe[0] = new String("");
 		}
 		else {
 			System.out.println("*****");

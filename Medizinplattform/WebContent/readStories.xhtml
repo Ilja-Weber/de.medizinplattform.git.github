@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,25 +13,94 @@
 	
 	<ui:define name="content">
 	<h:outputStylesheet library="css" name="storiesList.css"  />
+	<h:outputStylesheet library="css" name="buttons.css"  />
 	<h:form id="form">
-		<div>
-			Hier können Sie diverse Einträge bzg.&nsbr; <h:outputText value="#{readStoriesBean.about}" style="color:red"/>&nsbr; lesen
+				
+		<div style="text-align:center">
+			Hier können Sie diverse Einträge bzg.&nsbr; '<h:outputText value="#{readStoriesBean.about}" style="color:#000000"/>'&nsbr; lesen
 		</div>
 		<br/>
 		
-		<h:selectManyListbox value="#{readStoriesBean.symListbox}">
-    		<f:selectItems value="#{readStoriesBean.selectSymptom}" />
-		</h:selectManyListbox>
-		
-		<h:selectManyListbox value="#{readStoriesBean.behListbox}">
-    		<f:selectItems value="#{readStoriesBean.selectBehandlung}" />
-		</h:selectManyListbox>
-		
-		<p:accordionPanel id="accordion" value="#{readStoriesBean.story}" var="s" dynamic="true" multiple="false" activeIndex="null" style="width:80%;margin: 0 auto;" >  
+		<table class="zentriert">
+			<tr> 
+				<td>Filter nach Symptom</td>
+				<td>Filter nach Behandlung</td>
+			</tr>
+			<tr>
+				
+				<td>
+					<h:selectManyListbox value="#{readStoriesBean.symListbox}" class="fillManyListbox" size="5">
+    					<f:selectItems value="#{readStoriesBean.selectSymptom}" var="ss"	itemLabel="#{ss.getLabel}" itemValue="#{ss.getValue}" />
+					</h:selectManyListbox>
+				</td>
+			
+				<td>
+					<h:selectManyListbox value="#{readStoriesBean.behListbox}" class="fillManyListbox" size="5">
+    					<f:selectItems value="#{readStoriesBean.selectBehandlung}" var="sb"	itemLabel="#{sb.getLabel}" itemValue="#{sb.getValue}" />
+					</h:selectManyListbox>
+				</td>
+			</tr>
+			<tr>
+				<h:panelGrid columns="2" cellpadding="10"  class="zentriert">  
+       				<h:outputText value="Sortieren nach Datum: " />  
+	        		<h:selectOneRadio value="#{readStoriesBean.sort}">
+					   <f:selectItem itemValue="ASC" itemLabel="aktuell zuerst" />
+					   <f:selectItem itemValue="DESC" itemLabel="aktuell zuletzt" />	   			
+					</h:selectOneRadio>  
+        		</h:panelGrid>
+			</tr>
+			<tr>
+				<div class="zentriert"><h:commandButton value="Übernehmen" action="#{readStoriesBean.getAllStories}"  /></div>
+				<br/>
+			</tr>
+		</table>
+
+<script type="text/javascript">
+    function validate() {
+    	switch (document.getElementById('intensity').value()) {
+    	case "1": 
+    		document.getElementById('intensity').value("kaum merkbar");
+    		break;
+    	case "2": 
+    		document.getElementById('intensity').value("merkbar");
+    		break;
+    	case "3": 
+    		document.getElementById('intensity').value("mittelmäßig");
+    		break;
+    	case "4": 
+    		document.getElementById('intensity').value("stark");
+    		break;
+    	case "5": 
+    		document.getElementById('intensity').value("unerträglich");
+    		break;
+    	}
+    	
+    	switch (document.getElementById('period').value()) {
+    	case "1": 
+    		document.getElementById('period').value("einmalig");
+    		break;
+    	case "2": 
+    		document.getElementById('period').value("täglich");
+    		break;
+    	case "3": 
+    		document.getElementById('period').value("wöchentlich");
+    		break;
+    	case "4": 
+    		document.getElementById('period').value("monatlich");
+    		break;
+    	}
+    }
+</script>
+
+		<p:accordionPanel id="accordion" value="#{readStoriesBean.readStories}" var="r" dynamic="true" multiple="false" activeIndex="null" style="width:80%;margin: 0 auto;">  
 			<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
-	    	<p:tab title="#{s.title} Status: #{s.state}" closable="false">  
-	    	Details zum Diagnosis:
-	            <h:dataTable value="#{readStoriesBean.readDiagnosen}" var="d" class="details" style="margin: auto;">
+	    	<p:tab title="Chronik '#{r.title}', Status: #{r.state}, letzte Änderung #{r.t_day}.#{r.t_month}.#{r.t_year}" closable="false">  
+	            Details zu den Diagnosen:
+	            <h:dataTable value="#{readStoriesBean.diagnosis}" var="d" class="details" style="margin: auto;">
+    				<h:column>
+	    				<f:facet name="header">Diagnose</f:facet>
+	    				#{d.diagnosis}
+    				</h:column>
     				<h:column>
 	    				<f:facet name="header">Lokation der Krankheit</f:facet>
 	    				#{d.loc}
@@ -44,28 +114,28 @@
 	    				#{d.where_was_it_done}
     				</h:column>
     				<h:column>
-	    				<f:facet name="header">Datum</f:facet>
+	    				<f:facet name="header">Datum der Diagnostizierung</f:facet>
 	    				#{d.day}.#{d.month}.#{d.year}
     				</h:column>
     			</h:dataTable>
     			<hr/>
-	            Details zu den Symptomen:
+    			Details zu den Symptomen:
 	            <h:dataTable value="#{readStoriesBean.symptom}" var="s" class="details" style="margin: auto;">
     				<h:column>
-	    				<f:facet name="header">Symptom</f:facet>
+	    				<f:facet name="header">Symptombeschreibung</f:facet>
 	    				#{s.term}
     				</h:column>
     				<h:column>
 	    				<f:facet name="header">Intensivität</f:facet>
-	    				#{s.intensity}
+	    				<h:outputText id="intensity" value="#{s.intensity}" />
     				</h:column>
     				<h:column>
-	    				<f:facet name="header">Eintragsdatum</f:facet>
+	    				<f:facet name="header">Datum der Diagnostizierung</f:facet>
 	    				#{s.day}.#{s.month}.#{s.year}
     				</h:column>
     			</h:dataTable>
     			<hr/>
-    			Details zur Behandlung: 
+    			Details zu den Behandlungen: 
     			<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
     				<h:column>
 	    				<f:facet name="header">Behandlung</f:facet>
@@ -73,7 +143,7 @@
     				</h:column>
     				<h:column>
 	    				<f:facet name="header">Periode der Maßnahmen</f:facet>
-	    				#{a.period}
+	    				<h:outputText id="period" value="#{a.period}" />
     				</h:column>
     				<h:column>
 	    				<f:facet name="header">Menge</f:facet>
@@ -84,11 +154,11 @@
 	    				#{a.day}.#{a.month}.#{a.year}
     				</h:column>
     			</h:dataTable>
-			</p:tab> 
+			</p:tab>
+			  
 		</p:accordionPanel> 
-		<hr style="width:75%;margin 0 auto;"/> 
+	<hr style="width:75%;margin 0 auto;"/>	
 	</h:form>
-	
 	</ui:define>
 </ui:composition>
 </html>
