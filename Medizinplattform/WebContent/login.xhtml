@@ -30,7 +30,10 @@
             		</p:password>  
             		<p:message for="password" id="msgPassword" display="icon"/>  
   
-        			</h:panelGrid>  
+        			</h:panelGrid>
+        			<p>
+						 <span style="position:center" id="forgot-password">(<h:link style="color:blue"  value="Passwort vergessen?" outcome="password-restoration.xhtml" tabindex="4"></h:link>)</span>
+						</p> 
   					<p:commandButton id="btn" value="Login" update="panel" actionListener="#{loginBean.login}"/>  
     		</p:panel>  
   
