@@ -142,18 +142,9 @@ public class ReadStoriesBean {
 	// Konstruktor
 	public ReadStoriesBean() {
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String str = params.get("parameterAbout");
-		System.out.println("str:"+str);
-		
-		
-		
-		
-		this.about="Erkältung";
-		/*Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String str = params.get("parameterAbout");
-		System.out.println("this.str:"+str);
-		this.about = str;
-		System.out.println("this.about:"+this.about);*/
+		this.about = null;
+		this.about = params.get("parameterAbout");
+		System.out.println("this.about:"+this.about);
 		
 		this.symListbox = new ArrayList<String>();
 		this.behListbox = new ArrayList<String>();
@@ -162,10 +153,6 @@ public class ReadStoriesBean {
 	}
 		
 		public void getAllStories() {
-			/*FacesContext context = FacesContext.getCurrentInstance(); 
-			UIViewRoot root = context.getViewRoot();
-			System.out.println("root: "+root.findComponent("form:accordion"));*/
-
 			this.readStories = new ArrayList<Story>();
 			
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
