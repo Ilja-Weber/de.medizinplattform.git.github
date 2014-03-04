@@ -40,7 +40,6 @@ public class ReadStoriesBean {
 		this.parameterAbout=parameterAbout;
 	}
 	
-	
 	private static final long serialVersionUID = 1L;
 	private static final String PERSISTENCE_UNIT_NAME = "common-entities";
     
@@ -144,11 +143,17 @@ public class ReadStoriesBean {
 	public ReadStoriesBean() {
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String str = params.get("parameterAbout");
-		this.about = null;
-		this.about = str;
-		System.out.println("this.about:"+this.about);
-		this.about="Erkältung";
+		System.out.println("str:"+str);
 		
+		
+		
+		
+		this.about="Erkältung";
+		/*Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String str = params.get("parameterAbout");
+		System.out.println("this.str:"+str);
+		this.about = str;
+		System.out.println("this.about:"+this.about);*/
 		
 		this.symListbox = new ArrayList<String>();
 		this.behListbox = new ArrayList<String>();
@@ -157,11 +162,11 @@ public class ReadStoriesBean {
 	}
 		
 		public void getAllStories() {
+			/*FacesContext context = FacesContext.getCurrentInstance(); 
+			UIViewRoot root = context.getViewRoot();
+			System.out.println("root: "+root.findComponent("form:accordion"));*/
+
 			this.readStories = new ArrayList<Story>();
-			/*Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-			String str = params.get("parameterAbout");
-			this.about = str;
-			System.out.println("this.about:"+this.about);*/
 			
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
@@ -173,10 +178,8 @@ public class ReadStoriesBean {
 			System.out.println("---");
 			
 			for(Long d:this.dId) {
-				System.out.println(d);
 				q = em.createQuery("SELECT s FROM Story s WHERE s.id = " + d);
 				Story story = (Story) q.getSingleResult();
-				System.out.println(story);
 				this.readStories.add(story);
 			}
 			for(Story s:this.readStories) {
@@ -191,15 +194,12 @@ public class ReadStoriesBean {
 			}
 			
 			//Filter nach Symptomen
-			System.out.println("symListbox"+this.symListbox.size());
-			System.out.println("symListbox: "+this.symListbox);
 			String strS = "";
 			int hS;
 			if (this.symListbox.size() > 0) {
 				int count = 1;
 				for(String s: this.symListbox) {
 			        hS = Integer.parseInt(s);
-			        System.out.println("hS: "+hS);
 			        System.out.println(this.selectSymptom.get(hS).getLabel());
 			        if (count == 1)
 		        		strS += " AND (s.term = '"+this.selectSymptom.get(hS).getLabel()+"'";
@@ -211,26 +211,20 @@ public class ReadStoriesBean {
 			
 				for (int i=0;i<this.readStories.size();i++) {
 					long id = this.readStories.get(i).getId();
-					System.out.println("SELECT s FROM Symptom s WHERE s.belongs_to_story='"+id+"' "+strS);
 		        	q = em.createQuery("SELECT s FROM Symptom s WHERE s.belongs_to_story='"+id+"' "+strS);
 		        	List<Symptom> s = (List<Symptom>) q.getResultList();
-		        	System.out.println(s.size());
 		        	if (s.size() == 0)
 		        		this.readStories.remove(i);
 				}
 			}
 			
 			//Filter nach Behandlung
-			System.out.println("behListbox"+this.behListbox.size());
-			System.out.println("behListbox: "+this.behListbox);
 			String strB = "";
 			int hB;
 			if (this.behListbox.size() > 0) {
 				int count = 1;
 				for(String b: this.behListbox) {
 			        hB = Integer.parseInt(b);
-			        System.out.println("hB: "+hB);
-			        System.out.println(this.selectBehandlung.get(hB).getLabel());
 			        if (count == 1)
 		        		strB += " AND (a.action = '"+this.selectBehandlung.get(hB).getLabel()+"'";
 			        else
@@ -241,18 +235,13 @@ public class ReadStoriesBean {
 			
 				for (int i=0;i<this.readStories.size();i++) {
 					long id = this.readStories.get(i).getId();
-					System.out.println("SELECT a FROM Action a WHERE a.belongs_to_story='"+id+"' "+strB);
 		        	q = em.createQuery("SELECT a FROM Action a WHERE a.belongs_to_story='"+id+"' "+strB);
 		        	List<Action> a = (List<Action>) q.getResultList();
-		        	System.out.println(a.size());
 		        	if (a.size() == 0)
 		        		this.readStories.remove(i);
 				}
 			}
 			
-			System.out.println("strB: "+strB);
-			
-			System.out.println("sort: "+this.sort);
 		}
 		
 		public void onTabChange(TabChangeEvent event) {

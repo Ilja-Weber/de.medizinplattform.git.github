@@ -43,14 +43,14 @@
 			<tr>
 				<h:panelGrid columns="2" cellpadding="10"  class="zentriert">  
        				<h:outputText value="Sortieren nach Datum: " />  
-	        		<h:selectOneRadio value="#{readStoriesBean.sort}">
+	        		<h:selectOneRadio value="#{readStoriesBean.sort}" >
 					   <f:selectItem itemValue="ASC" itemLabel="aktuell zuerst" />
 					   <f:selectItem itemValue="DESC" itemLabel="aktuell zuletzt" />	   			
 					</h:selectOneRadio>  
         		</h:panelGrid>
 			</tr>
 			<tr>
-				<div class="zentriert"><h:commandButton value="Übernehmen" action="#{readStoriesBean.getAllStories}"  /></div>
+				<div class="zentriert"><h:commandButton value="Übernehmen" action="#{readStoriesBean.getAllStories}" immediate="false" /></div>
 				<br/>
 			</tr>
 		</table>
@@ -114,7 +114,7 @@
 	    				#{d.where_was_it_done}
     				</h:column>
     				<h:column>
-	    				<f:facet name="header">Datum der Diagnostizierung</f:facet>
+	    				<f:facet name="header">Datum</f:facet>
 	    				#{d.day}.#{d.month}.#{d.year}
     				</h:column>
     			</h:dataTable>
@@ -130,7 +130,7 @@
 	    				<h:outputText id="intensity" value="#{s.intensity}" />
     				</h:column>
     				<h:column>
-	    				<f:facet name="header">Datum der Diagnostizierung</f:facet>
+	    				<f:facet name="header">Datum</f:facet>
 	    				#{s.day}.#{s.month}.#{s.year}
     				</h:column>
     			</h:dataTable>
@@ -150,7 +150,7 @@
 	    				#{a.amount}
     				</h:column>
     				<h:column>
-	    				<f:facet name="header">Eintragsdatum</f:facet>
+	    				<f:facet name="header">Datum</f:facet>
 	    				#{a.day}.#{a.month}.#{a.year}
     				</h:column>
     			</h:dataTable>
