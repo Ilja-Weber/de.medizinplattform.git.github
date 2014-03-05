@@ -44,8 +44,8 @@
 				<h:panelGrid columns="2" cellpadding="10"  class="zentriert">  
        				<h:outputText value="Sortieren nach Datum: " />  
 	        		<h:selectOneRadio value="#{readStoriesBean.sort}" >
-					   <f:selectItem itemValue="ASC" itemLabel="aktuell zuerst" />
-					   <f:selectItem itemValue="DESC" itemLabel="aktuell zuletzt" />	   			
+					   <f:selectItem itemValue="DESC" itemLabel="aktuell zuerst" />
+					   <f:selectItem itemValue="ASC" itemLabel="aktuell zuletzt" />	   			
 					</h:selectOneRadio>  
         		</h:panelGrid>
 			</tr>
@@ -54,43 +54,6 @@
 				<br/>
 			</tr>
 		</table>
-
-<script type="text/javascript">
-    function validate() {
-    	switch (document.getElementById('intensity').value()) {
-    	case "1": 
-    		document.getElementById('intensity').value("kaum merkbar");
-    		break;
-    	case "2": 
-    		document.getElementById('intensity').value("merkbar");
-    		break;
-    	case "3": 
-    		document.getElementById('intensity').value("mittelmäßig");
-    		break;
-    	case "4": 
-    		document.getElementById('intensity').value("stark");
-    		break;
-    	case "5": 
-    		document.getElementById('intensity').value("unerträglich");
-    		break;
-    	}
-    	
-    	switch (document.getElementById('period').value()) {
-    	case "1": 
-    		document.getElementById('period').value("einmalig");
-    		break;
-    	case "2": 
-    		document.getElementById('period').value("täglich");
-    		break;
-    	case "3": 
-    		document.getElementById('period').value("wöchentlich");
-    		break;
-    	case "4": 
-    		document.getElementById('period').value("monatlich");
-    		break;
-    	}
-    }
-</script>
 
 		<p:accordionPanel id="accordion" value="#{readStoriesBean.readStories}" var="r" dynamic="true" multiple="false" activeIndex="null" style="width:80%;margin: 0 auto;">  
 			<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
@@ -120,42 +83,73 @@
     			</h:dataTable>
     			<hr/>
     			Details zu den Symptomen:
-	            <h:dataTable value="#{readStoriesBean.symptom}" var="s" class="details" style="margin: auto;">
-    				<h:column>
-	    				<f:facet name="header">Symptombeschreibung</f:facet>
-	    				#{s.term}
-    				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Intensivität</f:facet>
-	    				<h:outputText id="intensity" value="#{s.intensity}" />
-    				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Datum</f:facet>
-	    				#{s.day}.#{s.month}.#{s.year}
-    				</h:column>
-    			</h:dataTable>
+    			<table class="details" style="margin: auto;">
+    				<tr>
+	    				<td>
+	    					<h:dataTable value="#{readStoriesBean.symptom}" var="s" class="details" style="margin: auto;">
+    							<h:column>
+	    							<f:facet name="header">Symptombeschreibung</f:facet>
+	    							#{s.term}
+    								</h:column>
+    						</h:dataTable>
+	    				</td>
+	    				<td>
+	    					<h:dataTable value="#{readStoriesBean.intensity}" var="i" class="details" style="margin: auto;">
+    							<h:column>
+	    							<f:facet name="header">Intensivität</f:facet>
+	    							#{i}
+    							</h:column>
+    						</h:dataTable>
+	    				</td>
+						<td>
+							<h:dataTable value="#{readStoriesBean.symptom}" var="s" class="details" style="margin: auto;">
+    							<h:column>
+	    							<f:facet name="header">Datum</f:facet>
+	    							#{s.day}.#{s.month}.#{s.year}
+    							</h:column>
+    						</h:dataTable>
+						</td>    				
+    				</tr>
+    			</table>
     			<hr/>
     			Details zu den Behandlungen: 
-    			<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
-    				<h:column>
-	    				<f:facet name="header">Behandlung</f:facet>
-	    				#{a.action}
-    				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Periode der Maßnahmen</f:facet>
-	    				<h:outputText id="period" value="#{a.period}" />
-    				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Menge</f:facet>
-	    				#{a.amount}
-    				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Datum</f:facet>
-	    				#{a.day}.#{a.month}.#{a.year}
-    				</h:column>
-    			</h:dataTable>
+    			<table class="details" style="margin: auto;">
+    				<tr>
+    					<td>
+    						<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
+    							<h:column>
+	    							<f:facet name="header">Behandlung</f:facet>
+	    							#{a.action}
+    							</h:column>
+    						</h:dataTable>
+    					</td>
+    					<td>
+    						<h:dataTable value="#{readStoriesBean.periode}" var="p" class="details" style="margin: auto;">
+    							<h:column>
+	    							<f:facet name="header">Periode der Maßnahmen</f:facet>
+	    							#{p}
+    							</h:column>
+    						</h:dataTable>
+    					</td>
+    					<td>
+    						<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
+    							<h:column>
+		    						<f:facet name="header">Menge</f:facet>
+	    							#{a.amount}
+    							</h:column>
+    						</h:dataTable>
+    					</td>
+						<td>
+							<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
+	    						<h:column>
+	    							<f:facet name="header">Datum</f:facet>
+	    							#{a.day}.#{a.month}.#{a.year}
+    							</h:column>
+    						</h:dataTable>
+						</td>    				
+    				</tr>
+    			</table>
 			</p:tab>
-			  
 		</p:accordionPanel> 
 	<hr style="width:75%;margin 0 auto;"/>	
 	</h:form>

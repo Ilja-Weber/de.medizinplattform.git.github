@@ -32,18 +32,18 @@ import de.medizinplattform.entities.Symptom;
 @SessionScoped
 public class ReadStoriesBean {
 	
-	public static String parameterAbout;
-	public String getparameterAbout() {
-		return parameterAbout;
+	public static String pAbout;
+	public String getPAbout() {
+		return pAbout;
 	}
-	public void setParameterAbout(String parameterAbout) {
-		this.parameterAbout=parameterAbout;
+	public void setPAbout(String pAbout) {
+		this.pAbout=pAbout;
 	}
 	
 	private static final long serialVersionUID = 1L;
 	private static final String PERSISTENCE_UNIT_NAME = "common-entities";
     
-	public static String about;
+	public static String about = null;
 	public String getAbout() {
 		return about;
 	}
@@ -123,7 +123,7 @@ public class ReadStoriesBean {
 		this.readStories=readStories;
 	}
 	
-	public String sort = "ASC";
+	public String sort = "DESC";
 	public String getSort() {
 		return sort;
 	}
@@ -139,12 +139,30 @@ public class ReadStoriesBean {
 		this.dId = dId;
 	}
 	
+	public List<String> intensity;
+	public List<String> getIntensity() {
+		return intensity;
+	}
+	public void setIntensity(List<String> intensity) {
+		this.intensity=intensity;
+	}
+	
+	public List<String> periode;
+	public List<String> getPeriode() {
+		return periode;
+	}
+	public void setPeriode(List<String> periode) {
+		this.periode=periode;
+	}
+	
+	
 	// Konstruktor
 	public ReadStoriesBean() {
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		this.about = null;
-		this.about = params.get("parameterAbout");
-		System.out.println("this.about:"+this.about);
+		System.out.println("params:"+params);
+		//this.about = null;
+		this.about = params.get("pAbout");
+		//System.out.println("this.about:"+this.about);
 		
 		this.symListbox = new ArrayList<String>();
 		this.behListbox = new ArrayList<String>();
@@ -247,9 +265,53 @@ public class ReadStoriesBean {
 				
 				q = em.createQuery("SELECT s FROM Symptom s WHERE s.belongs_to_story='"+id+"' ");
 				this.symptom = (List<Symptom>) q.getResultList();
+				this.intensity = new ArrayList<String>();
+				for(Symptom s:this.symptom) {
+					switch (s.getIntensity()) {
+					case 1:
+						this.intensity.add("kaum merkbar");
+						break;
+					case 2:
+						this.intensity.add("merkbar");
+						break;
+					case 3:
+						this.intensity.add("mittelmäßig");
+						break;
+					case 4:
+						this.intensity.add("stark");
+						break;
+					case 5:
+						this.intensity.add("unerträglich");
+						break;
+					default:
+						this.intensity.add("k.A.");
+						break;
+					}
+				}
 				
 				q = em.createQuery("SELECT a FROM Action a WHERE a.belongs_to_story='"+id+"' ");
 				this.action = (List<Action>) q.getResultList();
+				this.periode = new ArrayList<String>();
+				for(Action a:this.action) {
+					switch (a.getPeriod()) {
+					case 1:
+						this.periode.add("einmalig");
+						break;
+					case 2:
+						this.periode.add("täglich");
+						break;
+					case 3:
+						this.periode.add("wöchentlich");
+						break;
+					case 4:
+						this.periode.add("monatlich");
+						break;
+					default:
+						this.periode.add("k.A.");
+						break;
+					}
+				}
+				
 			}
 			catch (NumberFormatException e) {
 			}
