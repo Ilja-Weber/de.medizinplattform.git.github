@@ -13,22 +13,22 @@
 		<h:panelGroup rendered="#{sessionBean.guest}">
 		
 		<li>
-			<h:commandButton class="login-button" value="Log-In" action="login.xhtml?faces-redirect=true"></h:commandButton>
+			<h:commandButton class="login-button" value="Log-In" action="login.xhtml?faces-redirect=true" title="Einlogin"></h:commandButton>
 		</li>
 		<li>
-			<h:link value="Registrieren" outcome="registration.xhtml"></h:link>
+			<h:link value="Registrieren" outcome="registration.xhtml" title="Hier kommen Sie zur Registrierung"></h:link>
 		</li>
 		</h:panelGroup>
 		
 		<h:panelGroup rendered="#{sessionBean.user}">
 		<li>
-		<h:commandButton class="MainMenu-button" value="Hauptmenü" action="MainMenu.xhtml?faces-redirect=true"></h:commandButton>
+		<h:commandButton class="MainMenu-button" value="Hauptmenü" action="MainMenu.xhtml?faces-redirect=true" title="Hier kommen Sie zur Hauptmenü"></h:commandButton>
 		</li>
 		<li>
-		<h:commandButton class="chronicle-button" value="Suche" action="abcSuche.xhtml?faces-redirect=true"></h:commandButton>
+		<h:commandButton class="chronicle-button" value="Suche" action="abcSuche.xhtml?faces-redirect=true" title="Hier können Sie nach Krankheiten suchen"></h:commandButton>
 		</li>
 		<li>
-			<h:commandButton class="chronicle-button" value="Chronik" action="chronicle.xhtml?faces-redirect=true"></h:commandButton>
+			<h:commandButton class="chronicle-button" value="Chronik" action="chronicle.xhtml?faces-redirect=true" title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten"></h:commandButton>
 		</li>
 		</h:panelGroup>
 		
@@ -40,7 +40,7 @@
 		
 		<h:panelGroup rendered="#{sessionBean.loggedIn}">
 		<li>
-			<h:commandLink value="log-out" action="#{loginBean.logout()}"></h:commandLink>
+			<h:commandLink value="Log-out" action="#{loginBean.logout()}" title="Auslogin"></h:commandLink>
 		</li>
 		</h:panelGroup>
 	</ul>
