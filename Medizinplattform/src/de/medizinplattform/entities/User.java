@@ -17,10 +17,9 @@ public class User{
 	private String role;
 	private String gewicht;
 	private String groesse;
-	/*
 	private String sex;
-	private String alter;
-	*/
+	//private String alter;
+	
 	//Variable	
 	protected static long year;
 	public static long getYear() {
@@ -82,17 +81,16 @@ public class User{
 		this.role = (isAdmin)?"admin":"user";
 	}
 	
-	/*
 	//Geschlecht
-	public String getSex() {
+	public String getSex(){
 		return sex;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setSex(String sex){
+			this.sex = sex;
 	}
 	
 	//alter
-	public String getAlter() {
+	/* public String getAlter() {
 		return alter;
 	}
 	

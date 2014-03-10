@@ -72,19 +72,17 @@ public class RegisterBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/*
+	
 	// Geschlecht
 	private String sex = null;
-	
 	public String getSex(){
 		return sex;
 	}
-	
 	public void setSex(String sex){
-		this.sex = sex;
+			this.sex = sex;
 	}
 	
-	//Alter wie aus der eingabe? */
+	//Alter wie aus der eingabe?
 	
 	private String gewicht = null;
 	
@@ -143,7 +141,8 @@ public class RegisterBean {
 				user.setPassword(password);
 				user.setRole("user");
 				user.setGewicht(gewicht);
-				user.setGroesse(groesse);		
+				user.setGroesse(groesse);
+				user.setSex(sex);
 				
 				User geburt = new User();
 				long day = DateUtility.calculateDay(date);

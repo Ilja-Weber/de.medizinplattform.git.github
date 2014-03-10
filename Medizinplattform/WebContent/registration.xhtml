@@ -47,15 +47,13 @@
 	
   	<legend>Freiwillige Daten zu ihrer Person</legend>
   	
-	 <h:selectOneRadio layout="pageDirection" value="?">
-	
-   		<f:selectItem id="männlich" itemLabel="Männlich" itemValue="1" /> 
-   		<f:selectItem id="weiblich" itemLabel="Weiblich" itemValue="2" />
- 
+	 <h:selectOneRadio value="#{registerBean.sex}">
+   		<f:selectItem itemLabel="Männlich" itemValue="männlich" /> 
+   		<f:selectItem itemLabel="Weiblich" itemValue="weiblich" />
 	</h:selectOneRadio>
 		
     <label>Geburtstag:</label><br></br>
-    <input type="date" name="textinput2" id="textinput2" value="#{RegisterBean.date}"></input><br></br>
+    <input type="date" name="textinput2" id="textinput2" value="#{registerBean.date}"></input><br></br>
     
     <label>Gewicht:</label><br></br>
     <p:inputText value="#{registerBean.gewicht}" required="true" placeholder="in Kilogramm"></p:inputText><br></br>
