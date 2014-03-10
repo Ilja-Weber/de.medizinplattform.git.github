@@ -15,11 +15,11 @@ public class User{
 	private String name;	
 	private String password;
 	private String role;
+	private String gewicht;
+	private String groesse;
 	/*
 	private String sex;
 	private String alter;
-	private String gewicht;
-	private String groesse;
 	*/
 		
 	public long getId() {
@@ -71,7 +71,7 @@ public class User{
 	
 	public void setAlter(String alter) {
 		this.alter = alter;
-	}
+	} */
 	
 	//gewicht
 	public String getGewicht() {
@@ -87,8 +87,4 @@ public class User{
 	public void setGroesse(String groesse) {
 		this.groesse = groesse;
 	}
-	
-	*/
-	
-
 }

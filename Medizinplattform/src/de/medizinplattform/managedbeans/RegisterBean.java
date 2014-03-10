@@ -57,9 +57,8 @@ public class RegisterBean {
 		this.sex = sex;
 	}
 	
-	//Alter wie aus der eingabe?
+	//Alter wie aus der eingabe? */
 	
-	//Gewicht
 	private String gewicht = null;
 	
 	public String getGewicht(){
@@ -67,7 +66,7 @@ public class RegisterBean {
 	}
 	
 	public void setGewicht(String gewicht){
-		this.gewicht=gewicht;
+		this.gewicht = gewicht;
 	}
 	
 	//Größe
@@ -78,10 +77,9 @@ public class RegisterBean {
 		
 	}
 
-	public void setGreosse(String groesse){
+	public void setGroesse(String groesse){
 		this.groesse = groesse;
 	}
-	*/
 	// Buttons logic
 	public String registerUser() {
 		if (name.length() > 0 && password.length() > 0) {
@@ -110,7 +108,8 @@ public class RegisterBean {
 				user.setName(name);
 				user.setPassword(password);
 				user.setRole("user");
-				
+				user.setGewicht(gewicht);
+				user.setGroesse(groesse);				
 
 				em.getTransaction().begin();
 				em.persist(user);

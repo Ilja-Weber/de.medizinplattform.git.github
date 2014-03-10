@@ -52,14 +52,16 @@
    		<f:selectItem id="männlich" itemLabel="Männlich" itemValue="1" /> 
    		<f:selectItem id="weiblich" itemLabel="Weiblich" itemValue="2" />
  
-	</h:selectOneRadio>	
+	</h:selectOneRadio>
+		
     <label>Geburtstag:</label><br></br>
     <input type="date" name="textinput2" id="textinput2"></input><br></br>
+    
     <label>Gewicht:</label><br></br>
-    <input type="text" name="textinput2" id="gewicht" value="" placeholder="in Kilogramm"></input><br></br>
+    <p:inputText value="#{registerBean.gewicht}" required="true" placeholder="in Kilogramm"></p:inputText><br></br>
+        
     <label>Größe:</label><br></br>
-    <input type="text" name="textinput2" id="textinput2" placeholder="in Zentimeter"></input><br></br>
-
+    <p:inputText value="#{registerBean.groesse}" required="true" placeholder="in Zentimeter"></p:inputText><br></br>
 	</fieldset>	
         			
   		<p:commandButton id="btn" value="Registrieren" update="panel" action="#{registerBean.registerUser()}"/>  
