@@ -21,7 +21,34 @@ public class User{
 	private String sex;
 	private String alter;
 	*/
-		
+	//Variable	
+	protected static long year;
+	public static long getYear() {
+		return year;
+	}
+	public void setYear(long year) {
+		this.year = year;
+	}
+
+	//Variable
+	protected static long month;
+	public static long getMonth() {
+		return month;
+	}
+
+	public void setMonth(long month) {
+		this.month = month;
+	}
+
+	//Variable
+	protected static long day;
+	public static long getDay() {
+		return day;
+	}
+	public void setDay(long day) {
+		this.day = day;
+	}
+	
 	public long getId() {
 		return id;
 	}

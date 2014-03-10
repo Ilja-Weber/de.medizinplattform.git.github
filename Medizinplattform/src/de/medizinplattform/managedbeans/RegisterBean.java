@@ -1,7 +1,10 @@
 package de.medizinplattform.managedbeans;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -10,8 +13,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import de.medizinplattform.entities.Symptom;
 import de.medizinplattform.entities.User;
 
+import java.util.Date;
+
+import de.medizinplattform.utilitybeans.DateUtility;
 @ManagedBean(name = "registerBean")
 @RequestScoped
 public class RegisterBean {
@@ -24,6 +31,26 @@ public class RegisterBean {
 		System.out.println("RegisterBean started");
 	}
 
+	@PostConstruct 
+	public void setupVariables(){
+			long year = User.getYear();
+			long month = User.getMonth();
+			long day = User.getDay();
+			
+			String datestring = DateUtility.numberToString(day)+"."+DateUtility.numberToString(month)+"."+DateUtility.numberToString(year);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+			try {
+				 
+				date = formatter.parse(datestring);
+				System.out.println(date);
+				System.out.println(formatter.format(date));
+		 
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+	
 	// Variable - OUTER
 	private String name = null;
 
@@ -80,6 +107,13 @@ public class RegisterBean {
 	public void setGroesse(String groesse){
 		this.groesse = groesse;
 	}
+	private Date date;
+	public Date getDate(){
+		return date;
+	}
+	public void setDate(Date date){
+		this.date = date;
+	}
 	// Buttons logic
 	public String registerUser() {
 		if (name.length() > 0 && password.length() > 0) {
@@ -109,10 +143,19 @@ public class RegisterBean {
 				user.setPassword(password);
 				user.setRole("user");
 				user.setGewicht(gewicht);
-				user.setGroesse(groesse);				
+				user.setGroesse(groesse);		
+				
+				User geburt = new User();
+				long day = DateUtility.calculateDay(date);
+				geburt.setDay(day);
+				long month = DateUtility.calculateMonth(date);
+				geburt.setMonth(month);
+				long year = DateUtility.calculateYear(date);
+				geburt.setYear(year);
 
 				em.getTransaction().begin();
 				em.persist(user);
+				em.persist(geburt);
 				em.getTransaction().commit();
 
 				return "registration-success.xhtml?faces-redirect=true";
