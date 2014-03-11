@@ -22,11 +22,11 @@ public class TextBean {
 	//Constructor
 	public TextBean(){
 		intensities = new HashMap<Integer, String>();
-		intensities.put(1, "kaum merkbare");
-		intensities.put(2, "merkbare");
-		intensities.put(3, "mittelmäßige");
-		intensities.put(4, "starke");
-		intensities.put(5, "unerträgliche");
+		intensities.put(1, "kaum merkbar");
+		intensities.put(2, "merkbar");
+		intensities.put(3, "mittelmäßig");
+		intensities.put(4, "stark");
+		intensities.put(5, "unerträglich");
 		
 		periods = new HashMap<Integer, String>();
 		periods.put(1, "einmalig");
@@ -92,7 +92,7 @@ public class TextBean {
 	
 	//Logic
 	public String getSymptomText(Entry entry){
-		return intensities.get(((Symptom)entry).getIntensity()) + " " +((Symptom)entry).getTerm();
+		return ((Symptom)entry).getTerm() +": "+intensities.get(((Symptom)entry).getIntensity());
 	}
 	
 	//Logic
