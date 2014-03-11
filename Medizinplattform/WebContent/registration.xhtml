@@ -57,7 +57,7 @@
 	</h:selectOneRadio>
 		
     <label>Geburtstag:</label><br></br>
-    <input type="date" name="textinput2" id="textinput2" value="#{registerBean.date}"></input><br></br>
+    <p:calendar value="#{registerBean.date}" pattern="dd.MM.yyyy" /><br></br>
     
     <label>Gewicht:</label><br></br>
     <p:inputText value="#{registerBean.gewicht}" required="false" placeholder="in Kilogramm"></p:inputText><br></br>
