@@ -61,11 +61,11 @@ public class SymptomBean {
 			symptoms.add(row.getSymptom());
 		}
 		
-		intensities.put("kaum merkbare", 1);
-		intensities.put("merkbare", 2);
-		intensities.put("mittelmäßige", 3);
-		intensities.put("starke", 4);
-		intensities.put("unerträgliche", 5);
+		intensities.put("kaum merkbar", 1);
+		intensities.put("merkbar", 2);
+		intensities.put("mittelmäßig", 3);
+		intensities.put("stark", 4);
+		intensities.put("unerträglich", 5);
 	}
 	
 	@PostConstruct 
