@@ -18,36 +18,33 @@ public class User{
 	private String gewicht;
 	private String groesse;
 	private String sex;
+	private long year;
+	private long month;
+	private long day;
 	//private String alter;
 	
 	//Variable	
-	protected static long year;
-	public static long getYear() {
+	
+	public long getYear() {
 		return year;
 	}
 	public void setYear(long year) {
 		this.year = year;
 	}
-
 	//Variable
-	protected static long month;
-	public static long getMonth() {
+	public long getMonth() {
 		return month;
 	}
-
 	public void setMonth(long month) {
 		this.month = month;
 	}
-
 	//Variable
-	protected static long day;
-	public static long getDay() {
+	public long getDay() {
 		return day;
 	}
 	public void setDay(long day) {
 		this.day = day;
 	}
-	
 	public long getId() {
 		return id;
 	}
@@ -90,7 +87,7 @@ public class User{
 	}
 	
 	//alter
-	/* public String getAlter() {
+	/*public String getAlter() {
 		return alter;
 	}
 	

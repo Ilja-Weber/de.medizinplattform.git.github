@@ -31,7 +31,7 @@ public class RegisterBean {
 		System.out.println("RegisterBean started");
 	}
 
-	@PostConstruct 
+	/*@PostConstruct 
 	public void setupVariables(){
 			long year = User.getYear();
 			long month = User.getMonth();
@@ -49,7 +49,7 @@ public class RegisterBean {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 	
 	// Variable - OUTER
 	private String name = null;
@@ -143,18 +143,19 @@ public class RegisterBean {
 				user.setGewicht(gewicht);
 				user.setGroesse(groesse);
 				user.setSex(sex);
+				//user.setAlter("alter");
 				
-				User geburt = new User();
+				//User geburt = new User();
 				long day = DateUtility.calculateDay(date);
-				geburt.setDay(day);
+				user.setDay(day);
 				long month = DateUtility.calculateMonth(date);
-				geburt.setMonth(month);
+				user.setMonth(month);
 				long year = DateUtility.calculateYear(date);
-				geburt.setYear(year);
+				user.setYear(year);
 
 				em.getTransaction().begin();
 				em.persist(user);
-				em.persist(geburt);
+				//em.persist(geburt);
 				em.getTransaction().commit();
 
 				return "registration-success.xhtml?faces-redirect=true";
