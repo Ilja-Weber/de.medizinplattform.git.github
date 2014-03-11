@@ -23,7 +23,7 @@
  <managed-bean>
  	<managed-bean-name>readStoriesBean</managed-bean-name>
  	<managed-bean-class>de.medizinplattform.managedbeans.ReadStoriesBean</managed-bean-class>
- 	<managed-bean-scope>session</managed-bean-scope>
+ 	<managed-bean-scope>view</managed-bean-scope>
  	<property-name>pAbout</property-name>
      <value>#{param.pAbout}</value>
  </managed-bean>

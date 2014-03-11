@@ -27,13 +27,11 @@
 				<td>Filter nach Behandlung</td>
 			</tr>
 			<tr>
-				
 				<td>
 					<h:selectManyListbox value="#{readStoriesBean.symListbox}" class="fillManyListbox" size="5">
     					<f:selectItems value="#{readStoriesBean.selectSymptom}" var="ss"	itemLabel="#{ss.getLabel}" itemValue="#{ss.getValue}" />
 					</h:selectManyListbox>
 				</td>
-			
 				<td>
 					<h:selectManyListbox value="#{readStoriesBean.behListbox}" class="fillManyListbox" size="5">
     					<f:selectItems value="#{readStoriesBean.selectBehandlung}" var="sb"	itemLabel="#{sb.getLabel}" itemValue="#{sb.getValue}" />
@@ -55,7 +53,7 @@
 			</tr>
 		</table>
 
-		<p:accordionPanel id="accordion" value="#{readStoriesBean.readStories}" var="r" dynamic="true" multiple="false" activeIndex="null" style="width:80%;margin: 0 auto;">  
+		<p:accordionPanel id="accordion" value="#{readStoriesBean.readStories}" var="r" dynamic="true" activeIndex="null" style="width:80%;margin: 0 auto;" >  
 			<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
 	    	<p:tab title="Chronik '#{r.title}', Status: #{r.state}, letzte Änderung #{r.t_day}.#{r.t_month}.#{r.t_year}" closable="false">  
 	            Details zu den Diagnosen:

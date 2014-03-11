@@ -1,12 +1,15 @@
 package de.medizinplattform.managedbeans;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputHidden;
@@ -157,12 +160,11 @@ public class ReadStoriesBean {
 	
 	
 	// Konstruktor
-	public ReadStoriesBean() {
+	public ReadStoriesBean() throws UnsupportedEncodingException {
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		System.out.println("params:"+params);
-		//this.about = null;
-		this.about = params.get("pAbout");
-		//System.out.println("this.about:"+this.about);
+		byte ptext[] = params.get("pAbout").getBytes("ISO-8859-1"); 
+		this.about = new String(ptext, "UTF-8");
+		System.out.println("this.about: "+this.about);
 		
 		this.symListbox = new ArrayList<String>();
 		this.behListbox = new ArrayList<String>();
@@ -177,7 +179,7 @@ public class ReadStoriesBean {
 			EntityManager em = emf.createEntityManager();
 
 			//alle Geschichten ohne Filter
-			Query q = em.createQuery("SELECT DISTINCT d.belongs_to_story FROM Diagnosis d WHERE d.diagnosis LIKE '%"+this.about+"%' ORDER BY d.year "+this.sort+", d.month "+this.sort+", d.day "+this.sort+", d.hour "+this.sort+", d.minute "+this.sort+", d.second "+this.sort);
+			Query q = em.createQuery("SELECT DISTINCT d.belongs_to_story FROM Diagnosis d WHERE (d.diagnosis LIKE '%"+this.about+"%') OR (d.diagnosis LIKE '%"+this.about.toUpperCase()+"%') OR (d.diagnosis LIKE '%"+this.about.toLowerCase()+"%') ORDER BY d.year "+this.sort+", d.month "+this.sort+", d.day "+this.sort+", d.hour "+this.sort+", d.minute "+this.sort+", d.second "+this.sort);
 			this.dId = (List<Long>) q.getResultList();
 			System.out.println("Size dId: "+this.dId);
 			System.out.println("---");
@@ -246,18 +248,17 @@ public class ReadStoriesBean {
 		        		this.readStories.remove(i);
 				}
 			}
-			
 		}
 		
 		public void onTabChange(TabChangeEvent event) {
+			String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();
+			System.out.println("tabChange "+activeIndex);
+			
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			
-			String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();
 			try {
 				int y = Integer.parseInt(activeIndex);
-				System.out.println("Active: "+y);
-				System.out.println(this.readStories.get(y).getId());
 				long id = this.readStories.get(y).getId() ;
 				Query q;
 				q = em.createQuery("SELECT d FROM Diagnosis d WHERE d.belongs_to_story='"+id+"' ");
@@ -311,11 +312,9 @@ public class ReadStoriesBean {
 						break;
 					}
 				}
-				
 			}
 			catch (NumberFormatException e) {
 			}
-			
 	    }
 		
 		public void listFill() {
@@ -350,7 +349,6 @@ public class ReadStoriesBean {
 				this.selectSymptom.add(new SelectItem(m,s));
 				m++;
 			}
-			System.out.println("-------------------------------");
 			
 			//Behandlungen List befüllen
 			this.selectBehandlung = new ArrayList<SelectItem>();
@@ -359,7 +357,6 @@ public class ReadStoriesBean {
 				this.selectBehandlung.add(new SelectItem(m,b));
 				m++;
 			}
-			System.out.println("-------------------------------");
 		}
 		
 }
