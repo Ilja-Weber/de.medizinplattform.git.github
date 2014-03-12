@@ -56,6 +56,13 @@
 		<p:accordionPanel id="accordion" value="#{readStoriesBean.readStories}" var="r" dynamic="true" activeIndex="null" style="width:80%;margin: 0 auto;" >  
 			<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
 	    	<p:tab title="Chronik '#{r.title}', Status: #{r.state}, letzte Änderung #{r.t_day}.#{r.t_month}.#{r.t_year}" closable="false">  
+	            <h:dataTable value="#{readStoriesBean.user}" var="u" >
+	            	<h:column>
+	    				Details zur Person:<br/>
+	    				#{u.sex} #{readStoriesBean.userBirthday} #{u.gewicht} #{u.groesse}
+    				</h:column>
+	            </h:dataTable>
+	            <br/>
 	            Details zu den Diagnosen:
 	            <h:dataTable value="#{readStoriesBean.diagnosis}" var="d" class="details" style="margin: auto;">
     				<h:column>

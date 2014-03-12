@@ -1,8 +1,12 @@
 package de.medizinplattform.managedbeans;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +34,7 @@ import de.medizinplattform.entities.Action;
 import de.medizinplattform.entities.Diagnosis;
 import de.medizinplattform.entities.Story;
 import de.medizinplattform.entities.Symptom;
+import de.medizinplattform.entities.User;
 
 @ManagedBean(name="readStoriesBean")
 @SessionScoped
@@ -76,6 +81,14 @@ public class ReadStoriesBean {
 	}
 	public void setSelectSymptom(List<SelectItem> selectSymptom) {
 		this.selectSymptom=selectSymptom;
+	}
+	
+	List<User> user;
+	public List<User> getUser() {
+		return user; 
+	}
+	public void setUser(List<User> user) {
+		this.user=user;
 	}
 	
 	List<Diagnosis> diagnosis;
@@ -140,6 +153,14 @@ public class ReadStoriesBean {
 	}
 	public void setDId(List<Long> dId) {
 		this.dId = dId;
+	}
+	
+	public String userBirthday;
+	public String getUserBirthday() {
+		return userBirthday;
+	}
+	public void setUserBirthday(String userBirthday) {
+		this.userBirthday=userBirthday;
 	}
 	
 	public List<String> intensity;
@@ -252,15 +273,37 @@ public class ReadStoriesBean {
 		
 		public void onTabChange(TabChangeEvent event) {
 			String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();
-			System.out.println("tabChange "+activeIndex);
-			
+
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 			EntityManager em = emf.createEntityManager();
 			
 			try {
 				int y = Integer.parseInt(activeIndex);
+				
 				long id = this.readStories.get(y).getId() ;
+				String who = this.readStories.get(y).getStory_teller();
+				
 				Query q;
+				q = em.createQuery("SELECT u FROM User u WHERE u.name='"+who+"' ");
+				this.user = (List<User>) q.getResultList();
+				if (this.user.get(0).getGewicht() != null)
+					this.user.get(0).setGewicht(" Gewicht:"+this.user.get(0).getGewicht());
+				
+				if (this.user.get(0).getGroesse() != null)
+					this.user.get(0).setGroesse(" Körpergröße:"+this.user.get(0).getGroesse());
+				
+				if (this.user.get(0).getSex() != null)
+					this.user.get(0).setSex(" Geschlecht:"+this.user.get(0).getSex());
+				
+				this.userBirthday = null;
+				if (this.user.get(0).getDay()!=0 & +this.user.get(0).getMonth()!=0 & this.user.get(0).getYear()!=0) {
+				    GregorianCalendar today = new GregorianCalendar();
+				    GregorianCalendar past = new GregorianCalendar((int) this.user.get(0).getYear(), (int) this.user.get(0).getMonth(), (int) this.user.get(0).getDay());
+					long difference = today.getTimeInMillis() - past.getTimeInMillis();
+					int years = (int)(difference / (1000 * 60 * 60 * 24) / 365);
+					this.userBirthday = "Alter: "+String.valueOf(years);
+				}
+				
 				q = em.createQuery("SELECT d FROM Diagnosis d WHERE d.belongs_to_story='"+id+"' ");
 				this.diagnosis = (List<Diagnosis>) q.getResultList();
 				
